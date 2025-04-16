@@ -7,25 +7,25 @@ public class MouseDirectionControllerXY : MonoBehaviour
     public float angleThreshold;
     void Update()
     {
-        // »ñÈ¡Êó±êÆÁÄ»×ø±ê
+        // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½
         Vector3 mouseScreen = Input.mousePosition;
 
         Vector3 quadScreen = Camera.main.WorldToScreenPoint(quadCenter.position);
 
-        // ¼ÆËãÊó±êÏà¶ÔÓÚ quadScreen ×ø±êÏµµÄÆ«ÒÆÁ¿
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ quadScreen ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½Æ«ï¿½ï¿½ï¿½ï¿½
         Vector2 mouseUV = new Vector2(mouseScreen.x - quadScreen.x, mouseScreen.y - quadScreen.y);
 
-        // ¼ÆËãÔ­Ê¼ÏòÁ¿µÄ³¤¶È
+        // ï¿½ï¿½ï¿½ï¿½Ô­Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½
         float length = mouseUV.magnitude;
 
-        // ¼ì²é³¤¶ÈÊÇ·ñÎª 0£¬ÒÔ±ÜÃâ³ýÒÔ 0
+        // ï¿½ï¿½é³¤ï¿½ï¿½ï¿½Ç·ï¿½Îª 0ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0
         if (length != 0)
         {
             mouseUV = new Vector2(mouseUV.x / length, mouseUV.y / length);
         }
         float radiusInRadians = angleThreshold * Mathf.Deg2Rad;
-
-        // ¸üÐÂ²ÄÖÊ²ÎÊý
+        
+        // ï¿½ï¿½ï¿½Â²ï¿½ï¿½Ê²ï¿½ï¿½ï¿½
         material.SetVector("_MouseVector", new Vector4(mouseUV.x, mouseUV.y, 0, 0));
         material.SetFloat("_RadiusInRadians", radiusInRadians);
     }
