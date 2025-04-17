@@ -15,7 +15,7 @@ public class BulletTracer : MonoBehaviour
 
     private void OnEnable()
     {
-        line.endColor = new Color(line.endColor.r, line.endColor.g, line.endColor.b);
+        line.endColor = new Color(line.endColor.r, line.endColor.g, line.endColor.b, alpha);
         StartCoroutine(Fade());
     }
 
@@ -23,7 +23,7 @@ public class BulletTracer : MonoBehaviour
     {
         while(line.endColor.a > 0)
         {
-            line.endColor = new Color(line.endColor.r, line.endColor.g, line.endColor.b);
+            line.endColor = new Color(line.endColor.r, line.endColor.g, line.endColor.b,line.endColor.a - fadeSpeed);
             yield return new WaitForFixedUpdate();
         }
 
