@@ -19,7 +19,9 @@ public class Conductor : MonoBehaviour {
     //public static bool hasOffsetAdjusted = false;
     //public int beatNumber = 0;
     //public int barNumber = 0;
-    public float songBPM;
+
+    public static Conductor Instance { get; private set; }
+    public float songBPM = 150.0f;
 
     public float secPerBeat;
     public float songPosition;
@@ -29,6 +31,16 @@ public class Conductor : MonoBehaviour {
     public float offset = 0.2f;
 
     public AudioSource musicSource;
+
+    
+    private void Awake() {
+        if (Instance == null) {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        } else {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
