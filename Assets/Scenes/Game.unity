@@ -3166,6 +3166,7 @@ GameObject:
   - component: {fileID: 376525729}
   - component: {fileID: 376525728}
   - component: {fileID: 376525731}
+  - component: {fileID: 376525732}
   m_Layer: 0
   m_Name: EnemyCube
   m_TagString: Untagged
@@ -3238,7 +3239,8 @@ Transform:
   m_LocalPosition: {x: 4.6, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 997993630}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &376525731
@@ -3287,6 +3289,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &376525732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376525726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fbdf9095ff81e742844fde572c162f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interval: 0.01
+  bulletPrefab: {fileID: 2431687133947429970, guid: 0f5299cbd0be5d34187c91fd6a33e4f5, type: 3}
 --- !u!1 &439269855
 GameObject:
   m_ObjectHideFlags: 0
@@ -4705,8 +4721,9 @@ MonoBehaviour:
   songBPM: 150
   secPerBeat: 0
   songPosition: 0
-  songPositionInBeats: 0
+  hit: 0
   dspSongTime: 0
+  lastHit: -1
   offset: 0.2
   musicSource: {fileID: 732449840}
 --- !u!4 &732449839
@@ -6475,6 +6492,37 @@ MonoBehaviour:
   BarTarget: 0.9400001
   DelayedBarIncreasingProgress: 0.9400001
   DelayedBarDecreasingProgress: 0.9400001
+--- !u!1 &997993629
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 997993630}
+  m_Layer: 0
+  m_Name: MuzzlePos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &997993630
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997993629}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.05, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 376525730}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1021466474
 GameObject:
   m_ObjectHideFlags: 0

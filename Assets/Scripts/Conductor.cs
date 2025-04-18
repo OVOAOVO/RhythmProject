@@ -25,8 +25,9 @@ public class Conductor : MonoBehaviour {
 
     public float secPerBeat;
     public float songPosition;
-    public int songPositionInBeats;
+    public int hit;
     public float dspSongTime;
+    public int lastHit;
 
     public float offset = 0.2f;
 
@@ -53,6 +54,7 @@ public class Conductor : MonoBehaviour {
     private void Update()
     {
         songPosition = (float)(AudioSettings.dspTime - dspSongTime) - offset;
-        songPositionInBeats = (int)(songPosition / secPerBeat);
+        hit = (int)(songPosition / secPerBeat);
+        lastHit = hit - 1;
     }
 }
