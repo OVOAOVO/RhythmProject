@@ -11,6 +11,13 @@ public class Pistol : Gun
         GameObject bullet = ObjectPool.Instance.GetGameObject(bulletPrefab);
         LineRenderer tracer = bullet.GetComponent<LineRenderer>();
         tracer.SetPosition(0, muzzlePos.position);
-        tracer.SetPosition(1, new Vector3(mousePos.x, mousePos.y, 0.0f));
+        if (hit2D.collider != null)
+        {
+            tracer.SetPosition(1, hit2D.point);
+        }
+        else
+        {
+            tracer.SetPosition(1, new Vector3(mousePos.x, mousePos.y, 0.0f));
+        }
     }
 }
