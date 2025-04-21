@@ -58,8 +58,6 @@ public class EnemySpawner : MonoBehaviour
         
         while (distanceCovered < journeyLength)
         {
-            // 使用hit来控制移动，根据节奏步伐来计算移动
-            float timePerBeat = Conductor.Instance.secPerBeat;
             // 每个节拍按设定的移动步伐进行移动
             float step = moveSpeed * Time.deltaTime;
 
