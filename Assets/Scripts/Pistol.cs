@@ -66,7 +66,6 @@ public class Pistol : Gun
         {
             RectTransform rectTransform = textTransform.GetComponent<RectTransform>();
             rectTransform.position = screenPos;
-            Debug.Log("HitText位置设置为: " +  rectTransform.position);
         }
         else
         {
