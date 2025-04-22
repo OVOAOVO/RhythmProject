@@ -6526,6 +6526,7 @@ MonoBehaviour:
   endAngle: 135
   numMonsters: 5
   moveSpeed: 2
+  previousHit: 0
 --- !u!4 &1088350362
 Transform:
   m_ObjectHideFlags: 0
@@ -11428,6 +11429,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interval: 0.2
   bulletPrefab: {fileID: 2431687133947429970, guid: 35844f542e835f54c8fe0f3594edf99f, type: 3}
+  HitBad: {fileID: 6524427588024216278, guid: 088113daf228ae94dbd2db3f81760728, type: 3}
+  HitGood: {fileID: 4395558270551878714, guid: 740dec12e37f23545ac5473f17f2831f, type: 3}
+  HitPerfect: {fileID: 4648535905291946968, guid: 7124afcdae628aa4bb0248a2aeb835df, type: 3}
 --- !u!1 &1777156988
 GameObject:
   m_ObjectHideFlags: 0

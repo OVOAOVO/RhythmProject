@@ -8,7 +8,7 @@ public class EnemySpawner : MonoBehaviour
     public float radius = 5f; // 圆弧半径
     public float startAngle = 0f; // 起始角度
     public float endAngle = 180f; // 结束角度
-    public int numMonsters = 10; // 怪物数量
+    // public int numMonsters = 10; // 怪物数量
     public float moveSpeed = 20f; // 怪物的移动速度
 
     public float previousHit = 0f; // 上一个hit值
@@ -70,8 +70,7 @@ public class EnemySpawner : MonoBehaviour
             // 平滑移动
             monster.transform.position = Vector3.MoveTowards(monster.transform.position, targetPosition, step);
 
-            // 每当hit变化时更新目标位置
-            if (Conductor.Instance.hit > 0 && distanceCovered >= journeyLength)
+            if (distanceCovered >= journeyLength)
             {
                 // 这里可以触发怪物到达目标后的行为，或者根据hit重置目标
                 break;
@@ -81,42 +80,6 @@ public class EnemySpawner : MonoBehaviour
         }
 
     }
-
-//   // 协程来实现怪物的按照节拍移动一小段
-//     IEnumerator MoveMonster(GameObject monster, Vector3 startPosition, Vector3 targetPosition)
-//     {
-//         float journeyLength = Vector3.Distance(startPosition, targetPosition);
-//         float distanceCovered = 0f;
-
-//         monster.transform.position = startPosition;
-
-//         float previousHit = Conductor.Instance.hit;
-
-//         while (distanceCovered < journeyLength)
-//         {
-
-//             float currentHit = Conductor.Instance.hit;
-
-//             if (currentHit > previousHit)
-//             {
-
-//                 float step = moveSpeed * Time.deltaTime;
-
-//                 distanceCovered += step;
-
-//                 monster.transform.position = startPosition + (targetPosition - startPosition).normalized * distanceCovered;
-//                // monster.transform.position = Vector3.MoveTowards(monster.transform.position, targetPosition, step);
-//             }
-
-//             previousHit = currentHit;
-
-//             //yield return new WaitForSeconds(0.1f);
-//             yield return null;
-//         }
-
-//         // 到达目标后，执行怪物到达目标后的逻辑（如果有）
-//         // 这里可以加入触发事件的代码
-//     }
 
 
 }
