@@ -33,7 +33,7 @@ public class Conductor : MonoBehaviour {
 
     public AudioSource musicSource;
 
-    
+    private bool isMusicFinished = false; 
     private void Awake() {
         if (Instance == null) {
             Instance = this;
@@ -49,12 +49,24 @@ public class Conductor : MonoBehaviour {
         secPerBeat = 60.0f / songBPM;
         dspSongTime = (float)AudioSettings.dspTime;
         musicSource.Play();
+        isMusicFinished = false; // 初始化
     }
 
     private void Update()
     {
-        songPosition = (float)(AudioSettings.dspTime - dspSongTime) - offset;
-        hit = (int)(songPosition / secPerBeat);
-        lastHit = hit - 1;
+        // 如果音乐未结束，则继续计算
+        if (!isMusicFinished && musicSource.isPlaying)
+        {
+            songPosition = (float)(AudioSettings.dspTime - dspSongTime) - offset;
+            hit = (int)(songPosition / secPerBeat);
+            lastHit = hit - 1;
+
+            // 检查是否播放完毕（当前时间 >= 音频长度）
+            if (songPosition >= musicSource.clip.length)
+            {
+                isMusicFinished = true;
+                Debug.Log("音乐播放完毕，停止计算。");
+            }
+        }
     }
 }
