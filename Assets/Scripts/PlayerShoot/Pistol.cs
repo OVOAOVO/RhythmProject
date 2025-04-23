@@ -1,6 +1,5 @@
 using UnityEditor;
 using UnityEngine;
-using TMPro;  // 引入TextMeshPro命名空间
 using UnityEngine.UI;  // 引入UI命名空间（如果需要使用UI元素）
 
 public class Pistol : Gun
@@ -8,11 +7,23 @@ public class Pistol : Gun
     public GameObject HitBad;  // 用于击中判断的Prefab（包含Canvas和Text）
     public GameObject HitGood; 
     public GameObject HitPerfect;  
+    private ComboManager comboManager;
+    protected override void Start()
+    {
+        base.Start();  // 先执行父类逻辑（比如找到 muzzle）
+        
+        // 然后执行自己想加的逻辑
+        comboManager = GetComponent<ComboManager>();
+        if (comboManager != null)
+        {
+            comboManager.Init("Canvas/Combo");  // 传入 Combo UI 元素的路径
+        }
+    }
+
     protected override void Fire()
     {
         RaycastHit hit;
         bool isHit = Physics.Raycast(muzzlePos.position, shootDir, out hit, 30);  // 使用 3D 射线
-
         // 设置LineRenderer的终点
         SetTracer(isHit ? hit.point : new Vector3(mousePos.x, mousePos.y, 0.0f));
         if (isHit)
@@ -27,24 +38,37 @@ public class Pistol : Gun
             // TODO:这个距离最好是不要这样写死
             float distanceToCenterLine = CalculateDistanceToCenterLine(hit.point, objectCenter, centerLineDirection);
 
-            if(distanceToCenterLine > 0.3f)
-            {
-                ShowDamageText(hit.point, HitBad);  // 显示击中效果
-            }
-            else if(distanceToCenterLine > 0.1f && distanceToCenterLine <= 0.3f)
-            {
-                ShowDamageText(hit.point, HitGood);  // 显示击中效果
-            }
-            else
-            {
-                ShowDamageText(hit.point, HitPerfect);  // 显示击中效果
-            }
+            // 处理击中效果和连击数
+            HandleHitEffectAndCombo(distanceToCenterLine, hit.point);
         }
         else
         {
-            Debug.Log("No hit!");
+            comboManager.ResetCombo();  // 如果没有击中，重置连击数
         }
     }
+
+    private void HandleHitEffectAndCombo(float distanceToCenterLine, Vector3 hitPoint)
+    {
+        GameObject hitType = null;  // 用于存储击中效果的Prefab
+        
+        //TODO: 这里最好不要按照固定的数值，需要再改
+        if (distanceToCenterLine > 0.3f)
+        {
+            hitType = HitBad;
+        }
+        else if (distanceToCenterLine > 0.1f && distanceToCenterLine <= 0.3f)
+        {
+            hitType = HitGood;
+        }
+        else
+        {
+            hitType = HitPerfect;
+        }
+        
+        ShowDamageText(hitPoint, hitType);  // 显示击中效果
+        comboManager.IncrementCombo();  // 增加 Combo
+    }
+
 
     private void SetTracer(Vector3 endPosition)
     {
