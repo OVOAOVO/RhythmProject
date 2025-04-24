@@ -1,85 +1,43 @@
-using System.Collections;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject monsterPrefab; // 怪物预设体
-    public GameObject target; // 目标物体
-    public float radius = 5f; // 圆弧半径
-    public float startAngle = 0f; // 起始角度
-    public float endAngle = 180f; // 结束角度
-    // public int numMonsters = 10; // 怪物数量
-    public float moveSpeed = 20f; // 怪物的移动速度
+    public GameObject monsterPrefab;
+    public GameObject target;
+    public float radius = 5f;
+    public float startAngle = 0f;
+    public float endAngle = 180f;
+    public float moveSpeed = 20f;
 
-    public float previousHit = 0f; // 上一个hit值
+    private float previousHit = 0f;
 
     void Update()
     {
-        // 检测hit值是否增加
         if (Conductor.Instance.hit > previousHit)
         {
-            // 如果hit增加了，就生成一个怪物
             SpawnMonsterAtRandomAngle();
-            // 更新previousHit为当前值
             previousHit = Conductor.Instance.hit;
         }
     }
 
     void SpawnMonsterAtRandomAngle()
     {
-        // 计算一个随机角度
-        float randomAngle = Random.Range(startAngle, endAngle);
+        float angle = Random.Range(startAngle, endAngle) * Mathf.Deg2Rad;
+        float x = radius * Mathf.Cos(angle);
+        float y = radius * Mathf.Sin(angle);
+        Vector3 spawnPos = new Vector3(y, -x, 0f); // 旋转90度
 
-        // 将角度转换为弧度
-        float radians = randomAngle * Mathf.Deg2Rad;
+        GameObject monsterObj = ObjectPool.Instance.GetGameObject(monsterPrefab);
+        monsterObj.transform.position = spawnPos;
+        monsterObj.transform.LookAt(target.transform);
 
-        // 计算怪物位置（极坐标转笛卡尔坐标）
-        float x = radius * Mathf.Cos(radians);
-        float y = radius * Mathf.Sin(radians);
-
-        // 顺时针旋转90度
-        float rotatedX = y;  // 顺时针旋转90度：x' = y
-        float rotatedY = -x; // 顺时针旋转90度：y' = -x
-
-        // 创建怪物实例，位置是经过旋转的坐标
-        Vector3 spawnPosition = new Vector3(rotatedX, rotatedY, 0f); // 假设圆弧平面是在XZ平面上
-        GameObject monster = ObjectPool.Instance.GetGameObject(monsterPrefab);
-        monster.transform.position = spawnPosition; // 设置怪物位置
-
-        // 使怪物朝向目标
-        if (target != null)
-        {
-            monster.transform.LookAt(target.transform);
-            StartCoroutine(MoveMonster(monster, spawnPosition, target.transform.position));
-        }
+        Enemy enemy = monsterObj.GetComponent<Enemy>();
+        enemy.Initialize(target.transform, moveSpeed, OnEnemyReached);
     }
 
-      // 协程来实现怪物的平滑移动
-    IEnumerator MoveMonster(GameObject monster, Vector3 startPosition, Vector3 targetPosition)
+    void OnEnemyReached(Enemy enemy)
     {
-        float journeyLength = Vector3.Distance(startPosition, targetPosition);
-        float distanceCovered = 0f;
-        
-        while (distanceCovered < journeyLength)
-        {
-            // 每个节拍按设定的移动步伐进行移动
-            float step = moveSpeed * Time.deltaTime;
-
-            distanceCovered += step;
-
-            // 平滑移动
-            monster.transform.position = Vector3.MoveTowards(monster.transform.position, targetPosition, step);
-
-            if (distanceCovered >= journeyLength)
-            {
-                // 这里可以触发怪物到达目标后的行为，或者根据hit重置目标
-                break;
-            }
-
-            yield return null; // 等待下一帧
-        }
-
+        ObjectPool.Instance.PushObject(enemy.gameObject);
     }
-
-
 }
