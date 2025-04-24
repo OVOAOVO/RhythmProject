@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
-
+using System.Collections;
 public class EnemySpawner : MonoBehaviour
 {
     public GameObject monsterPrefab;
@@ -12,13 +12,22 @@ public class EnemySpawner : MonoBehaviour
 
     private float previousHit = 0f;
 
+    // 协程原因
+    //同一帧里“生成”一个敌人，再马上做一次 Physics.Raycast，新的 Collider 已经被注册到场景里了；
+    // 如果它恰巧落在你的射线方向上，就会被立刻击中，造成一种穿透并且击中了刚生成敌人的bug
     void Update()
     {
         if (Conductor.Instance.hit > previousHit)
         {
-            SpawnMonsterAtRandomAngle();
             previousHit = Conductor.Instance.hit;
+            StartCoroutine(SpawnAtEndOfFrame());
         }
+    }
+
+    private IEnumerator SpawnAtEndOfFrame()
+    {
+        yield return null; // 等待一帧
+        SpawnMonsterAtRandomAngle();
     }
 
     void SpawnMonsterAtRandomAngle()

@@ -16,7 +16,7 @@ public class Pistol : Gun
         comboManager = GetComponent<ComboManager>();
         if (comboManager != null)
         {
-            comboManager.Init("Canvas/Combo");  // 传入 Combo UI 元素的路径
+            comboManager.Init("Canvas/ComboText/Combo");  // 传入 Combo UI 元素的路径
         }
     }
 
