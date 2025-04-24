@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using MoreMountains.Feedbacks;
+using MoreMountains.Tools;
 public class EnemySpawner : MonoBehaviour
 {
     public GameObject monsterPrefab;
@@ -10,6 +12,8 @@ public class EnemySpawner : MonoBehaviour
     public float endAngle = 180f;
     public float moveSpeed = 20f;
 
+    public MMFeedbacks healthBarFeedBacks; // 反馈系统
+    public MMProgressBar progressBar;
     private float previousHit = 0f;
 
     // 协程原因
@@ -51,5 +55,8 @@ public class EnemySpawner : MonoBehaviour
     void OnEnemyReached(Enemy enemy)
     {
         ObjectPool.Instance.PushObject(enemy.gameObject);
+       
+        progressBar.Minus10Percent(); // 减少进度条
+        healthBarFeedBacks.PlayFeedbacks(); // 播放反馈
     }
 }
