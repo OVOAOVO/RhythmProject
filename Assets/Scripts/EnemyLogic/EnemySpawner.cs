@@ -16,25 +16,19 @@ public class EnemySpawner : MonoBehaviour
     public MMProgressBar progressBar;
     private float previousHit = 0f;
 
-    // 协程原因
+    // LateUpdate
     //同一帧里“生成”一个敌人，再马上做一次 Physics.Raycast，新的 Collider 已经被注册到场景里了；
     // 如果它恰巧落在你的射线方向上，就会被立刻击中，造成一种穿透并且击中了刚生成敌人的bug
     // “前面生成的敌人被穿透”，但可能你认为“先生成的”就是“视觉上靠近摄像机的”。
     // 但其实 Unity 并不会自动把“先生成的对象”摆在“前面”。
     // 如果你在一个半圆范围内随机生成敌人，他们的位置是随机的，哪怕一个敌人在逻辑上“先生成”，但空间位置上可能在队尾，Raycast 命中它也合理。
-    void Update()
+    void LateUpdate()
     {
         if (Conductor.Instance.hit > previousHit)
         {
             previousHit = Conductor.Instance.hit;
-            StartCoroutine(SpawnAtEndOfFrame());
+            SpawnMonsterAtRandomAngle();
         }
-    }
-
-    private IEnumerator SpawnAtEndOfFrame()
-    {
-        yield return null; // 等待一帧
-        SpawnMonsterAtRandomAngle();
     }
 
     void SpawnMonsterAtRandomAngle()
