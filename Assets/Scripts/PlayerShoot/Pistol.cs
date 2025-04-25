@@ -1,6 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;  // 引入UI命名空间（如果需要使用UI元素）
+using MoreMountains.Feedbacks;
 
 public class Pistol : Gun
 {
@@ -8,6 +9,10 @@ public class Pistol : Gun
     public GameObject HitGood; 
     public GameObject HitPerfect;  
     private ComboManager comboManager;
+    
+    [Header("Feedback to Play on Click")]
+    public MMFeedbacks feedbacks;// 反馈系统
+
     protected override void Start()
     {
         base.Start();  // 先执行父类逻辑（比如找到 muzzle）
@@ -45,6 +50,7 @@ public class Pistol : Gun
         {
             comboManager.ResetCombo();  // 如果没有击中，重置连击数
         }
+        feedbacks.PlayFeedbacks();// 播放反馈    
     }
 
     private void HandleHitEffectAndCombo(float distanceToCenterLine, Vector3 hitPoint)

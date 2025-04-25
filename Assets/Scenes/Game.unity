@@ -1713,7 +1713,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1313597635}
-  - component: {fileID: 1313597636}
   - component: {fileID: 1313597637}
   m_Layer: 0
   m_Name: ShootFeedBack
@@ -1737,19 +1736,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1540835722}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1313597636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1313597634}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ecd0b4ecea937647854fc94f37dfa77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  feedbacks: {fileID: 1313597637}
 --- !u!114 &1313597637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4076,6 +4062,7 @@ MonoBehaviour:
   HitBad: {fileID: 6524427588024216278, guid: 088113daf228ae94dbd2db3f81760728, type: 3}
   HitGood: {fileID: 4395558270551878714, guid: 740dec12e37f23545ac5473f17f2831f, type: 3}
   HitPerfect: {fileID: 4648535905291946968, guid: 7124afcdae628aa4bb0248a2aeb835df, type: 3}
+  feedbacks: {fileID: 1313597637}
 --- !u!114 &1757660559
 MonoBehaviour:
   m_ObjectHideFlags: 0
