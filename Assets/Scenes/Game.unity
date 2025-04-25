@@ -130,7 +130,6 @@ GameObject:
   - component: {fileID: 55849158}
   - component: {fileID: 55849161}
   - component: {fileID: 55849160}
-  - component: {fileID: 55849159}
   - component: {fileID: 55849162}
   m_Layer: 0
   m_Name: Plane
@@ -155,28 +154,6 @@ Transform:
   - {fileID: 1757660557}
   m_Father: {fileID: 1540835722}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 90}
---- !u!64 &55849159
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 55849157}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &55849160
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -581,7 +558,7 @@ MonoBehaviour:
   MinimumBarFillValue: 0
   MaximumBarFillValue: 1
   SetInitialFillValueOnStart: 1
-  InitialFillValue: 0.8
+  InitialFillValue: 1
   BarDirection: 0
   FillMode: 0
   TimeScale: 0
@@ -3837,7 +3814,6 @@ GameObject:
   - component: {fileID: 1540835722}
   - component: {fileID: 1540835721}
   - component: {fileID: 1540835720}
-  - component: {fileID: 1540835719}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -3845,27 +3821,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &1540835719
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1540835718}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1540835720
 MeshRenderer:
   m_ObjectHideFlags: 0
