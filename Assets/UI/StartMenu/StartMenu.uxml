@@ -1,7 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:engine="UnityEngine.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/StartMenu/StartMenu.uss?fileID=7433441132597879392&amp;guid=360a9d70fde7c7c4a9ca82e535eb7d25&amp;type=3#StartMenu" />
     <ui:VisualElement class="root">
-        <ui:Label name="myLabel" text="初始内容" />
-        <ui:Button name="myButton" text="点我试试" />
+        <ui:VisualElement class="banner" style="background-color: rgb(255, 196, 0); height: 77px;">
+            <ui:Label name="gameTitle" text="Rhythm Shooter" style="unity-font-style: bold; -unity-font-definition: url(&quot;project://database/Assets/Feel/FeelDemos/UIToolkitFeedbacksDemo/Fonts/UIToolkitDemo_BigJohn.otf?fileID=12800000&amp;guid=3258cbeb41f23b545a323883d7b047b9&amp;type=3#UIToolkitDemo_BigJohn&quot;);" />
+        </ui:VisualElement>
+        <ui:Button name="startButton" text="开始游戏" style="background-color: rgb(255, 196, 0); -unity-font-definition: url(&quot;project://database/Assets/Feel/FeelDemos/UIToolkitFeedbacksDemo/Fonts/UIToolkitDemo_Lato.ttf?fileID=12800000&amp;guid=6f8c7831e01d1074488720a8bac8a393&amp;type=3#UIToolkitDemo_Lato&quot;); top: 30px;" />
     </ui:VisualElement>
 </ui:UXML>

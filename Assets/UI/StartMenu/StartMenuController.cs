@@ -1,20 +1,19 @@
 using UnityEngine;
-using UnityEngine.UIElements; // 引入 UIElements 命名空间
+using UnityEngine.UIElements;
+
 public class StartMenuController : MonoBehaviour
 {
-
     void OnEnable()
     {
-        // 获取当前界面的 UI 根元素
         var root = GetComponent<UIDocument>().rootVisualElement;
 
-        var label = root.Q<Label>("myLabel");
-        var button = root.Q<Button>("myButton");
+        var startButton = root.Q<Button>("startButton");
 
-        // 注册按钮点击事件
-        button.clicked += () =>
+        startButton.clicked += () =>
         {
-            label.text = "你点了按钮 ";
+            Debug.Log("进入游戏！");
+            // TODO: 切换场景或执行逻辑
+            // SceneManager.LoadScene("MainGameScene");
         };
     }
 }

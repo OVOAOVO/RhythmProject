@@ -1,15 +1,36 @@
 .root {
-    padding: 10px;
+    background-color: black;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0px;
+    gap: 30px;
 }
 
-#myLabel {
-    color: white;
-    font-size: 18px;
+.banner {
+    background-color: yellow;
+    width: 100%;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+#gameTitle {
+    color: black;
+    font-size: 32px;
     unity-font-style: bold;
-    margin-bottom: 10px;
+    unity-text-align: middle-center;
 }
 
-#myButton {
-    width: 100px;
-    height: 30px;
+#startButton {
+    background-color: yellow;
+    border-color: black;
+    border-width: 2px;
+    border-radius: 8px;
+    color: black;
+    font-size: 20px;
+    width: 160px;
+    height: 50px;
 }
