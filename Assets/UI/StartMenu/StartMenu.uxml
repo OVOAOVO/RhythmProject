@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:engine="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/StartMenu/StartMenu.uss?fileID=7433441132597879392&amp;guid=360a9d70fde7c7c4a9ca82e535eb7d25&amp;type=3#StartMenu" />
+    <ui:VisualElement class="root">
+        <ui:Label name="myLabel" text="初始内容" />
+        <ui:Button name="myButton" text="点我试试" />
+    </ui:VisualElement>
+</ui:UXML>

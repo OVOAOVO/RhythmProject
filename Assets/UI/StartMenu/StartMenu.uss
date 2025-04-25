@@ -1,0 +1,15 @@
+.root {
+    padding: 10px;
+}
+
+#myLabel {
+    color: white;
+    font-size: 18px;
+    unity-font-style: bold;
+    margin-bottom: 10px;
+}
+
+#myButton {
+    width: 100px;
+    height: 30px;
+}
