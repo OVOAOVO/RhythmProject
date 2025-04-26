@@ -1,7 +1,8 @@
 using MoreMountains.Feedbacks;
 using UnityEngine;
 using UnityEngine.UIElements;
-
+using UnityEngine.SceneManagement;
+using System.Collections;
 public class StartMenuController : MonoBehaviour
 {
     public MMFeedbacks feedbacks; // 反馈系统
@@ -13,10 +14,14 @@ public class StartMenuController : MonoBehaviour
 
         startButton.clicked += () =>
         {
-            Debug.Log("进入游戏！");
-            // TODO: 切换场景或执行逻辑
-            // SceneManager.LoadScene("MainGameScene");
-            feedbacks.PlayFeedbacks(); // 播放反馈
+            StartCoroutine(WaitUntilFeedbacksEnd());
         };
+    }
+
+    private IEnumerator WaitUntilFeedbacksEnd()
+    {
+        feedbacks.PlayFeedbacks();
+        yield return new WaitUntil(() => !feedbacks.IsPlaying);
+        SceneManager.LoadScene("Game");
     }
 }
