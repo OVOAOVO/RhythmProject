@@ -29,6 +29,6 @@ public class StartMenuController : MonoBehaviour
     {
         feedbacks.PlayFeedbacks();
         yield return new WaitUntil(() => !feedbacks.IsPlaying);
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("MainMenu"); // 这里是主菜单场景的名称
     }
 }

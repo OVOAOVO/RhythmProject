@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class ResultDataManager : MonoBehaviour
 {
     // —— 数据统计部分 —— //
@@ -23,16 +23,35 @@ public class ResultDataManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+
+            // 订阅场景加载完成事件
+            SceneManager.sceneLoaded += OnSceneLoaded;
+
+            // 初始化 UI 绑定
+            BindComboText();
+            // 第一次 Awake 时，也先重置一次
+            ResetAll();
         }
         else
         {
             Destroy(gameObject);
-            return;
         }
-        // 初始绑定一次
-        BindComboText();
-        // 初始化 UI
-        UpdateComboUI(0);
+    }
+
+    private void OnDestroy()
+    {
+        // 取消订阅，防止内存泄漏
+        if (Instance == this)
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // 只在进入 “Game” 场景时重置
+        if (scene.name == "Game")
+        {
+            ResetAll();
+        }
     }
 
     // —— 对外接口 —— //
