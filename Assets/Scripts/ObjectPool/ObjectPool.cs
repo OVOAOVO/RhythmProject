@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class ObjectPool
 {
     private static ObjectPool instance;
@@ -13,8 +13,37 @@ public class ObjectPool
             if (instance == null)
             {
                 instance = new ObjectPool();
+                SceneManager.sceneLoaded += instance.OnSceneLoaded;
             }
             return instance;
+        }
+    }
+        // 场景加载时自动清理对象池
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        ClearPool();
+    }
+
+    // 清理所有池内对象
+    private void ClearPool()
+    {
+        foreach (var queue in objectPool.Values)
+        {
+            while (queue.Count > 0)
+            {
+                GameObject obj = queue.Dequeue();
+                if (obj != null)
+                {
+                    GameObject.Destroy(obj);
+                }
+            }
+        }
+        objectPool.Clear();
+
+        if (pool != null)
+        {
+            GameObject.Destroy(pool);
+            pool = null;
         }
     }
 
