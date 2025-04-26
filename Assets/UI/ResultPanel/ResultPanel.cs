@@ -43,6 +43,7 @@ public class ResultPanel : MonoBehaviour
 
         isTransitioning = true;
         targetScene = sceneName;
+        ResultDataManager.Instance.ResetAll(); // 重置数据
         StartCoroutine(PlayFeedbackAndLoadScene(feedback));
     }
 
