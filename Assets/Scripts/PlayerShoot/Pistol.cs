@@ -8,21 +8,13 @@ public class Pistol : Gun
     public GameObject HitBad;  // 用于击中判断的Prefab（包含Canvas和Text）
     public GameObject HitGood; 
     public GameObject HitPerfect;  
-    private ComboManager comboManager;
     
     [Header("Feedback to Play on Click")]
     public MMFeedbacks feedbacks;// 反馈系统
 
     protected override void Start()
     {
-        base.Start();  // 先执行父类逻辑（比如找到 muzzle）
-        
-        // 然后执行自己想加的逻辑
-        comboManager = GetComponent<ComboManager>();
-        if (comboManager != null)
-        {
-            comboManager.Init("Canvas/ComboText/Combo");  // 传入 Combo UI 元素的路径
-        }
+        base.Start();  // 先执行父类逻辑（比如找到 muzzle）       
     }
 
     protected override void Fire()
@@ -48,7 +40,7 @@ public class Pistol : Gun
         }
         else
         {
-            comboManager.ResetCombo();  // 如果没有击中，重置连击数
+            ResultDataManager.Instance.ResetCombo();
         }
         feedbacks.PlayFeedbacks();// 播放反馈    
     }
@@ -61,18 +53,20 @@ public class Pistol : Gun
         if (distanceToCenterLine > 0.3f)
         {
             hitType = HitBad;
+            ResultDataManager.Instance.AddBad();      // 记一次 Bad
         }
         else if (distanceToCenterLine > 0.1f && distanceToCenterLine <= 0.3f)
         {
             hitType = HitGood;
+            ResultDataManager.Instance.AddGood();     // 记一次 Good
         }
         else
         {
             hitType = HitPerfect;
+            ResultDataManager.Instance.AddPerfect();  // 记一次 Perfect
         }
         
         ShowDamageText(hitPoint, hitType);  // 显示击中效果
-        comboManager.IncrementCombo();  // 增加 Combo
     }
 
 

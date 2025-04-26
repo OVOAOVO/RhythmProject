@@ -1,5 +1,6 @@
+using UnityEditor.SearchService;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Conductor : MonoBehaviour {
 
     // crotchetsperbar = 8;
@@ -37,7 +38,6 @@ public class Conductor : MonoBehaviour {
     private void Awake() {
         if (Instance == null) {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         } else {
             Destroy(gameObject);
         }
@@ -66,6 +66,7 @@ public class Conductor : MonoBehaviour {
             {
                 isMusicFinished = true;
                 Debug.Log("音乐播放完毕，停止计算。");
+                SceneManager.LoadScene("ResultMenu"); // 加载结果场景
             }
         }
     }

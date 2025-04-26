@@ -20,6 +20,19 @@ public class ResultPanel : MonoBehaviour
         var retryButton = root.Q<Button>("retryButton");
         var exitButton = root.Q<Button>("exitButton");
 
+        
+        // 拿到各个 Label，用 Q<T>，name 对应 UXML 中的 name 属性
+        var comboLabel   = root.Q<Label>("comboLabel");
+        var perfectLabel = root.Q<Label>("perfectLabel");
+        var goodLabel    = root.Q<Label>("goodLabel");
+        var badLabel     = root.Q<Label>("badLabel");
+
+        // 从单例里读值，刷新文本
+        comboLabel.text   = $"Max Combo: {ResultDataManager.Instance.MaxCombo}";
+        perfectLabel.text = $"Perfect: {ResultDataManager.Instance.PerfectCount}";
+        goodLabel.text    = $"Good: {ResultDataManager.Instance.GoodCount}";
+        badLabel.text     = $"Bad: {ResultDataManager.Instance.BadCount}";
+
         retryButton.clicked += () => OnButtonClicked(retryFeedback, "Game");
         exitButton.clicked += () => OnButtonClicked(mainMenuFeedback, "MainMenu");
     }

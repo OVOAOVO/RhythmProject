@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
-
+using UnityEngine.SceneManagement;
 public class EnemySpawner : MonoBehaviour
 {
     public GameObject monsterPrefab;
@@ -66,5 +66,13 @@ public class EnemySpawner : MonoBehaviour
        
         progressBar.Minus10Percent(); // 减少进度条
         healthBarFeedBacks.PlayFeedbacks(); // 播放反馈
+
+         if (progressBar.BarTarget <= 0f)
+        {
+            // 如果你有加载界面管理器，可以用它：
+            // MMSceneLoadingManager.LoadScene("ResultMenu");               // :contentReference[oaicite:2]{index=2}
+            // 或者直接：
+            SceneManager.LoadScene("ResultMenu");
+        }
     }
 }
