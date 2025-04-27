@@ -10,7 +10,7 @@ public class BeatDial : MonoBehaviour
     // 每次节拍要旋转的角度
     public float anglePerHit = 45f;
     // 平滑时间，越小越“硬”
-    public float smoothTime = 0.1f;
+    public float smoothTime = 0.2f;
 
     // 内部追踪：目标角度、当前插值速度
     private float targetZ;

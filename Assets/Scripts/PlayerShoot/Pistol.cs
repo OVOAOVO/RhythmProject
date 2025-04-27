@@ -14,11 +14,12 @@ public class Pistol : Gun
 
     protected override void Start()
     {
-        base.Start();  // 先执行父类逻辑（比如找到 muzzle）       
+        base.Start();  // 先执行父类逻辑      
     }
 
     protected override void Fire()
     {
+        base.Fire();  // 先执行父类逻辑
         RaycastHit hit;
         bool isHit = Physics.Raycast(muzzlePos.position, shootDir, out hit, 30);  // 使用 3D 射线
         // 设置LineRenderer的终点

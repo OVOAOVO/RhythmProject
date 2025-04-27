@@ -28,6 +28,7 @@ public class Conductor : MonoBehaviour
     public int aliveEnemies = 0; // 存活敌人数量
 
     public float durationInSeconds = 0f; // 音乐持续时间（秒）
+    public float hitOffset = 0f; // 击打偏移量（秒）
     private void Awake()
     {
         // —— 单例管理 —— 
@@ -101,5 +102,19 @@ public class Conductor : MonoBehaviour
     public bool IsMusicFinished()
     {
         return CurrentState == MusicState.Finished;
+    }
+
+    public void GetBeatOffset()
+    {
+        float songPosition = this.songPosition;
+        float secPerBeat = this.secPerBeat;
+
+        if (secPerBeat <= 0f) return; // 防止除0错误
+
+        float currentBeat = songPosition / secPerBeat;
+        int nearestBeat = Mathf.RoundToInt(currentBeat);// 找到最近的节拍
+        // 计算当前节拍的时间
+        float nearestBeatTime = nearestBeat * secPerBeat;
+        hitOffset = songPosition - nearestBeatTime;
     }
 }
