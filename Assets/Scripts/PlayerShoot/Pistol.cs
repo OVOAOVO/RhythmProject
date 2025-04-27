@@ -37,6 +37,7 @@ public class Pistol : Gun
 
             // 处理击中效果和连击数
             HandleHitEffectAndCombo(distanceToCenterLine, hit.point);
+            Conductor.Instance.aliveEnemies--;  // 击中敌人，减少存活敌人数量
         }
         else
         {

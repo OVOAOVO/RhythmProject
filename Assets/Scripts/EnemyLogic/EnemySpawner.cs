@@ -17,12 +17,23 @@ public class EnemySpawner : MonoBehaviour
     public MMProgressBar progressBar;
     private float previousHit = 0f;
 
+
     void Update()
     {
         if (Conductor.Instance.hit > previousHit)
         {
             previousHit = Conductor.Instance.hit;
             SpawnMonsterAtRandomAngle();
+        }
+
+        if (Conductor.Instance.CurrentState == Conductor.MusicState.Finished)
+        {
+            // 并且场上已经没有怪物了，直接跳转
+            if (Conductor.Instance.aliveEnemies <= 0)
+            {
+                Debug.Log("update跳转到结果界面");
+                SceneManager.LoadScene("ResultMenu");
+            }
         }
     }
 
@@ -46,6 +57,8 @@ public class EnemySpawner : MonoBehaviour
 
         Enemy enemy = monsterObj.GetComponent<Enemy>();
         enemy.Initialize(target.transform, moveSpeed, OnEnemyReached);
+
+        Conductor.Instance.aliveEnemies++; // 生成时数量+1
     }
 
     // NOTE:
@@ -66,12 +79,12 @@ public class EnemySpawner : MonoBehaviour
        
         progressBar.Minus10Percent(); // 减少进度条
         healthBarFeedBacks.PlayFeedbacks(); // 播放反馈
-
-         if (progressBar.BarTarget <= 0f)
+        
+        Conductor.Instance.aliveEnemies--; // 被击中/到终点回收时数量-1
+        
+        //怪物到达终点，或者生命值为0，直接跳转到结果界面
+        if (Conductor.Instance.aliveEnemies <= 0 || progressBar.BarTarget <= 0f)
         {
-            // 如果你有加载界面管理器，可以用它：
-            // MMSceneLoadingManager.LoadScene("ResultMenu");               // :contentReference[oaicite:2]{index=2}
-            // 或者直接：
             SceneManager.LoadScene("ResultMenu");
         }
     }

@@ -1,73 +1,105 @@
-using UnityEditor.SearchService;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-public class Conductor : MonoBehaviour {
 
-    // crotchetsperbar = 8;
-    //public float bpm = 180;
-    //public float crotchet;
-
-    //public float songPosition;
-    //public float deltaSongPos;
-    //public float lastHit;
-    //public float actualLastHit;
-    //public float nextBeatTime = 0.0f;
-    //public  float nextBarTime = 0.0f;
-
-    //public float offset = 0.2f;
-    //public float addOffset;
-    //public static float offSetStatic = 0.4f;
-    //public static bool hasOffsetAdjusted = false;
-    //public int beatNumber = 0;
-    //public int barNumber = 0;
-
+public class Conductor : MonoBehaviour
+{
     public static Conductor Instance { get; private set; }
-    public float songBPM = 150.0f;
 
+    public enum MusicState
+    {
+        NotStarted,
+        Playing,
+        Finished
+    }
+
+    public MusicState CurrentState { get; private set; } = MusicState.NotStarted;
+
+    [Header("Music Settings")]
+    public float songBPM = 150.0f;
+    //public float offset = 0.2f;
+    //public const float EndTolerance = 0.01f;  // 容差值：可以用于判断songPosition >= musicSource.clip.length
+    [Header("Runtime Info")]
     public float secPerBeat;
     public float songPosition;
     public int hit;
     public float dspSongTime;
-    public int lastHit;
-
-    public float offset = 0.2f;
 
     public AudioSource musicSource;
 
-    private bool isMusicFinished = false; 
-    private void Awake() {
-        if (Instance == null) {
+    public int aliveEnemies = 0; // 存活敌人数量
+
+    public float durationInSeconds = 0f; // 音乐持续时间（秒）
+    private void Awake()
+    {
+        // —— 单例管理 —— 
+        if (Instance == null)
+        {
             Instance = this;
-        } else {
-            Destroy(gameObject);
         }
     }
 
     private void Start()
     {
         musicSource = GetComponent<AudioSource>();
-        secPerBeat = 60.0f / songBPM;
-        dspSongTime = (float)AudioSettings.dspTime;
-        musicSource.Play();
-        isMusicFinished = false; // 初始化
+
+        ResetConductor();
+        StartMusic();
     }
 
     private void Update()
     {
-        // 如果音乐未结束，则继续计算
-        if (!isMusicFinished && musicSource.isPlaying)
+        switch (CurrentState)
         {
-            songPosition = (float)(AudioSettings.dspTime - dspSongTime) - offset;
-            hit = (int)(songPosition / secPerBeat);
-            lastHit = hit - 1;
+            case MusicState.Playing:
+                UpdateSongPosition();
+                break;
+            case MusicState.Finished:
+                // 如果需要在Finished状态做些什么，可以加在这里
+                break;
+        }
+    }
 
-            // 检查是否播放完毕（当前时间 >= 音频长度）
+    private void UpdateSongPosition()
+    {
+        if (musicSource.isPlaying)
+        {
+            // offset = 0.2f; // 这里可以设置一个偏移量，单位是秒，但要注意不要导致songPosition大于musicSource.clip.length
+            //songPosition = (float)(AudioSettings.dspTime - dspSongTime) - offset;
+            songPosition = (float)(AudioSettings.dspTime - dspSongTime);
+            hit = (int)(songPosition / secPerBeat);
+
             if (songPosition >= musicSource.clip.length)
             {
-                isMusicFinished = true;
-                Debug.Log("音乐播放完毕，停止计算。");
-                SceneManager.LoadScene("ResultMenu"); // 加载结果场景
+                durationInSeconds = musicSource.clip.length;
+                FinishMusic();
             }
         }
+    }
+
+    public void ResetConductor()
+    {
+        secPerBeat = 60.0f / songBPM;
+        songPosition = 0f;
+        hit = 0;
+        dspSongTime = 0f;
+        CurrentState = MusicState.NotStarted;
+    }
+
+    public void StartMusic()
+    {
+        dspSongTime = (float)AudioSettings.dspTime;
+        musicSource.Play();
+        CurrentState = MusicState.Playing;
+        Debug.Log("音乐开始播放");
+    }
+
+    private void FinishMusic()
+    {
+        CurrentState = MusicState.Finished;
+        Debug.Log("音乐播放完毕");
+    }
+
+    public bool IsMusicFinished()
+    {
+        return CurrentState == MusicState.Finished;
     }
 }
