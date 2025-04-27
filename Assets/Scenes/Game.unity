@@ -1352,7 +1352,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   songBPM: 150
-  offset: 0
   secPerBeat: 0
   songPosition: 0
   hit: 0
