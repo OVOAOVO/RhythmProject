@@ -27,13 +27,20 @@ public class ResultPanel : MonoBehaviour
         var goodLabel    = root.Q<Label>("goodLabel");
         var badLabel     = root.Q<Label>("badLabel");
 
-        // 从单例里读值，刷新文本
-        comboLabel.text   = $"Max Combo: {ResultDataManager.Instance.MaxCombo}";
-        perfectLabel.text = $"Perfect: {ResultDataManager.Instance.PerfectCount}";
-        goodLabel.text    = $"Good: {ResultDataManager.Instance.GoodCount}";
-        badLabel.text     = $"Bad: {ResultDataManager.Instance.BadCount}";
+        if(ResultDataManager.Instance != null)
+        {
+            // 从单例里读值，刷新文本
+            comboLabel.text   = $"Max Combo: {ResultDataManager.Instance.MaxCombo}";
+            perfectLabel.text = $"Perfect: {ResultDataManager.Instance.PerfectCount}";
+            goodLabel.text    = $"Good: {ResultDataManager.Instance.GoodCount}";
+            badLabel.text     = $"Bad: {ResultDataManager.Instance.BadCount}";
+            retryButton.clicked += () => OnButtonClicked(retryFeedback, ResultDataManager.LastPlayedSceneName);
+        }
+        else
+        {
+            retryButton.clicked += () => OnButtonClicked(retryFeedback, "Game");
+        }
 
-        retryButton.clicked += () => OnButtonClicked(retryFeedback, "Game");
         exitButton.clicked += () => OnButtonClicked(mainMenuFeedback, "MainMenu");
     }
 

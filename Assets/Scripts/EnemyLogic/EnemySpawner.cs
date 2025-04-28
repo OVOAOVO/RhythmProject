@@ -32,6 +32,7 @@ public class EnemySpawner : MonoBehaviour
             if (Conductor.Instance.aliveEnemies <= 0)
             {
                 Debug.Log("update跳转到结果界面");
+                ResultDataManager.LastPlayedSceneName = SceneManager.GetActiveScene().name;
                 SceneManager.LoadScene("ResultMenu");
             }
         }
@@ -85,6 +86,7 @@ public class EnemySpawner : MonoBehaviour
         //怪物到达终点，或者生命值为0，直接跳转到结果界面
         if (Conductor.Instance.aliveEnemies <= 0 || progressBar.BarTarget <= 0f)
         {
+            ResultDataManager.LastPlayedSceneName = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene("ResultMenu");
         }
     }

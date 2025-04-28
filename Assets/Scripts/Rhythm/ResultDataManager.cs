@@ -15,7 +15,7 @@ public class ResultDataManager : MonoBehaviour
     private string ComboPath = "Canvas/ComboText/Combo";  // 预设路径      
     // —— 单例 —— //
     public static ResultDataManager Instance { get; private set; }
-
+    public static string LastPlayedSceneName;
     private void Awake()
     {
         // 单例初始化
