@@ -1359,6 +1359,7 @@ MonoBehaviour:
   musicSource: {fileID: 732449840}
   aliveEnemies: 0
   durationInSeconds: 0
+  hitOffset: 0
 --- !u!4 &732449839
 Transform:
   m_ObjectHideFlags: 0
