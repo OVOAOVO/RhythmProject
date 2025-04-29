@@ -1624,7 +1624,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6a070ab0d3295c41943807816c1399d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterPrefab: {fileID: 5175433164174420965, guid: 0cddffcc8f88c8c4f8204634ecd3e8de, type: 3}
+  EnemyPrefab: {fileID: 5175433164174420965, guid: 0cddffcc8f88c8c4f8204634ecd3e8de, type: 3}
+  jumpingEnemyPrefab: {fileID: 5175433164174420965, guid: a7ad9d94307cedb4faaa42f0864ce548, type: 3}
   target: {fileID: 1540835718}
   radius: 5
   startAngle: 45

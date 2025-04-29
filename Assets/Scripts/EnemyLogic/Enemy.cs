@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private Transform target;
-    private float moveSpeed;
-    private System.Action<Enemy> onReachedTarget;
+    protected Transform target;
+    protected float moveSpeed;
+    protected System.Action<Enemy> onReachedTarget;
 
-    public void Initialize(Transform target, float speed, System.Action<Enemy> onReached = null)
+    public virtual void Initialize(Transform target, float speed, System.Action<Enemy> onReached = null)
     {
         this.target = target;
         this.moveSpeed = speed;
@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
         StartCoroutine(MoveToTarget());
     }
 
-    private IEnumerator MoveToTarget()
+    protected  IEnumerator MoveToTarget()
     {
         while ((transform.position - target.position).sqrMagnitude > 0.01f)
         {
