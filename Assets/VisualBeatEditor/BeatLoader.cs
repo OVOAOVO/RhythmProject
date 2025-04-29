@@ -3,9 +3,9 @@ using System.IO;
 
 public class BeatLoader : MonoBehaviour
 {
-    public BeatRecord loadedData;
+    public static BeatRecord LoadedData { get; private set; }
 
-    void Start()
+    void Awake()
     {
         LoadFromJson();
     }
@@ -16,12 +16,13 @@ public class BeatLoader : MonoBehaviour
         if (File.Exists(filePath))
         {
             string json = File.ReadAllText(filePath);
-            loadedData = JsonUtility.FromJson<BeatRecord>(json);
-            Debug.Log($"✅ Loaded {loadedData.beatHits.Count} beats.");
+            LoadedData = JsonUtility.FromJson<BeatRecord>(json);
+            Debug.Log($"✅ Loaded {LoadedData.beatHits.Count} beats.");
         }
         else
         {
             Debug.LogWarning("⚠️ Beat JSON file not found.");
+            LoadedData = new BeatRecord();
         }
     }
 }

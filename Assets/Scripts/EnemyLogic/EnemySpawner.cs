@@ -16,29 +16,50 @@ public class EnemySpawner : MonoBehaviour
 
     public MMFeedbacks healthBarFeedBacks; // 反馈系统
     public MMProgressBar progressBar;
-    private float previousHit = 0f;
 
+    private List<int> scheduledBeats = new List<int>();
+   
+    private HashSet<int> spawnedBeats = new HashSet<int>();
+    private const int spawnAdvanceBeats = 6;
+    
+    void Start()
+    {
+        if (BeatLoader.LoadedData != null)
+        {
+            scheduledBeats = new List<int>(BeatLoader.LoadedData.beatHits);
+        }
+        else
+        {
+            Debug.LogWarning("⚠️ No beat data loaded.");
+        }
+    }
 
     void Update()
     {
-        if (Conductor.Instance.hit > previousHit)
-        {
-            previousHit = Conductor.Instance.hit;
-            SpawnMonsterAtRandomAngle();
-            //SpawnJumpMonster();
-        }
+        int currentHit = Conductor.Instance.hit;
 
-        if (Conductor.Instance.CurrentState == Conductor.MusicState.Finished)
+        foreach (int beat in scheduledBeats)
         {
-            // 并且场上已经没有怪物了，直接跳转
-            if (Conductor.Instance.aliveEnemies <= 0)
+            int fireBeat = beat - spawnAdvanceBeats;
+
+            // ✅ 精准匹配节拍，并且只触发一次
+            //Unity 的 Update() 是 每秒调用多次（一般是每秒 60 帧或以上），而 hit 只在进入下一拍时才加 1
+            if (currentHit == fireBeat && !spawnedBeats.Contains(beat))
             {
-                Debug.Log("update跳转到结果界面");
-                ResultDataManager.LastPlayedSceneName = SceneManager.GetActiveScene().name;
-                SceneManager.LoadScene("ResultMenu");
+                spawnedBeats.Add(beat); // 记录这个节拍已触发
+                SpawnMonsterAtRandomAngle(); // 或 SpawnJumpMonster()
             }
         }
+
+        // 结算逻辑保持不变
+        if (Conductor.Instance.CurrentState == Conductor.MusicState.Finished &&
+            Conductor.Instance.aliveEnemies <= 0)
+        {
+            ResultDataManager.LastPlayedSceneName = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene("ResultMenu");
+        }
     }
+
 
     void SpawnMonsterAtRandomAngle()
     {
