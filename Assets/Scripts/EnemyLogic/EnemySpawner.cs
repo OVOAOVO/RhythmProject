@@ -24,8 +24,8 @@ public class EnemySpawner : MonoBehaviour
         if (Conductor.Instance.hit > previousHit)
         {
             previousHit = Conductor.Instance.hit;
-            //SpawnMonsterAtRandomAngle();
-            SpawnJumpMonster();
+            SpawnMonsterAtRandomAngle();
+            //SpawnJumpMonster();
         }
 
         if (Conductor.Instance.CurrentState == Conductor.MusicState.Finished)
@@ -72,8 +72,8 @@ public class EnemySpawner : MonoBehaviour
         Vector3 spawnPos = new Vector3(y, -x, 0f); // 旋转90度
 
         // 计算跳跃中点和落地点
-        Vector3 midPoint = spawnPos + new Vector3(-1.5f, 0f, 0f); // 向左移动一定距离作为中点
-        Vector3 jumpTarget = spawnPos + new Vector3(-3f, 0f, 0f); // 向左更远处作为跳跃目标
+        Vector3 midPoint = spawnPos + new Vector3(-2.0f, 0f, 0f); // 向左移动一定距离作为中点
+        Vector3 jumpTarget = spawnPos + new Vector3(-4f, 0f, 0f); // 向左更远处作为跳跃目标
 
         GameObject monsterObj = ObjectPool.Instance.GetGameObject(jumpingEnemyPrefab);
         monsterObj.transform.position = spawnPos;
