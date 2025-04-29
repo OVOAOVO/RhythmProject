@@ -28,16 +28,12 @@ public class Pistol : Gun
         {
             ObjectPool.Instance.PushObject(hit.collider.gameObject);  // 将射中物体放入对象池
 
-              // 获取物体的中心位置和中心线方向
             Vector3 objectCenter = hit.collider.transform.position;
-            Vector3 centerLineDirection = hit.collider.transform.forward;  // 物体的前方方向（中心线）
-
-            // 计算射中点到物体中心线的垂直距离
-            // TODO:这个距离最好是不要这样写死
-            float distanceToCenterLine = CalculateDistanceToCenterLine(hit.point, objectCenter, centerLineDirection);
+            Vector3 idealDirection = (objectCenter - muzzlePos.position).normalized;
+            float distanceToIdealLine = CalculatePerpendicularDistanceToLine(hit.point, muzzlePos.position, idealDirection);
 
             // 处理击中效果和连击数
-            HandleHitEffectAndCombo(distanceToCenterLine, hit.point);
+            HandleHitEffectAndCombo(distanceToIdealLine, hit.point);
             Conductor.Instance.aliveEnemies--;  // 击中敌人，减少存活敌人数量
         }
         else
@@ -101,7 +97,7 @@ public class Pistol : Gun
         HitTextController controller = instance.GetComponent<HitTextController>(); //这里协程调用自动控制显示时间
     }
 
-    private float CalculateDistanceToCenterLine(Vector3 hitPoint, Vector3 objectCenter, Vector3 centerLineDirection)
+    private float CalculatePerpendicularDistanceToLine(Vector3 hitPoint, Vector3 objectCenter, Vector3 centerLineDirection)
     {
         // 计算射中点到物体中心点的向量
         Vector3 toHitPoint = hitPoint - objectCenter;

@@ -77,7 +77,6 @@ public class EnemySpawner : MonoBehaviour
 
         GameObject monsterObj = ObjectPool.Instance.GetGameObject(jumpingEnemyPrefab);
         monsterObj.transform.position = spawnPos;
-
         // 先关闭 Collider
         Collider col = monsterObj.GetComponent<Collider>();
         if (col != null) col.enabled = false;
