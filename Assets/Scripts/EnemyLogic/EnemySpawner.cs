@@ -33,7 +33,27 @@ public class EnemySpawner : MonoBehaviour
             Debug.LogWarning("⚠️ No beat data loaded.");
         }
     }
+    // 每拍发射怪物
+    // void Update()
+    // {
+    //     if (Conductor.Instance.hit > previousHit)
+    //     {
+    //         previousHit = Conductor.Instance.hit;
+    //         SpawnMonsterAtRandomAngle();
+    //         //SpawnJumpMonster();
+    //     }
 
+    //     if (Conductor.Instance.CurrentState == Conductor.MusicState.Finished)
+    //     {
+    //         // 并且场上已经没有怪物了，直接跳转
+    //         if (Conductor.Instance.aliveEnemies <= 0)
+    //         {
+    //             Debug.Log("update跳转到结果界面");
+    //             ResultDataManager.LastPlayedSceneName = SceneManager.GetActiveScene().name;
+    //             SceneManager.LoadScene("ResultMenu");
+    //         }
+    //     }
+    // }
     void Update()
     {
         int currentHit = Conductor.Instance.hit;
