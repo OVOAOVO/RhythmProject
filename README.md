@@ -1,6 +1,7 @@
 # 🎵 Rhythm Game  
 > **An Indie Game Jam Entry**  
-> *A Stylish Fusion of Rhythm & Shooting Gameplay*
+> *A Stylish Fusion of Rhythm & Shooting Gameplay 
+... Maybe :)*
 
 ![rhythmshoot](ReadMeAssets/startMenu.png)
 
