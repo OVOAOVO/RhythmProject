@@ -67,7 +67,8 @@ public class EnemySpawner : MonoBehaviour
             if (currentHit == fireBeat && !spawnedBeats.Contains(beat))
             {
                 spawnedBeats.Add(beat); // 记录这个节拍已触发
-                SpawnMonsterAtRandomAngle(); // 或 SpawnJumpMonster()
+                //SpawnMonsterAtRandomAngle(); // 或 SpawnJumpMonster()
+                SpawnJumpMonster(); // 生成跳跃怪物
             }
         }
 

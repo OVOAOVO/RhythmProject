@@ -12,7 +12,18 @@ public class BeatLoader : MonoBehaviour
 
     void LoadFromJson()
     {
-        string filePath = Path.Combine(Application.dataPath, "BeatBook/beat_data.json");
+        string filePath;
+
+    #if UNITY_EDITOR
+        // 编辑器运行时：直接用 Assets 目录
+        filePath = Path.Combine(Application.dataPath, "BeatBook/beat_data.json");
+    #else
+        // 构建后：从 .exe 同目录读取
+        filePath = Path.Combine(Application.dataPath, "../beat_data.json");
+    #endif
+
+        Debug.Log($"🧾 Attempting to load beat data from: {filePath}");
+
         if (File.Exists(filePath))
         {
             string json = File.ReadAllText(filePath);
