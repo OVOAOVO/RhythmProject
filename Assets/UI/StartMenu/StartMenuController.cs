@@ -6,7 +6,8 @@ using System.Collections;
 
 public class StartMenuController : MonoBehaviour
 {
-    public MMFeedbacks feedbacks;
+    public MMF_Player startFeedBack;
+    public MMF_Player exitFeedBack; // 退出反馈
     private bool isTransitioning = false;
 
     void OnEnable()
@@ -14,21 +15,37 @@ public class StartMenuController : MonoBehaviour
         isTransitioning = false; // 重置状态
         var root = GetComponent<UIDocument>().rootVisualElement;
         var startButton = root.Q<Button>("startButton");
-
+        var exitButton = root.Q<Button>("exitButton");
         startButton.clicked += () =>
         {
             if (!isTransitioning)
             {
                 isTransitioning = true;
-                StartCoroutine(WaitUntilFeedbacksEnd());
+                StartCoroutine(WaitUntilStartFeedbacksEnd());
+            }
+        };
+
+        exitButton.clicked += () =>
+        {
+            if (!isTransitioning)
+            {
+                isTransitioning = true;
+                StartCoroutine(WaitUntilExitFeedbacksEnd());
             }
         };
     }
 
-    private IEnumerator WaitUntilFeedbacksEnd()
+    private IEnumerator WaitUntilStartFeedbacksEnd()
     {
-        feedbacks.PlayFeedbacks();
-        yield return new WaitUntil(() => !feedbacks.IsPlaying);
+        startFeedBack.PlayFeedbacks();
+        yield return new WaitUntil(() => !startFeedBack.IsPlaying);
         SceneManager.LoadScene("MainMenu"); // 这里是主菜单场景的名称
+    }
+
+    private IEnumerator WaitUntilExitFeedbacksEnd()
+    {
+        exitFeedBack.PlayFeedbacks();
+        yield return new WaitUntil(() => !exitFeedBack.IsPlaying);
+        Application.Quit(); // 退出游戏
     }
 }

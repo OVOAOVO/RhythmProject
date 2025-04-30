@@ -8,7 +8,7 @@ public class ResultPanel : MonoBehaviour
 {
     public MMF_Player retryFeedback;
     public MMF_Player mainMenuFeedback;
-
+    public MMF_Player quitFeedback;
     private bool isTransitioning = false;
     private string targetScene = "";
 
@@ -19,7 +19,7 @@ public class ResultPanel : MonoBehaviour
 
         var retryButton = root.Q<Button>("retryButton");
         var exitButton = root.Q<Button>("exitButton");
-
+        var quitButton = root.Q<Button>("quitButton");
         
         // 拿到各个 Label，用 Q<T>，name 对应 UXML 中的 name 属性
         var comboLabel   = root.Q<Label>("comboLabel");
@@ -42,6 +42,15 @@ public class ResultPanel : MonoBehaviour
         }
 
         exitButton.clicked += () => OnButtonClicked(mainMenuFeedback, "MainMenu");
+
+        quitButton.clicked += () =>
+        {
+            if (!isTransitioning)
+            {
+                isTransitioning = true;
+                StartCoroutine(WaitUntilExitFeedbacksEnd());
+            }
+        };
     }
 
     private void OnButtonClicked(MMF_Player feedback, string sceneName)
@@ -59,5 +68,12 @@ public class ResultPanel : MonoBehaviour
         feedback.PlayFeedbacks();
         yield return new WaitUntil(() => !feedback.IsPlaying);
         SceneManager.LoadScene(targetScene);
+    }
+
+    private IEnumerator WaitUntilExitFeedbacksEnd()
+    {
+        quitFeedback.PlayFeedbacks();
+        yield return new WaitUntil(() => !quitFeedback.IsPlaying);
+        Application.Quit(); // 退出游戏
     }
 }
