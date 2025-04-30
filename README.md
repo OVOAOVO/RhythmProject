@@ -1,2 +1,8 @@
-# Rhythm Game
-To Achieve the Indie Game Contest
+# 🎵 Rhythm Game  
+> **An Indie Game Jam Entry**  
+> *A Stylish Fusion of Rhythm & Shooting Gameplay*
+
+![rhythmshoot](ReadMeAssets/startMenu.png)
+
+## GameView  
+![rhythmshoot](ReadMeAssets/rhythmShoot.gif)
