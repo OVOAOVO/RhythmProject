@@ -1,38 +1,44 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.IO;
 
 public class BeatLoader : MonoBehaviour
 {
     public static BeatRecord LoadedData { get; private set; }
 
+    [Tooltip("若非空，优先加载此谱面名；为空则根据场景名加载")]
+    public string beatMapName = ""; // 可手动设置，或留空以自动使用场景名
+
     void Awake()
     {
-        LoadFromJson();
+        string mapNameToLoad = string.IsNullOrEmpty(beatMapName)
+            ? SceneManager.GetActiveScene().name
+            : beatMapName;
+
+        LoadFromJson(mapNameToLoad);
     }
 
-    void LoadFromJson()
+    public void LoadFromJson(string mapName)
     {
         string filePath;
 
     #if UNITY_EDITOR
-        // 编辑器运行时：直接用 Assets 目录
-        filePath = Path.Combine(Application.dataPath, "BeatBook/beat_data.json");
+        filePath = Path.Combine(Application.dataPath, $"BeatBook/{mapName}.json");
     #else
-        // 构建后：从 .exe 同目录读取
-        filePath = Path.Combine(Application.dataPath, "../beat_data.json");
+        filePath = Path.Combine(Application.dataPath, $"../{mapName}.json");
     #endif
 
-        Debug.Log($"🧾 Attempting to load beat data from: {filePath}");
+        Debug.Log($"🧾 Attempting to load beat data: {filePath}");
 
         if (File.Exists(filePath))
         {
             string json = File.ReadAllText(filePath);
             LoadedData = JsonUtility.FromJson<BeatRecord>(json);
-            Debug.Log($"✅ Loaded {LoadedData.beatHits.Count} beats.");
+            Debug.Log($"✅ Loaded {LoadedData.beatHits.Count} beats from '{mapName}'.");
         }
         else
         {
-            Debug.LogWarning("⚠️ Beat JSON file not found.");
+            Debug.LogWarning($"⚠️ Beat JSON file for '{mapName}' not found.");
             LoadedData = new BeatRecord();
         }
     }
