@@ -1,31 +1,60 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
+using MoreMountains.Feedbacks;
+using System.Collections;
+using UnityEngine.EventSystems;
 
 public class PauseMenu : MonoBehaviour
 {
     private bool isPaused = false;
     private VisualElement pauseMenu;
-
+    public MMF_Player recoverFeedback;
+    public MMF_Player quitFeedback;
+    private bool isTransitioning = false;   
+    
     void OnEnable()
     {
         var uiDocument = GetComponent<UIDocument>();
-        var root = uiDocument.rootVisualElement;
-
-        // 等待 UI 构建完成后设置隐藏
-        root.RegisterCallback<GeometryChangedEvent>(_ =>
+        if (uiDocument == null)
         {
-            pauseMenu = root.Q<VisualElement>("results-panel");
-            if (pauseMenu != null)
+            Debug.LogError("UIDocument component is missing!");
+            return;
+        }
+
+        var root = uiDocument.rootVisualElement;
+        
+        // 获取 pauseMenu 元素
+        pauseMenu = root.Q<VisualElement>("VisualElement");
+        if (pauseMenu == null)
+        {
+            Debug.LogError("Pause menu (results-panel) not found!");
+            return;
+        }
+
+        var retryButton = root.Q<Button>("retryButton");
+        var quitButton = root.Q<Button>("quitButton");
+
+        recoverFeedback.ForceTimescaleMode = true;
+        quitFeedback.ForceTimescaleMode = true;
+        
+        retryButton.clicked += () => OnButtonClicked(recoverFeedback);
+        quitButton.clicked += () =>
+        {
+            if (!isTransitioning)
             {
-                pauseMenu.style.display = DisplayStyle.None;
+                isTransitioning = true;
+                StartCoroutine(WaitUntilExitFeedbacksEnd());
             }
-        });
+        };
     }
 
     void Update()
     {
+        // 打印一下确认输入是否正常响应
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            Debug.Log("Escape key pressed");
             TogglePause();
         }
     }
@@ -34,20 +63,56 @@ public class PauseMenu : MonoBehaviour
     {
         isPaused = !isPaused;
 
+        if (pauseMenu == null)
+            return;
+
         if (isPaused)
         {
             Time.timeScale = 0f;
             pauseMenu.style.display = DisplayStyle.Flex;
+
+            // 暂停音乐
+            if (Conductor.Instance != null)
+                Conductor.Instance.musicSource.Pause();
         }
         else
         {
             Time.timeScale = 1f;
             pauseMenu.style.display = DisplayStyle.None;
+
+            // 继续音乐
+            if (Conductor.Instance != null)
+                Conductor.Instance.musicSource.UnPause();
         }
     }
 
-    void OnDisable()
+    private void OnButtonClicked(MMF_Player feedback)
     {
+        if (isTransitioning) return;
+
+        isTransitioning = true;
+        StartCoroutine(PlayFeedbackAndLoadScene(feedback));
+    }
+
+    private IEnumerator PlayFeedbackAndLoadScene(MMF_Player feedback)
+    {
+        feedback.PlayFeedbacks();
+        yield return new WaitUntil(() => !feedback.IsPlaying);
+        
+        isTransitioning = false;
+        isPaused = !isPaused;
         Time.timeScale = 1f;
+        pauseMenu.style.display = DisplayStyle.None;
+
+        // 继续音乐
+        if (Conductor.Instance != null)
+            Conductor.Instance.musicSource.UnPause();
+    }
+
+    private IEnumerator WaitUntilExitFeedbacksEnd()
+    {
+        quitFeedback.PlayFeedbacks();
+        yield return new WaitUntil(() => !quitFeedback.IsPlaying);
+        Application.Quit(); // 退出游戏
     }
 }
