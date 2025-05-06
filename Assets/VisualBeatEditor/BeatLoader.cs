@@ -25,7 +25,7 @@ public class BeatLoader : MonoBehaviour
     #if UNITY_EDITOR
         filePath = Path.Combine(Application.dataPath, $"BeatBook/{mapName}.json");
     #else
-        filePath = Path.Combine(Application.dataPath, $"BeatBook/{mapName}.json");
+        filePath = Path.Combine(Application.dataPath, $"../BeatBook/{mapName}.json");
     #endif
 
         Debug.Log($"🧾 Attempting to load beat data: {filePath}");
