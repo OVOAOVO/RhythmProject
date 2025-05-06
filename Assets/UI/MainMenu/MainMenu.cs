@@ -20,9 +20,9 @@ public class MainMenuController : MonoBehaviour
         var songBButton = root.Q<Button>("songB");    
         var songCButton = root.Q<Button>("songC");
         var exitButton = root.Q<Button>("quitButton");
-        songAButton.clicked += () => OnButtonClicked(songA, "Game");
-        songBButton.clicked += () => OnButtonClicked(songB, "Game");
-        songCButton.clicked += () => OnButtonClicked(songC, "Game");
+        songAButton.clicked += () => OnButtonClicked(songA, "SONG_A");
+        songBButton.clicked += () => OnButtonClicked(songB, "SONG_B");
+        songCButton.clicked += () => OnButtonClicked(songC, "SONG_C");
         exitButton.clicked += () =>
         {
             if (!isTransitioning)

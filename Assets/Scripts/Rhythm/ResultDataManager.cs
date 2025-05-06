@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 public class ResultDataManager : MonoBehaviour
 {
     // —— 数据统计部分 —— //
@@ -8,7 +9,9 @@ public class ResultDataManager : MonoBehaviour
     public int PerfectCount { get; private set; } = 0;
     public int GoodCount { get; private set; } = 0;
     public int BadCount { get; private set; } = 0;
-
+    public float Offset { get; private set; } = 0.0f;  // 偏差值
+    public List<float> Offsets = new List<float>();
+    public float Pure { get; private set; } = 0;  // 完美百分比
     private int currentCombo = 0;
 
     private Text comboText;
@@ -77,6 +80,30 @@ public class ResultDataManager : MonoBehaviour
         AddCombo();
     }
 
+    public void SetOffset(float offset)
+    {
+        Offset += offset;
+        Offsets.Add(offset);
+    }
+
+    public void ComputeOverallAccuracy(float maxOffset = 1.0f)
+    {
+        if (Offsets.Count == 0)
+        {
+            Pure = 100f;
+            return;
+        }
+
+        float sumAccuracy = 0f;
+        foreach (var offset in Offsets)
+        {
+            float acc = 1f - Mathf.Clamp01(Mathf.Abs(offset) / maxOffset);
+            sumAccuracy += acc;
+        }
+
+        Pure = (sumAccuracy / Offsets.Count) * 100f;
+    }
+
     /// <summary>重置所有数据（可在关卡开始/重试时调用）</summary>
     public void ResetAll()
     {
@@ -85,6 +112,7 @@ public class ResultDataManager : MonoBehaviour
         BadCount = 0;
         MaxCombo = 0;
         currentCombo = 0;
+        Offset = 0.0f;
         UpdateComboUI(0);
     }
 

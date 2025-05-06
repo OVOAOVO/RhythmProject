@@ -20,6 +20,7 @@ public class Pistol : Gun
     protected override void Fire()
     {
         base.Fire();  // 先执行父类逻辑
+        //—— 计算射线 ——    
         RaycastHit hit;
         bool isHit = Physics.Raycast(muzzlePos.position, shootDir, out hit, 30);  // 使用 3D 射线
         // 设置LineRenderer的终点
@@ -63,7 +64,12 @@ public class Pistol : Gun
             hitType = HitPerfect;
             ResultDataManager.Instance.AddPerfect();  // 记一次 Perfect
         }
-        
+
+                // —— 节拍偏差检测 ——
+        Conductor.Instance.GetBeatOffset();
+        float Offset = Conductor.Instance.hitOffset;
+        ResultDataManager.Instance.SetOffset(Offset);  // 获取当前节拍偏差值并设置到 ResultDataManager 
+        ResultDataManager.Instance.ComputeOverallAccuracy();  // 计算准确率
         ShowDamageText(hitPoint, hitType);  // 显示击中效果
     }
 

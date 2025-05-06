@@ -26,7 +26,7 @@ public class ResultPanel : MonoBehaviour
         var perfectLabel = root.Q<Label>("perfectLabel");
         var goodLabel    = root.Q<Label>("goodLabel");
         var badLabel     = root.Q<Label>("badLabel");
-
+        var pureLabel  = root.Q<Label>("scoreLabel");
         if(ResultDataManager.Instance != null)
         {
             // 从单例里读值，刷新文本
@@ -34,6 +34,7 @@ public class ResultPanel : MonoBehaviour
             perfectLabel.text = $"Perfect: {ResultDataManager.Instance.PerfectCount}";
             goodLabel.text    = $"Good: {ResultDataManager.Instance.GoodCount}";
             badLabel.text     = $"Bad: {ResultDataManager.Instance.BadCount}";
+            pureLabel.text = $"Pure: {ResultDataManager.Instance.Pure}%";
             retryButton.clicked += () => OnButtonClicked(retryFeedback, ResultDataManager.LastPlayedSceneName);
         }
         else

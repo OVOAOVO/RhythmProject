@@ -44,14 +44,9 @@ public class Gun : MonoBehaviour
 
     protected virtual void Fire()
     {
-            // —— 节拍偏差检测 ——
-        if (Conductor.Instance != null)
-        {
-            Conductor.Instance.GetBeatOffset();
         // GameObject bullet = ObjectPool.Instance.GetGameObject(bulletPrefab);
         // bullet.transform.position = muzzlePos.position;
 
         //bullet.GetComponent<Bullet>().SetSpeed(shootDir);
-        }
     }
 }
