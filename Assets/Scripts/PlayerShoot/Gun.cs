@@ -18,6 +18,7 @@ public class Gun : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (Time.timeScale == 0f) return; // 如果游戏暂停了，不执行枪械逻辑
         Vector3 mp = Input.mousePosition;
         mp.z = -Camera.main.transform.position.z;       // 摄像机到 z=0 平面的距离
         mousePos = Camera.main.ScreenToWorldPoint(mp);
