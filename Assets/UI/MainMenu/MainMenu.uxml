@@ -1,9 +1,8 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/MainMenu/MainMenu.uss?fileID=7433441132597879392&amp;guid=ee60adffb92ecb54b9b3e4f78524decd&amp;type=3#MainMenu" />
     <engine:VisualElement class="root">
-        <engine:VisualElement class="left-panel" style="background-image: url(&quot;project://database/Assets/Sprite/sorry.png?fileID=2800000&amp;guid=a15592cbf9f2d944e9b5254bd4c7f696&amp;type=3#sorry&quot;);">
+        <engine:VisualElement class="left-panel" style="background-image: url(&quot;project://database/Assets/Sprite/YES.png?fileID=2800000&amp;guid=a5c7742739c07f1468e76f24df45eed0&amp;type=3#YES&quot;);">
             <engine:Image name="coverImage" />
-            <engine:Label name="leftPanelText" text="这里应该放点图片的，但做起来时间可能比较长就先不做了" style="color: white; font-size: 20px; margin-top: 20px; transform-origin: center;" />
         </engine:VisualElement>
         <engine:ScrollView class="right-Container">
             <engine:ScrollView class="right-panel">
