@@ -1621,7 +1621,7 @@ MonoBehaviour:
   startAngle: 45
   endAngle: 135
   moveSpeed: 2
-  healthBarDecreaseFeedBacks: {fileID: 0}
+  healthBarDecreaseFeedBacks: {fileID: 2083206870}
   progressBar: {fileID: 339571312}
 --- !u!4 &1088350362
 Transform:
