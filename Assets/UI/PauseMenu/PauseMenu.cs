@@ -73,7 +73,7 @@ public class PauseMenu : MonoBehaviour
 
             // 暂停音乐
             if (Conductor.Instance != null)
-                Conductor.Instance.musicSource.Pause();
+                Conductor.Instance.PauseMusic();
         }
         else
         {
@@ -82,7 +82,7 @@ public class PauseMenu : MonoBehaviour
 
             // 继续音乐
             if (Conductor.Instance != null)
-                Conductor.Instance.musicSource.UnPause();
+                Conductor.Instance.ResumeMusic();
         }
     }
 
@@ -106,7 +106,7 @@ public class PauseMenu : MonoBehaviour
 
         // 继续音乐
         if (Conductor.Instance != null)
-            Conductor.Instance.musicSource.UnPause();
+            Conductor.Instance.ResumeMusic();
     }
 
     private IEnumerator WaitUntilExitFeedbacksEnd()

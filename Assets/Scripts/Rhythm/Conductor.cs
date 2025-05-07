@@ -29,6 +29,7 @@ public class Conductor : MonoBehaviour
 
     public float durationInSeconds = 0f; // 音乐持续时间（秒）
     public float hitOffset = 0f; // 击打偏移量（秒）
+    public bool IsPaused = false;
     private void Awake()
     {
         // —— 单例管理 —— 
@@ -61,6 +62,8 @@ public class Conductor : MonoBehaviour
 
     private void UpdateSongPosition()
     {
+        if (IsPaused) return;
+        
         if (musicSource.isPlaying)
         {
             // offset = 0.2f; // 这里可以设置一个偏移量，单位是秒，但要注意不要导致songPosition大于musicSource.clip.length
@@ -116,5 +119,18 @@ public class Conductor : MonoBehaviour
         // 计算当前节拍的时间
         float nearestBeatTime = nearestBeat * secPerBeat;
         hitOffset = songPosition - nearestBeatTime;
+    }
+
+    public void PauseMusic()
+    {
+        musicSource.Pause();
+        IsPaused = true;
+    }
+
+    public void ResumeMusic()
+    {
+        musicSource.UnPause();
+        dspSongTime += (float)(AudioSettings.dspTime - dspSongTime - songPosition); // 修正时间
+        IsPaused = false;
     }
 }
