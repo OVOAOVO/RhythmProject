@@ -169,7 +169,7 @@ public class EnemySpawner : MonoBehaviour
         Conductor.Instance.aliveEnemies--; // 被击中/到终点回收时数量-1
         
         //怪物到达终点，或者生命值为0，直接跳转到结果界面
-        if (Conductor.Instance.aliveEnemies <= 0 || progressBar.BarTarget <= 0f)
+        if ((Conductor.Instance.aliveEnemies <= 0 && Conductor.Instance.CurrentState == Conductor.MusicState.Finished )|| progressBar.BarTarget <= 0f)
         {
             ResultDataManager.LastPlayedSceneName = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene("ResultMenu");

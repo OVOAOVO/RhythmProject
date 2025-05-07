@@ -19,6 +19,11 @@ public class ResultDataManager : MonoBehaviour
     // —— 单例 —— //
     public static ResultDataManager Instance { get; private set; }
     public static string LastPlayedSceneName;
+
+    private static readonly HashSet<string> GameSceneNames = new HashSet<string>
+    {
+        "Game","SONG_A", "SONG_B", "SONG_C"
+    };
     private void Awake()
     {
         // 单例初始化
@@ -50,8 +55,7 @@ public class ResultDataManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // 只在进入 “Game” 场景时重置
-        if (scene.name == "Game")
+        if (GameSceneNames.Contains(scene.name))
         {
             ResetAll();
         }
