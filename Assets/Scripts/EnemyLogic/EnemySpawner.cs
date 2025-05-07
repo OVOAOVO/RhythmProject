@@ -4,10 +4,12 @@ using System.Collections;
 using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
 using UnityEngine.SceneManagement;
+using System;
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject EnemyPrefab;
-    public GameObject jumpingEnemyPrefab; // 跳跃怪物预制体
+    public List<GameObject> EnemyPrefab;
+    public List<GameObject> jumpingEnemyPrefab; // 跳跃怪物预制体
+    private List<Action> spawnFunctions;
     public GameObject target;
     public float radius = 5f;
     public float startAngle = 0f;
@@ -32,6 +34,16 @@ public class EnemySpawner : MonoBehaviour
         {
             Debug.LogWarning("⚠️ No beat data loaded.");
         }
+
+            // 初始化生成函数列表
+        spawnFunctions = new List<Action>
+        {
+            SpawnMonsterAtRandomAngle,
+            SpawnJumpMonster,
+            // 你可以继续加更多的生成函数，比如：
+            // SpawnFlyMonster,
+            // SpawnBoss
+        };
     }
     // 每拍发射怪物
     // void Update()
@@ -67,8 +79,8 @@ public class EnemySpawner : MonoBehaviour
             if (currentHit == fireBeat && !spawnedBeats.Contains(beat))
             {
                 spawnedBeats.Add(beat); // 记录这个节拍已触发
-                //SpawnMonsterAtRandomAngle(); // 或 SpawnJumpMonster()
-                SpawnJumpMonster(); // 生成跳跃怪物
+                int index = UnityEngine.Random.Range(0, spawnFunctions.Count);
+                spawnFunctions[index].Invoke(); // 随机调用一个生成函数
             }
         }
 
@@ -84,12 +96,14 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnMonsterAtRandomAngle()
     {
-        float angle = Random.Range(startAngle, endAngle) * Mathf.Deg2Rad;
+        float angle = UnityEngine.Random.Range(startAngle, endAngle) * Mathf.Deg2Rad;
         float x = radius * Mathf.Cos(angle);
         float y = radius * Mathf.Sin(angle);
         Vector3 spawnPos = new Vector3(y, -x, 0f); // 旋转90度
 
-        GameObject monsterObj = ObjectPool.Instance.GetGameObject(EnemyPrefab);
+        // 随机选择一个预制体
+        GameObject prefab = EnemyPrefab[UnityEngine.Random.Range(0, EnemyPrefab.Count)];
+        GameObject monsterObj = ObjectPool.Instance.GetGameObject(prefab);
         monsterObj.transform.position = spawnPos;
         monsterObj.transform.LookAt(target.transform);
 
@@ -108,7 +122,7 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnJumpMonster()
     {
-        float angle = Random.Range(startAngle, endAngle) * Mathf.Deg2Rad;
+        float angle = UnityEngine.Random.Range(startAngle, endAngle) * Mathf.Deg2Rad;
         float x = radius * Mathf.Cos(angle);
         float y = radius * Mathf.Sin(angle);
         Vector3 spawnPos = new Vector3(y, -x, 0f); // 旋转90度
@@ -117,7 +131,9 @@ public class EnemySpawner : MonoBehaviour
         Vector3 midPoint = spawnPos + new Vector3(-2.0f, 0f, 0f); // 向左移动一定距离作为中点
         Vector3 jumpTarget = spawnPos + new Vector3(-4f, 0f, 0f); // 向左更远处作为跳跃目标
 
-        GameObject monsterObj = ObjectPool.Instance.GetGameObject(jumpingEnemyPrefab);
+        GameObject prefab = jumpingEnemyPrefab[UnityEngine.Random.Range(0, jumpingEnemyPrefab.Count)];
+        GameObject monsterObj = ObjectPool.Instance.GetGameObject(prefab);
+
         monsterObj.transform.position = spawnPos;
         // 先关闭 Collider
         Collider col = monsterObj.GetComponent<Collider>();

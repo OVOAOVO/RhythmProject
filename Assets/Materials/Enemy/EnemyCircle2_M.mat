@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: LineEnemy
+  m_Name: EnemyCircle2_M
   m_Shader: {fileID: 4800000, guid: d4b1f8e8d330f2b49989b5d7a3a6ade5, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -50,8 +50,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: ff6ef20764af32745ad151687042db56, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: 845a9b477a80e454093db315f33a2672, type: 3}
+        m_Scale: {x: 5, y: 5}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
@@ -165,6 +165,6 @@ Material:
     - _RimColor: {r: 0, g: 0.7342432, b: 1, a: 1}
     - _ShadowColor: {r: 0.8509804, g: 0.27450982, b: 0, a: 1}
     - _SpecularColor: {r: 2, g: 2, b: 2, a: 1}
-    - _Tint: {r: 0.82240206, g: 0.40583837, b: 0.9056604, a: 1}
+    - _Tint: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
