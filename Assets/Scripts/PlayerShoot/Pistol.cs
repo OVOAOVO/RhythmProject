@@ -11,7 +11,7 @@ public class Pistol : Gun
     
     [Header("Feedback to Play on Click")]
     public MMFeedbacks feedbacks;// 反馈系统
-
+    public MMFeedbacks healthBarIncreaseFeedBacks; // 反馈系统
     protected override void Start()
     {
         base.Start();  // 先执行父类逻辑      
@@ -46,6 +46,7 @@ public class Pistol : Gun
 
     private void HandleHitEffectAndCombo(float distanceToCenterLine, Vector3 hitPoint)
     {
+        healthBarIncreaseFeedBacks.PlayFeedbacks(); // 播放反馈
         GameObject hitType = null;  // 用于存储击中效果的Prefab
         
         //TODO: 这里最好不要按照固定的数值，需要再改

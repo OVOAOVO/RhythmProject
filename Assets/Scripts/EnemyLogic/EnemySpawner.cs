@@ -16,7 +16,7 @@ public class EnemySpawner : MonoBehaviour
     public float endAngle = 180f;
     public float moveSpeed = 20f;
 
-    public MMFeedbacks healthBarFeedBacks; // 反馈系统
+    public MMFeedbacks healthBarDecreaseFeedBacks; // 反馈系统
     public MMProgressBar progressBar;
 
     private List<int> scheduledBeats = new List<int>();
@@ -164,7 +164,7 @@ public class EnemySpawner : MonoBehaviour
         ObjectPool.Instance.PushObject(enemy.gameObject);
        
         progressBar.Minus10Percent(); // 减少进度条
-        healthBarFeedBacks.PlayFeedbacks(); // 播放反馈
+        healthBarDecreaseFeedBacks.PlayFeedbacks(); // 播放反馈
         
         Conductor.Instance.aliveEnemies--; // 被击中/到终点回收时数量-1
         
