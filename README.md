@@ -14,6 +14,11 @@ You can customize the song and beatmap in the VisualBeatEditor folder to create 
 
 We use .json to store the song scores and put them in BeatBook
 
+1. copy an exist scene and change name
+2. change the recorder's .json file name to adjust your scene name
+3. recorder the song beat that you like(BPM need to change)
+4. play it!
+
 📌 Don’t forget:
 
 Update the BPM in the Conductor script to match your track
