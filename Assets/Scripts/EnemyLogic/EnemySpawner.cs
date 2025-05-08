@@ -24,7 +24,7 @@ public class EnemySpawner : MonoBehaviour
     private List<int> scheduledBeats = new List<int>();
    
     private Dictionary<int, int> spawnedBeatCounts = new Dictionary<int, int>(); // 记录每个 beat 已触发次数
-    private const int spawnAdvanceBeats = 6;
+    private int spawnAdvanceBeats = 6;
     
     void Start()
     {
@@ -35,6 +35,13 @@ public class EnemySpawner : MonoBehaviour
         else
         {
             Debug.LogWarning("⚠️ No beat data loaded.");
+        }
+
+        if (Conductor.Instance != null && Conductor.Instance.songBPM > 0)
+        {
+            float beatsPerSecond = Conductor.Instance.songBPM / 60f;
+            float timeToTravel = radius / moveSpeed; // 假设从半径5米远处移动
+            spawnAdvanceBeats = Mathf.CeilToInt(timeToTravel * beatsPerSecond);//这个计算的是根据BPM要提前多少拍发射怪物刚好到中心
         }
 
             // 初始化生成函数列表
