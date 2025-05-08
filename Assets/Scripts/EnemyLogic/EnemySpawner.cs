@@ -5,6 +5,8 @@ using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
 using UnityEngine.SceneManagement;
 using System;
+using System.Linq;
+
 public class EnemySpawner : MonoBehaviour
 {
     public List<GameObject> EnemyPrefab;
@@ -21,7 +23,7 @@ public class EnemySpawner : MonoBehaviour
 
     private List<int> scheduledBeats = new List<int>();
    
-    private HashSet<int> spawnedBeats = new HashSet<int>();
+    private Dictionary<int, int> spawnedBeatCounts = new Dictionary<int, int>(); // 记录每个 beat 已触发次数
     private const int spawnAdvanceBeats = 6;
     
     void Start()
@@ -76,11 +78,21 @@ public class EnemySpawner : MonoBehaviour
 
             // ✅ 精准匹配节拍，并且只触发一次
             //Unity 的 Update() 是 每秒调用多次（一般是每秒 60 帧或以上），而 hit 只在进入下一拍时才加 1
-            if (currentHit == fireBeat && !spawnedBeats.Contains(beat))
+            if (currentHit == fireBeat)
             {
-                spawnedBeats.Add(beat); // 记录这个节拍已触发
-                int index = UnityEngine.Random.Range(0, spawnFunctions.Count);
-                spawnFunctions[index].Invoke(); // 随机调用一个生成函数
+                // 检查这个 beat 之前触发了多少次
+                if (!spawnedBeatCounts.ContainsKey(beat))
+                    spawnedBeatCounts[beat] = 0;
+
+                // 统计 beat 的总出现次数
+                int totalOccurrences = scheduledBeats.Count(b => b == beat);
+
+                if (spawnedBeatCounts[beat] < totalOccurrences)
+                {
+                    spawnedBeatCounts[beat]++;
+                    int index = UnityEngine.Random.Range(0, spawnFunctions.Count);
+                    spawnFunctions[index].Invoke(); // 生成怪物
+                }
             }
         }
 
