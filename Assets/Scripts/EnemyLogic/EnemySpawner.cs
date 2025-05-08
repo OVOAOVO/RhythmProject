@@ -40,7 +40,7 @@ public class EnemySpawner : MonoBehaviour
         if (Conductor.Instance != null && Conductor.Instance.songBPM > 0)
         {
             float beatsPerSecond = Conductor.Instance.songBPM / 60f;
-            float timeToTravel = radius / moveSpeed; // 假设从半径5米远处移动
+            float timeToTravel = (radius/2) / moveSpeed; // 假设从半径5米远处移动
             spawnAdvanceBeats = Mathf.CeilToInt(timeToTravel * beatsPerSecond);//这个计算的是根据BPM要提前多少拍发射怪物刚好到中心
         }
 
