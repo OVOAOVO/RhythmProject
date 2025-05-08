@@ -4,7 +4,7 @@
         <engine:VisualElement class="left-panel" style="background-image: url(&quot;project://database/Assets/Sprite/YES.png?fileID=2800000&amp;guid=a5c7742739c07f1468e76f24df45eed0&amp;type=3#YES&quot;);">
             <engine:Image name="coverImage" />
                 <!-- Credits -->
-        <engine:Label text="&quot;Cloud Dancer&quot; Kevin MacLeod (incompetech.com)&#10;&quot;Galactic Rap&quot; Kevin MacLeod (incompetech.com)&#10;&quot;Voxel Revolution&quot; Kevin MacLeod (incompetech.com)&#10;Licensed under Creative Commons: By Attribution 4.0 License&#10;http://creativecommons.org/licenses/by/4.0/"
+        <engine:Label text="Special Thanks&#10;&quot;Cloud Dancer&quot; Kevin MacLeod (incompetech.com)&#10;&quot;Galactic Rap&quot; Kevin MacLeod (incompetech.com)&#10;&quot;Voxel Revolution&quot; Kevin MacLeod (incompetech.com)&#10;Licensed under Creative Commons: By Attribution 4.0 License&#10;http://creativecommons.org/licenses/by/4.0/"
             style="position: absolute; bottom: 10px; left: 10px; font-size: 10px; color: white; white-space: pre-wrap; width: 300px;" />
         </engine:VisualElement>
         <engine:ScrollView class="right-Container">
