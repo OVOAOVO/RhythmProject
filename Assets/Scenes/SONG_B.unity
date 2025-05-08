@@ -2366,10 +2366,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyPrefab:
   - {fileID: 5175433164174420965, guid: 0cddffcc8f88c8c4f8204634ecd3e8de, type: 3}
-  - {fileID: 5175433164174420965, guid: 2b389ed2881d0e74cb3ff5b6ee7f11d6, type: 3}
   - {fileID: 5175433164174420965, guid: a6287250b60c25c41b31034aa3e55008, type: 3}
+  - {fileID: 5175433164174420965, guid: acb3e3f1107d79046bd9f130c025ec68, type: 3}
   jumpingEnemyPrefab:
   - {fileID: 5175433164174420965, guid: a7ad9d94307cedb4faaa42f0864ce548, type: 3}
+  - {fileID: 5175433164174420965, guid: 2b389ed2881d0e74cb3ff5b6ee7f11d6, type: 3}
   target: {fileID: 1445694027}
   radius: 5
   startAngle: 45
