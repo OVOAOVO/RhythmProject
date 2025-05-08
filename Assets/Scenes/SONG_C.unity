@@ -2973,7 +2973,7 @@ MonoBehaviour:
   radius: 5
   startAngle: 45
   endAngle: 135
-  moveSpeed: 12
+  moveSpeed: 10
   healthBarDecreaseFeedBacks: {fileID: 2083206870}
   progressBar: {fileID: 339571312}
 --- !u!4 &1088350362

@@ -10,6 +10,7 @@ public class PauseMenu : MonoBehaviour
     private bool isPaused = false;
     private VisualElement pauseMenu;
     public MMF_Player recoverFeedback;
+    public MMF_Player MainMenuFeedback;
     public MMF_Player quitFeedback;
     private bool isTransitioning = false;   
     
@@ -34,10 +35,12 @@ public class PauseMenu : MonoBehaviour
 
         var retryButton = root.Q<Button>("retryButton");
         var quitButton = root.Q<Button>("quitButton");
+        var mainMenuButton = root.Q<Button>("MainMenuButton");
 
         recoverFeedback.ForceTimescaleMode = true;
         quitFeedback.ForceTimescaleMode = true;
-        
+        MainMenuFeedback.ForceTimescaleMode = true;
+
         retryButton.clicked += () => OnButtonClicked(recoverFeedback);
         quitButton.clicked += () =>
         {
@@ -47,6 +50,8 @@ public class PauseMenu : MonoBehaviour
                 StartCoroutine(WaitUntilExitFeedbacksEnd());
             }
         };
+        mainMenuButton.clicked += () => OnMainButtonClicked(MainMenuFeedback);
+
     }
 
     void Update()
@@ -91,10 +96,18 @@ public class PauseMenu : MonoBehaviour
         if (isTransitioning) return;
 
         isTransitioning = true;
+        StartCoroutine(PlayFeedbackAndReocver(feedback));
+    }
+
+    private void OnMainButtonClicked(MMF_Player feedback)
+    {
+        if (isTransitioning) return;
+
+        isTransitioning = true;
         StartCoroutine(PlayFeedbackAndLoadScene(feedback));
     }
 
-    private IEnumerator PlayFeedbackAndLoadScene(MMF_Player feedback)
+    private IEnumerator PlayFeedbackAndReocver(MMF_Player feedback)
     {
         feedback.PlayFeedbacks();
         yield return new WaitUntil(() => !feedback.IsPlaying);
@@ -107,6 +120,22 @@ public class PauseMenu : MonoBehaviour
         // 继续音乐
         if (Conductor.Instance != null)
             Conductor.Instance.ResumeMusic();
+    }
+
+        private IEnumerator PlayFeedbackAndLoadScene(MMF_Player feedback)
+    {
+        feedback.PlayFeedbacks();
+        yield return new WaitUntil(() => !feedback.IsPlaying);
+        
+        isTransitioning = false;
+        isPaused = !isPaused;
+        Time.timeScale = 1f;
+        pauseMenu.style.display = DisplayStyle.None;
+
+        // 继续音乐
+        if (Conductor.Instance != null)
+            Conductor.Instance.ResumeMusic();
+        SceneManager.LoadScene("MainMenu"); // 加载主菜单场景
     }
 
     private IEnumerator WaitUntilExitFeedbacksEnd()
