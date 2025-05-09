@@ -32,7 +32,7 @@ public class BeatRecorder : MonoBehaviour
             Directory.CreateDirectory(folderPath);
         }
 
-        string filePath = Path.Combine(folderPath, "SONG_C.json");
+        string filePath = Path.Combine(folderPath, "SONG_D.json");
         string json = JsonUtility.ToJson(beatRecord, true);
         File.WriteAllText(filePath, json);
         Debug.Log($"✅ Saved beat data to: {filePath}");
