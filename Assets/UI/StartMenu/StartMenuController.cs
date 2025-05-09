@@ -15,7 +15,6 @@ public class StartMenuController : MonoBehaviour
     {
         isTransitioning = false; // 重置状态
         var root = GetComponent<UIDocument>().rootVisualElement;
-        var titleLabel = root.Q<Label>("gameTitle");
         var startButton = root.Q<Button>("startButton");
         var exitButton = root.Q<Button>("exitButton");
         var languageButton = root.Q<Button>("languageButton");
@@ -38,7 +37,6 @@ public class StartMenuController : MonoBehaviour
         };
         languageButton.clicked += LanguageToggle.ToggleLanguage;
         // 绑定本地化文本
-        UILocalizationHelper.BindLocalizedText(titleLabel, "LocalizationTables", "gameTitle");
         UILocalizationHelper.BindLocalizedText(startButton, "LocalizationTables", "startButton");
         UILocalizationHelper.BindLocalizedText(exitButton, "LocalizationTables", "exitButton");
         UILocalizationHelper.BindLocalizedText(languageButton, "LocalizationTables", "languageButton");
