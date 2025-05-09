@@ -6,9 +6,10 @@ public class BeatVisualizer : MonoBehaviour
     public Material targetMaterial;
     public string shaderPropertyName = "_BeatStrength";
     public float strengthMultiplier = 0.1f;
-    public float beatDecay = 0.95f;
+    public float beatDecay = 0.9f;
 
     private float beatStrength = 0f;
+    private int lastBeat = -1;
 
     void LateUpdate()
     {
@@ -18,12 +19,19 @@ public class BeatVisualizer : MonoBehaviour
         float songPosition = Conductor.Instance.songPosition;
         float secPerBeat = Conductor.Instance.secPerBeat;
 
-        float currentBeat = songPosition / secPerBeat;
-        float fractional = currentBeat - Mathf.Floor(currentBeat);
+        int currentBeat = Mathf.FloorToInt(songPosition / secPerBeat);
 
-        // 越接近整数节拍，值越大（简单脉冲效果）
-        float proximity = Mathf.Cos(fractional * Mathf.PI * 2); // 范围 [-1, 1]
-        beatStrength = Mathf.Max(beatStrength * beatDecay, Mathf.Abs(proximity));
+        // 当进入新的一拍时，触发一次脉冲
+        if (currentBeat != lastBeat)
+        {
+            lastBeat = currentBeat;
+            beatStrength = 1.0f;
+        }
+        else
+        {
+            // 否则逐渐衰减
+            beatStrength *= beatDecay;
+        }
 
         if (targetMaterial != null)
         {
