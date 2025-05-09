@@ -6,5 +6,11 @@
         </ui:VisualElement>
         <ui:Button name="startButton" text="StartGame" style="background-color: rgb(81, 81, 81); -unity-font-definition: url(&quot;project://database/Assets/Feel/NiceVibrations/Demo/Common/Fonts/BIG%20JOHN.otf?fileID=12800000&amp;guid=7015f2d2ce595844e9fe6e0c3bd8d27b&amp;type=3#BIG JOHN&quot;); top: 30px; border-top-color: rgb(255, 196, 0); border-right-color: rgb(255, 196, 0); border-bottom-color: rgb(255, 196, 0); border-left-color: rgb(255, 196, 0); color: rgb(255, 196, 0); -unity-text-align: lower-center;" />
         <ui:Button name="exitButton" text="Exit" style="background-color: rgb(81, 81, 81); -unity-font-definition: url(&quot;project://database/Assets/Feel/NiceVibrations/Demo/Common/Fonts/BIG%20JOHN.otf?fileID=12800000&amp;guid=7015f2d2ce595844e9fe6e0c3bd8d27b&amp;type=3#BIG JOHN&quot;); top: 30px; border-top-color: rgb(255, 196, 0); border-right-color: rgb(255, 196, 0); border-bottom-color: rgb(255, 196, 0); border-left-color: rgb(255, 196, 0); color: rgb(255, 196, 0); -unity-text-align: lower-center; font-size: 20px;" />
+        <ui:Button name="languageButton" text="Language"
+      style="position: absolute; right: 20px; bottom: 20px;
+             background-color: rgb(81, 81, 81);
+             color: rgb(255, 196, 0);
+             border-color: rgb(255, 196, 0);
+             -unity-font-definition: url('project://database/Assets/Feel/NiceVibrations/Demo/Common/Fonts/BIG JOHN.otf?fileID=12800000&amp;guid=7015f2d2ce595844e9fe6e0c3bd8d27b&amp;type=3#BIG JOHN');" />
     </ui:VisualElement>
 </ui:UXML>

@@ -17,8 +17,9 @@ public class ResultPanel : MonoBehaviour
         isTransitioning = false;
         var root = GetComponent<UIDocument>().rootVisualElement;
 
+        var titleLabel = root.Q<Label>("titleLabel");
         var retryButton = root.Q<Button>("retryButton");
-        var exitButton = root.Q<Button>("exitButton");
+        var mainMenuButton = root.Q<Button>("exitButton");
         var quitButton = root.Q<Button>("quitButton");
         
         // 拿到各个 Label，用 Q<T>，name 对应 UXML 中的 name 属性
@@ -29,12 +30,6 @@ public class ResultPanel : MonoBehaviour
         var pureLabel  = root.Q<Label>("scoreLabel");
         if(ResultDataManager.Instance != null)
         {
-            // 从单例里读值，刷新文本
-            comboLabel.text   = $"Max Combo: {ResultDataManager.Instance.MaxCombo}";
-            perfectLabel.text = $"Perfect: {ResultDataManager.Instance.PerfectCount}";
-            goodLabel.text    = $"Good: {ResultDataManager.Instance.GoodCount}";
-            badLabel.text     = $"Bad: {ResultDataManager.Instance.BadCount}";
-            pureLabel.text = $"Pure: {ResultDataManager.Instance.Pure}%";
             retryButton.clicked += () => OnButtonClicked(retryFeedback, ResultDataManager.LastPlayedSceneName);
         }
         else
@@ -42,7 +37,7 @@ public class ResultPanel : MonoBehaviour
             retryButton.clicked += () => OnButtonClicked(retryFeedback, "Game");
         }
 
-        exitButton.clicked += () => OnButtonClicked(mainMenuFeedback, "MainMenu");
+        mainMenuButton.clicked += () => OnButtonClicked(mainMenuFeedback, "MainMenu");
 
         quitButton.clicked += () =>
         {
@@ -52,6 +47,18 @@ public class ResultPanel : MonoBehaviour
                 StartCoroutine(WaitUntilExitFeedbacksEnd());
             }
         };
+
+        // 绑定本地化文本
+        UILocalizationHelper.BindLocalizedText(titleLabel, "LocalizationTables", "ResultLabel");
+        UILocalizationHelper.BindLocalizedText(retryButton, "LocalizationTables", "retryButton");
+        UILocalizationHelper.BindLocalizedText(mainMenuButton, "LocalizationTables", "MainMenuButton");
+        UILocalizationHelper.BindLocalizedText(quitButton, "LocalizationTables", "quitButton");
+
+        UILocalizationHelper.SetLocalizedFormattedTextValue(comboLabel, "LocalizationTables", "comboLabel", ResultDataManager.Instance.MaxCombo);
+        UILocalizationHelper.SetLocalizedFormattedTextValue(perfectLabel, "LocalizationTables", "perfectLabel", ResultDataManager.Instance.PerfectCount);
+        UILocalizationHelper.SetLocalizedFormattedTextValue(goodLabel, "LocalizationTables", "goodLabel", ResultDataManager.Instance.GoodCount);
+        UILocalizationHelper.SetLocalizedFormattedTextValue(badLabel, "LocalizationTables", "badLabel", ResultDataManager.Instance.BadCount);
+        UILocalizationHelper.SetLocalizedFormattedTextValue(pureLabel, "LocalizationTables", "scoreLabel", ResultDataManager.Instance.Pure);
     }
 
     private void OnButtonClicked(MMF_Player feedback, string sceneName)

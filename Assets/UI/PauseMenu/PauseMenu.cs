@@ -36,6 +36,7 @@ public class PauseMenu : MonoBehaviour
         var retryButton = root.Q<Button>("retryButton");
         var quitButton = root.Q<Button>("quitButton");
         var mainMenuButton = root.Q<Button>("MainMenuButton");
+        var pauseLabel = root.Q<Label>("titleLabel");
 
         recoverFeedback.ForceTimescaleMode = true;
         quitFeedback.ForceTimescaleMode = true;
@@ -51,7 +52,10 @@ public class PauseMenu : MonoBehaviour
             }
         };
         mainMenuButton.clicked += () => OnMainButtonClicked(MainMenuFeedback);
-
+        UILocalizationHelper.BindLocalizedText(retryButton, "LocalizationTables", "continueButton");
+        UILocalizationHelper.BindLocalizedText(quitButton, "LocalizationTables", "quitButton");
+        UILocalizationHelper.BindLocalizedText(mainMenuButton, "LocalizationTables", "MainMenuButton");
+        UILocalizationHelper.BindLocalizedText(pauseLabel, "LocalizationTables", "titleLabel");
     }
 
     void Update()

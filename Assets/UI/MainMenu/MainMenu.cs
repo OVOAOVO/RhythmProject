@@ -31,6 +31,11 @@ public class MainMenuController : MonoBehaviour
                 StartCoroutine(WaitUntilExitFeedbacksEnd());
             }
         };
+
+        UILocalizationHelper.BindLocalizedText(songAButton, "LocalizationTables", "songA");
+        UILocalizationHelper.BindLocalizedText(songBButton, "LocalizationTables", "songB");
+        UILocalizationHelper.BindLocalizedText(songCButton, "LocalizationTables", "songC");
+        UILocalizationHelper.BindLocalizedText(exitButton, "LocalizationTables", "quitButton");
     }
 
     private void OnButtonClicked(MMF_Player feedback, string sceneName)

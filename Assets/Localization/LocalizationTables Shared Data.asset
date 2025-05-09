@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: LocalizationTables Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: LocalizationTables
+  m_TableCollectionNameGuidString: ca04813356b1e7b4b86a0153d279a8f8
+  m_Entries:
+  - m_Id: 104125267968
+    m_Key: gameTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1926365806592
+    m_Key: startButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1994892345344
+    m_Key: exitButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29713562697728
+    m_Key: languageButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31004791767040
+    m_Key: quitButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31105379565568
+    m_Key: songA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31133858889728
+    m_Key: songB
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31161407078400
+    m_Key: songC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31888166715392
+    m_Key: retryButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32034250129408
+    m_Key: MainMenuButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32818161352704
+    m_Key: titleLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34115824484352
+    m_Key: comboLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34146556149760
+    m_Key: perfectLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34168173592576
+    m_Key: goodLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34181100437504
+    m_Key: badLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34192995483648
+    m_Key: scoreLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38374641074176
+    m_Key: continueButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39205369118720
+    m_Key: ResultLabel
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 8509574792123514977
+  references:
+    version: 2
+    RefIds:
+    - rid: 8509574792123514977
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1746764437782
