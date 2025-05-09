@@ -18,6 +18,10 @@ public class EnemySpawner : MonoBehaviour
     public float endAngle = 180f;
     public float moveSpeed = 20f;
 
+    private int spawnSteps = 10; // 总共划分几个生成点
+    private int currentSpawnIndex = 0;
+    private bool goingDown = true;
+
     public MMFeedbacks healthBarDecreaseFeedBacks; // 反馈系统
     public MMProgressBar progressBar;
 
@@ -25,6 +29,7 @@ public class EnemySpawner : MonoBehaviour
    
     private Dictionary<int, int> spawnedBeatCounts = new Dictionary<int, int>(); // 记录每个 beat 已触发次数
     private int spawnAdvanceBeats = 6;
+
     
     void Start()
     {
@@ -54,27 +59,6 @@ public class EnemySpawner : MonoBehaviour
             // SpawnBoss
         };
     }
-    // 每拍发射怪物
-    // void Update()
-    // {
-    //     if (Conductor.Instance.hit > previousHit)
-    //     {
-    //         previousHit = Conductor.Instance.hit;
-    //         SpawnMonsterAtRandomAngle();
-    //         //SpawnJumpMonster();
-    //     }
-
-    //     if (Conductor.Instance.CurrentState == Conductor.MusicState.Finished)
-    //     {
-    //         // 并且场上已经没有怪物了，直接跳转
-    //         if (Conductor.Instance.aliveEnemies <= 0)
-    //         {
-    //             Debug.Log("update跳转到结果界面");
-    //             ResultDataManager.LastPlayedSceneName = SceneManager.GetActiveScene().name;
-    //             SceneManager.LoadScene("ResultMenu");
-    //         }
-    //     }
-    // }
     void Update()
     {
         int currentHit = Conductor.Instance.hit;
@@ -112,10 +96,37 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    float GetAngleFromIndex()
+    {
+        float step = (endAngle - startAngle) / (spawnSteps - 1);
+        float angle = startAngle + step * currentSpawnIndex;
+        return angle;
+    }
 
+    void UpdateSpawnIndex()
+    {
+        if (goingDown)
+        {
+            currentSpawnIndex++;
+            if (currentSpawnIndex >= spawnSteps)
+            {
+                currentSpawnIndex = spawnSteps - 2;
+                goingDown = false;
+            }
+        }
+        else
+        {
+            currentSpawnIndex--;
+            if (currentSpawnIndex < 0)
+            {
+                currentSpawnIndex = 1;
+                goingDown = true;
+            }
+        }
+    }
     void SpawnMonsterAtRandomAngle()
     {
-        float angle = UnityEngine.Random.Range(startAngle, endAngle) * Mathf.Deg2Rad;
+        float angle = GetAngleFromIndex() * Mathf.Deg2Rad;
         float x = radius * Mathf.Cos(angle);
         float y = radius * Mathf.Sin(angle);
         Vector3 spawnPos = new Vector3(y, -x, 0f); // 旋转90度
@@ -141,11 +152,13 @@ public class EnemySpawner : MonoBehaviour
         enemy.Initialize(target.transform, moveSpeed, OnEnemyReached);
 
         Conductor.Instance.aliveEnemies++; // 生成时数量+1
+
+        UpdateSpawnIndex(); // 更新为下一个生成点
     }
 
     void SpawnJumpMonster()
     {
-        float angle = UnityEngine.Random.Range(startAngle, endAngle) * Mathf.Deg2Rad;
+        float angle = GetAngleFromIndex() * Mathf.Deg2Rad;
         float x = radius * Mathf.Cos(angle);
         float y = radius * Mathf.Sin(angle);
         Vector3 spawnPos = new Vector3(y, -x, 0f); // 旋转90度
@@ -173,6 +186,8 @@ public class EnemySpawner : MonoBehaviour
         enemy.InitializeJump(midPoint, jumpTarget, target.transform, moveSpeed, OnEnemyReached);
 
         Conductor.Instance.aliveEnemies++; // 生成时数量+1
+
+        UpdateSpawnIndex(); // 更新为下一个生成点
     }
     // NOTE:
     // 同一帧里“生成”一个敌人，再马上做一次 Physics.Raycast，新的 Collider 已经被注册到场景里了；
