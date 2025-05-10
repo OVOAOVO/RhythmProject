@@ -85,7 +85,7 @@ Material:
     - _AddPrecomputedVelocity: 0
     - _AlphaClip: 0
     - _AlphaToMask: 0
-    - _BeatStrength: 0.023782682
+    - _BeatStrength: 0.0024894257
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
