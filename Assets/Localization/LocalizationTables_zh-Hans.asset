@@ -90,6 +90,10 @@ MonoBehaviour:
     m_Localized: "\u51FB\u4E2D\u7ED3\u7B97"
     m_Metadata:
       m_Items: []
+  - m_Id: 1152591855190016
+    m_Localized: "P.S. \u8FD9\u4E0D\u662F\u5199\u9519\uFF0C\n\u662F\u2018COMB\u2019\uFF08\u68B3\uFF09\u5BF9\u4E86\uFF01"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

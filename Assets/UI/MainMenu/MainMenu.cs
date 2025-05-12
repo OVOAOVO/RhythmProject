@@ -20,6 +20,7 @@ public class MainMenuController : MonoBehaviour
         var songBButton = root.Q<Button>("songB");    
         var songCButton = root.Q<Button>("songC");
         var exitButton = root.Q<Button>("quitButton");
+        var PSLabel = root.Q<Label>("PSLabel");
         songAButton.clicked += () => OnButtonClicked(songA, "SONG_A");
         songBButton.clicked += () => OnButtonClicked(songB, "SONG_B");
         songCButton.clicked += () => OnButtonClicked(songC, "SONG_C");
@@ -36,6 +37,7 @@ public class MainMenuController : MonoBehaviour
         UILocalizationHelper.BindLocalizedText(songBButton, "LocalizationTables", "songB");
         UILocalizationHelper.BindLocalizedText(songCButton, "LocalizationTables", "songC");
         UILocalizationHelper.BindLocalizedText(exitButton, "LocalizationTables", "quitButton");
+        UILocalizationHelper.BindLocalizedText(PSLabel, "LocalizationTables", "PSLabel");
     }
 
     private void OnButtonClicked(MMF_Player feedback, string sceneName)

@@ -90,6 +90,10 @@ MonoBehaviour:
     m_Localized: Result
     m_Metadata:
       m_Items: []
+  - m_Id: 1152591855190016
+    m_Localized: P.S. It's not a typo. COMB on!
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
