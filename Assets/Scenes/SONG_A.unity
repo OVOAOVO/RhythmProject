@@ -1611,11 +1611,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyPrefab:
-  - {fileID: 5175433164174420965, guid: a6287250b60c25c41b31034aa3e55008, type: 3}
-  - {fileID: 5175433164174420965, guid: 0cddffcc8f88c8c4f8204634ecd3e8de, type: 3}
+  - {fileID: 5175433164174420965, guid: acb3e3f1107d79046bd9f130c025ec68, type: 3}
+  - {fileID: 5175433164174420965, guid: 7fbd90e95f8b63c42b6fea1d99a1fa62, type: 3}
+  - {fileID: 5175433164174420965, guid: 901875f281cec294faa43e8a1be5c4a4, type: 3}
+  - {fileID: 5175433164174420965, guid: 358fdd397b92d5c4c8baca6e263f2fcf, type: 3}
+  - {fileID: 5175433164174420965, guid: 465d3f1c0b5778a4bb56e883cf77faed, type: 3}
+  - {fileID: 5175433164174420965, guid: 6a34eeb48a690204e8e0921f3c4fbbda, type: 3}
+  - {fileID: 5175433164174420965, guid: ff2e87923356c2d4c8073cc8d27ce477, type: 3}
+  - {fileID: 5175433164174420965, guid: b0c52e886d9167c44b8fab0c3d97ac10, type: 3}
+  - {fileID: 5175433164174420965, guid: 2e22db7b82ee3a148bce8a3c0bb974bd, type: 3}
   jumpingEnemyPrefab:
-  - {fileID: 5175433164174420965, guid: a7ad9d94307cedb4faaa42f0864ce548, type: 3}
-  - {fileID: 5175433164174420965, guid: 2b389ed2881d0e74cb3ff5b6ee7f11d6, type: 3}
+  - {fileID: 5175433164174420965, guid: 8ccd715eff2e97346adb5191cd0d11b7, type: 3}
+  - {fileID: 5175433164174420965, guid: 9bca9bb9627e7ad4c97215fd90963d48, type: 3}
+  - {fileID: 5175433164174420965, guid: 317d859d80852064bab887f854e14d32, type: 3}
+  - {fileID: 5175433164174420965, guid: 83ae0aececb7ceb4a80f461dd7510d99, type: 3}
+  - {fileID: 5175433164174420965, guid: e57f78121838856448e4f0539018dd3d, type: 3}
   target: {fileID: 2023212320}
   radius: 5
   startAngle: 45

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: EnemyCircle_M
+  m_Name: EnemyS_1
   m_Shader: {fileID: 4800000, guid: d4b1f8e8d330f2b49989b5d7a3a6ade5, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -50,7 +50,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: df3bc9f5c2528c64b8492d7e3dce227e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9b3024f73aaf8db43a6add4a86f7b36b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:

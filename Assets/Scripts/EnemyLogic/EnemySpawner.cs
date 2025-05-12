@@ -137,9 +137,9 @@ public class EnemySpawner : MonoBehaviour
         monsterObj.transform.position = spawnPos;
         monsterObj.transform.LookAt(target.transform);
 
-        // ✅ 设置随机缩放（大小 80% - 120%）
-        float scale = UnityEngine.Random.Range(0.5f, 1.2f);
-        monsterObj.transform.localScale = Vector3.one * scale;
+        // // ✅ 设置随机缩放（大小 80% - 120%）
+        // float scale = UnityEngine.Random.Range(0.5f, 1.2f);
+        // monsterObj.transform.localScale = Vector3.one * scale;
 
         // 先关闭 Collider
         Collider col = monsterObj.GetComponent<Collider>();
@@ -171,9 +171,9 @@ public class EnemySpawner : MonoBehaviour
         GameObject monsterObj = ObjectPool.Instance.GetGameObject(prefab);
 
         monsterObj.transform.position = spawnPos;   
-        // ✅ 设置随机缩放（大小 80% - 120%）
-        float scale = UnityEngine.Random.Range(0.5f, 1.2f);
-        monsterObj.transform.localScale = Vector3.one * scale;
+        // // ✅ 设置随机缩放（大小 80% - 120%）
+        // float scale = UnityEngine.Random.Range(0.5f, 1.2f);
+        // monsterObj.transform.localScale = Vector3.one * scale;
 
         // 先关闭 Collider
         Collider col = monsterObj.GetComponent<Collider>();
