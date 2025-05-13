@@ -8,13 +8,13 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: EnemyF_3
-  m_Shader: {fileID: 4800000, guid: d4b1f8e8d330f2b49989b5d7a3a6ade5, type: 3}
+  m_Shader: {fileID: 4800000, guid: 4918cccace6072440b3917201d3c5da5, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
+  m_ValidKeywords: []
+  m_InvalidKeywords:
   - _SHADOWMIXMODE_MULTIPLY
   - _SHARPRIMLIGHT_ON
-  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -25,6 +25,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: bc2a0247d4a3a2d42a659317268ccddb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 2800000, guid: 8f1ed309a298a2742b829de2033346ab, type: 3}
         m_Scale: {x: 1, y: 1}

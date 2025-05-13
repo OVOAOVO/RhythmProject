@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: EnemyY_8
+  m_Name: EnemyY_5
   m_Shader: {fileID: 4800000, guid: 4918cccace6072440b3917201d3c5da5, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -26,7 +26,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: c3675f06f2dcf844280ee17e1e2f201d, type: 3}
+        m_Texture: {fileID: 2800000, guid: eeb8e42e0c4cba74a8f9c7df889ee32e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -54,7 +54,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: c3675f06f2dcf844280ee17e1e2f201d, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5d9e21dab2f02134f95a580735e3097c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
