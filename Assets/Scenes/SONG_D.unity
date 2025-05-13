@@ -2964,11 +2964,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyPrefab:
-  - {fileID: 5175433164174420965, guid: 0cddffcc8f88c8c4f8204634ecd3e8de, type: 3}
-  - {fileID: 5175433164174420965, guid: a6287250b60c25c41b31034aa3e55008, type: 3}
+  - {fileID: 5175433164174420965, guid: acb3e3f1107d79046bd9f130c025ec68, type: 3}
+  - {fileID: 5175433164174420965, guid: 465d3f1c0b5778a4bb56e883cf77faed, type: 3}
+  - {fileID: 5175433164174420965, guid: 358fdd397b92d5c4c8baca6e263f2fcf, type: 3}
+  - {fileID: 5175433164174420965, guid: ae30a91d4468cd74c84e6c6340b2824b, type: 3}
+  - {fileID: 5175433164174420965, guid: 6a34eeb48a690204e8e0921f3c4fbbda, type: 3}
+  - {fileID: 5175433164174420965, guid: fcc5dc4cdd6ed9d4ea2269ebb7229173, type: 3}
+  - {fileID: 5175433164174420965, guid: b0c52e886d9167c44b8fab0c3d97ac10, type: 3}
+  - {fileID: 5175433164174420965, guid: 0c90df1b2e0803d4184f9c414a47eb3d, type: 3}
   jumpingEnemyPrefab:
-  - {fileID: 5175433164174420965, guid: a7ad9d94307cedb4faaa42f0864ce548, type: 3}
-  - {fileID: 5175433164174420965, guid: 2b389ed2881d0e74cb3ff5b6ee7f11d6, type: 3}
+  - {fileID: 5175433164174420965, guid: e57f78121838856448e4f0539018dd3d, type: 3}
+  - {fileID: 5175433164174420965, guid: 28c17c27b0793f9479ade809c38e8627, type: 3}
+  - {fileID: 5175433164174420965, guid: 007960cf890b70f41aa5047f585ca151, type: 3}
+  - {fileID: 5175433164174420965, guid: 8ccd715eff2e97346adb5191cd0d11b7, type: 3}
+  - {fileID: 5175433164174420965, guid: 317d859d80852064bab887f854e14d32, type: 3}
   target: {fileID: 1460766939}
   radius: 5
   startAngle: 45
@@ -4555,7 +4564,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 45432766c446a60429db1c1c841cbada, type: 2}
+  - {fileID: 2100000, guid: 8fb4f38a77906f642b1b24311615867c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
