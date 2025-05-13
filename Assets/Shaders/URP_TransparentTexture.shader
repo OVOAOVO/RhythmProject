@@ -49,10 +49,15 @@ Shader "Custom/URP_TransparentTexture"
             half4 frag (Varyings input) : SV_Target
             {
                 half4 color = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, input.uv);
-                if (color.a < 0.01)
+
+                // 使用 soft alpha 剪裁，模糊透明边缘，缓解锯齿
+                float alpha = smoothstep(0.05, 0.1, color.a); // 你可以调整阈值范围
+                if (alpha < 0.01)
                     discard;
-                return color;
+
+                return half4(color.rgb, alpha);
             }
+
             ENDHLSL
         }
     }

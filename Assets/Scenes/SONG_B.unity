@@ -1968,7 +1968,7 @@ Transform:
   m_GameObject: {fileID: 626415412}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 5}
   m_LocalScale: {x: 0.52, y: 0.52, z: 0.52}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -2486,11 +2486,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyPrefab:
-  - {fileID: 5175433164174420965, guid: 0cddffcc8f88c8c4f8204634ecd3e8de, type: 3}
-  - {fileID: 5175433164174420965, guid: a6287250b60c25c41b31034aa3e55008, type: 3}
+  - {fileID: 5175433164174420965, guid: 8725bfd54db661349a3cc882f5717283, type: 3}
+  - {fileID: 5175433164174420965, guid: 2747cf80a3a01dd4eb97cddd84858f03, type: 3}
+  - {fileID: 5175433164174420965, guid: ae30a91d4468cd74c84e6c6340b2824b, type: 3}
+  - {fileID: 5175433164174420965, guid: 488f888341c823b458d2112de90a626c, type: 3}
+  - {fileID: 5175433164174420965, guid: 3bd5ea8ccce99524489437cfbdb173d0, type: 3}
+  - {fileID: 5175433164174420965, guid: 0c90df1b2e0803d4184f9c414a47eb3d, type: 3}
+  - {fileID: 5175433164174420965, guid: 60b194cc459aabb45956f834defab65e, type: 3}
+  - {fileID: 5175433164174420965, guid: fcc5dc4cdd6ed9d4ea2269ebb7229173, type: 3}
   jumpingEnemyPrefab:
-  - {fileID: 5175433164174420965, guid: a7ad9d94307cedb4faaa42f0864ce548, type: 3}
-  - {fileID: 5175433164174420965, guid: 2b389ed2881d0e74cb3ff5b6ee7f11d6, type: 3}
+  - {fileID: 5175433164174420965, guid: aa93c24ae1bcd9a449ec119b6718a2fa, type: 3}
+  - {fileID: 5175433164174420965, guid: 007960cf890b70f41aa5047f585ca151, type: 3}
+  - {fileID: 5175433164174420965, guid: 28c17c27b0793f9479ade809c38e8627, type: 3}
+  - {fileID: 5175433164174420965, guid: 6a967fad7e6cb034fb7d786e67094b92, type: 3}
   target: {fileID: 1445694027}
   radius: 5
   startAngle: 45
@@ -4828,7 +4836,7 @@ MonoBehaviour:
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
-  m_Antialiasing: 0
+  m_Antialiasing: 1
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
