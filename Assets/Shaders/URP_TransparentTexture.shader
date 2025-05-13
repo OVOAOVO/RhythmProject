@@ -1,4 +1,4 @@
-Shader "Custom/URP_TransparentTexture"
+Shader "Custom/URP_AlphaToMask_MSAA"
 {
     Properties
     {
@@ -7,7 +7,7 @@ Shader "Custom/URP_TransparentTexture"
 
     SubShader
     {
-        Tags { "RenderType"="Transparent" "Queue"="Transparent" }
+        Tags { "RenderType"="TransparentCutout" "Queue"="AlphaTest" }
 
         Pass
         {
@@ -16,7 +16,8 @@ Shader "Custom/URP_TransparentTexture"
 
             Blend SrcAlpha OneMinusSrcAlpha
             Cull Back
-            ZWrite Off
+            ZWrite On
+            AlphaToMask On
 
             HLSLPROGRAM
             #pragma vertex vert
@@ -48,14 +49,12 @@ Shader "Custom/URP_TransparentTexture"
 
             half4 frag (Varyings input) : SV_Target
             {
-                half4 color = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, input.uv);
+                half4 col = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, input.uv);
 
-                // 使用 soft alpha 剪裁，模糊透明边缘，缓解锯齿
-                float alpha = smoothstep(0.05, 0.1, color.a); // 你可以调整阈值范围
-                if (alpha < 0.01)
-                    discard;
-
-                return half4(color.rgb, alpha);
+                // Soft cutout
+                float alpha = smoothstep(0.05, 0.1, col.a);
+                clip(alpha - 0.01); // 必须用 clip 才能让 AlphaToMask 工作
+                return half4(col.rgb, alpha);
             }
 
             ENDHLSL
