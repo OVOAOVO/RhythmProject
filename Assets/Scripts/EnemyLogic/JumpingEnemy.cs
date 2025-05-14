@@ -34,7 +34,7 @@ public class JumpingEnemy : Enemy
         // Jump阶段
         yield return JumpToTarget();
 
-        // 3. 跳跃结束后，正式进入基类的追击逻辑
+        // 跳跃结束后，进入基类的追击逻辑
         base.Initialize(target, moveSpeed, onReachedTarget);
     }
 
@@ -42,6 +42,13 @@ public class JumpingEnemy : Enemy
     {
         while ((transform.position - midPos).sqrMagnitude > 0.01f)
         {
+            Vector3 dir = (midPos - transform.position).normalized;
+            if (dir != Vector3.zero)
+            {
+                Quaternion targetRot = Quaternion.LookRotation(dir, Vector3.up);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * 10f);
+            }
+
             transform.position = Vector3.MoveTowards(transform.position, midPos, moveSpeed * Time.deltaTime);
             yield return null;
         }
@@ -55,9 +62,19 @@ public class JumpingEnemy : Enemy
         while (jumpTime < 1f)
         {
             jumpTime += Time.deltaTime / 0.5f;
+
+            Vector3 flatPos = Vector3.Lerp(jumpStart, jumpTarget, jumpTime);
             float height = Mathf.Sin(Mathf.PI * jumpTime) * 1.5f;
-            Vector3 flatLerp = Vector3.Lerp(jumpStart, jumpTarget, jumpTime);
-            transform.position = flatLerp + new Vector3(0, height, 0);
+            Vector3 nextPos = flatPos + new Vector3(0, height, 0);
+
+            Vector3 dir = (nextPos - transform.position).normalized;
+            if (dir != Vector3.zero)
+            {
+                Quaternion targetRot = Quaternion.LookRotation(dir, Vector3.up);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * 10f);
+            }
+
+            transform.position = nextPos;
             yield return null;
         }
     }
