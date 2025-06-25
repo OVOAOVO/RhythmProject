@@ -2,14 +2,23 @@ using UnityEngine;
 
 public class BeatVisualizer : MonoBehaviour
 {
-    [Header("Material Control")]
-    public Material targetMaterial;
+    public Material targetMaterial;           // 原始材质，仅用于复制
     public string shaderPropertyName = "_BeatStrength";
     public float strengthMultiplier = 0.1f;
     public float beatDecay = 0.9f;
 
+    private Material runtimeMaterial;         // 运行时克隆版本
     private float beatStrength = 0f;
     private int lastBeat = -1;
+
+    void Start()
+    {
+        if (targetMaterial != null)
+        {
+            runtimeMaterial = new Material(targetMaterial);  // 克隆一份
+            GetComponent<Renderer>().material = runtimeMaterial; // 应用给当前对象（根据需要替换）
+        }
+    }
 
     void LateUpdate()
     {
@@ -21,7 +30,6 @@ public class BeatVisualizer : MonoBehaviour
 
         int currentBeat = Mathf.FloorToInt(songPosition / secPerBeat);
 
-        // 当进入新的一拍时，触发一次脉冲
         if (currentBeat != lastBeat)
         {
             lastBeat = currentBeat;
@@ -29,13 +37,13 @@ public class BeatVisualizer : MonoBehaviour
         }
         else
         {
-            // 否则逐渐衰减
             beatStrength *= beatDecay;
         }
 
-        if (targetMaterial != null)
+        if (runtimeMaterial != null)
         {
-            targetMaterial.SetFloat(shaderPropertyName, beatStrength * strengthMultiplier);
+            runtimeMaterial.SetFloat(shaderPropertyName, beatStrength * strengthMultiplier);
         }
     }
 }
+
