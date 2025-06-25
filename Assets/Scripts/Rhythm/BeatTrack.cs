@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//NOTE: 这个因为是UI，所以需要放在Canvas下，所以生成的滑块虽然使用了对象池，但在BeatTrack下
 public class BeatTrack : MonoBehaviour
 {
     public RectTransform trackPanel;         // 滑块容器
@@ -28,10 +29,11 @@ public class BeatTrack : MonoBehaviour
             var note = activeNotes[i];
             note.anchoredPosition -= new Vector2(moveSpeed * Time.deltaTime, 0);
 
-            // 超出左边就销毁
-            if (note.anchoredPosition.x < -trackPanel.rect.width / 2 - 100)
+            // 超出左边就回收
+            // 终点判断
+            if (note.anchoredPosition.x < -trackPanel.rect.width / 2)
             {
-                Destroy(note.gameObject);
+                ObjectPool.Instance.PushObject(note.gameObject);
                 activeNotes.RemoveAt(i);
             }
         }
@@ -39,9 +41,11 @@ public class BeatTrack : MonoBehaviour
 
     void SpawnNote()
     {
-        GameObject obj = Instantiate(notePrefab, trackPanel);
+        GameObject obj = ObjectPool.Instance.GetGameObject(notePrefab);
+        obj.transform.SetParent(trackPanel, false); // 保持 UI 尺寸缩放
         RectTransform rt = obj.GetComponent<RectTransform>();
-        rt.anchoredPosition = new Vector2(trackPanel.rect.width / 2 + 50, 0); // 从最右边开始
+        // 起点
+        rt.anchoredPosition = new Vector2(trackPanel.rect.width / 2, 0);
         activeNotes.Add(rt);
     }
 }
