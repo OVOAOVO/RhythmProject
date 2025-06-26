@@ -1,11 +1,21 @@
 using System.Collections;
 using UnityEngine;
-
+using System.Collections.Generic;
 public class Enemy : MonoBehaviour
 {
     protected Transform target;
     protected float moveSpeed;
     protected System.Action<Enemy> onReachedTarget;
+
+    private void OnEnable()
+    {
+        AutoShoot.RegisterEnemy(this);
+    }
+
+    private void OnDisable()
+    {
+        AutoShoot.UnregisterEnemy(this);
+    }
 
     public virtual void Initialize(Transform target, float speed, System.Action<Enemy> onReached = null)
     {
@@ -16,7 +26,7 @@ public class Enemy : MonoBehaviour
         StartCoroutine(MoveToTarget());
     }
 
-    protected  IEnumerator MoveToTarget()
+    protected IEnumerator MoveToTarget()
     {
         while ((transform.position - target.position).sqrMagnitude > 0.01f)
         {

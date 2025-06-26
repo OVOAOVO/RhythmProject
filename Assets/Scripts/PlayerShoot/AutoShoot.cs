@@ -7,6 +7,19 @@ public class AutoShoot : Gun
     private int lastShotBeat = -1;
     private List<int> scheduledBeats = new List<int>();
     private Coroutine currentTracerRoutine;
+    private Vector3[] basePositions = new Vector3[8]; //segmentCount = 8; // 越多越平滑
+    private static readonly List<Enemy> activeEnemies = new List<Enemy>();
+
+    public static void RegisterEnemy(Enemy enemy)
+    {
+        if (!activeEnemies.Contains(enemy))
+            activeEnemies.Add(enemy);
+    }
+
+    public static void UnregisterEnemy(Enemy enemy)
+    {
+        activeEnemies.Remove(enemy);
+    }
 
     protected override void Start()
     {
@@ -82,8 +95,6 @@ public class AutoShoot : Gun
     {
         float duration = 0.1f; // 抖动到变直的时间
         float timer = 0f;
-
-        Vector3[] basePositions = new Vector3[segmentCount];
 
         for (int i = 0; i < segmentCount; i++)
         {
@@ -171,10 +182,12 @@ public class AutoShoot : Gun
     {
         float minDistance = float.MaxValue;
         Transform closest = null;
-        Enemy[] enemies = Object.FindObjectsByType<Enemy>(FindObjectsSortMode.None);
 
-        foreach (var enemy in enemies)
+        foreach (var enemy in activeEnemies)
         {
+            if (enemy == null || !enemy.gameObject.activeInHierarchy)
+            continue;
+
             float dist = Vector3.Distance(muzzlePos.position, enemy.transform.position);
             if (dist < minDistance)
             {

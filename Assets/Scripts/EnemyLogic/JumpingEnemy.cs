@@ -9,6 +9,15 @@ public class JumpingEnemy : Enemy
     private Vector3 jumpTarget;
     private Vector3 jumpStart;
     private float jumpTime;
+    private void OnEnable()
+    {
+        AutoShoot.RegisterEnemy(this);
+    }
+
+    private void OnDisable()
+    {
+        AutoShoot.UnregisterEnemy(this);
+    }
 
     public void InitializeJump(Vector3 mid, Vector3 jumpTo, Transform finalTarget, float speed, System.Action<Enemy> onReached)
     {     
