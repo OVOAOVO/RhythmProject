@@ -1610,6 +1610,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6a070ab0d3295c41943807816c1399d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 2023212320}
+  moveSpeed: 2
+  spawnSteps: 10
+  radius: 5
+  startAngle: 45
+  endAngle: 135
+  healthBarDecreaseFeedBacks: {fileID: 2083206870}
+  progressBar: {fileID: 339571312}
   EnemyPrefab:
   - {fileID: 5175433164174420965, guid: acb3e3f1107d79046bd9f130c025ec68, type: 3}
   - {fileID: 5175433164174420965, guid: 7fbd90e95f8b63c42b6fea1d99a1fa62, type: 3}
@@ -1620,19 +1628,7 @@ MonoBehaviour:
   - {fileID: 5175433164174420965, guid: ff2e87923356c2d4c8073cc8d27ce477, type: 3}
   - {fileID: 5175433164174420965, guid: b0c52e886d9167c44b8fab0c3d97ac10, type: 3}
   - {fileID: 5175433164174420965, guid: 2e22db7b82ee3a148bce8a3c0bb974bd, type: 3}
-  jumpingEnemyPrefab:
-  - {fileID: 5175433164174420965, guid: 8ccd715eff2e97346adb5191cd0d11b7, type: 3}
-  - {fileID: 5175433164174420965, guid: 9bca9bb9627e7ad4c97215fd90963d48, type: 3}
-  - {fileID: 5175433164174420965, guid: 317d859d80852064bab887f854e14d32, type: 3}
-  - {fileID: 5175433164174420965, guid: 83ae0aececb7ceb4a80f461dd7510d99, type: 3}
-  - {fileID: 5175433164174420965, guid: e57f78121838856448e4f0539018dd3d, type: 3}
-  target: {fileID: 2023212320}
-  radius: 5
-  startAngle: 45
-  endAngle: 135
-  moveSpeed: 2
-  healthBarDecreaseFeedBacks: {fileID: 2083206870}
-  progressBar: {fileID: 339571312}
+  JumpingEnemyPrefab: []
 --- !u!4 &1088350362
 Transform:
   m_ObjectHideFlags: 0
