@@ -1,40 +1,27 @@
+using System;
 using System.Collections;
 using UnityEngine;
-using System.Collections.Generic;
+
 public class Enemy : MonoBehaviour
 {
     protected Transform target;
     protected float moveSpeed;
-    protected System.Action<Enemy> onReachedTarget;
+    protected Action<Enemy> onReachedTarget;
 
-    private void OnEnable()
-    {
-        AutoShoot.RegisterEnemy(this);
-    }
+    private Coroutine moveCoroutine;
+    private IMoveBehavior moveBehavior = new DirectMove(); // 默认行为
 
-    private void OnDisable()
-    {
-        AutoShoot.UnregisterEnemy(this);
-    }
-
-    public virtual void Initialize(Transform target, float speed, System.Action<Enemy> onReached = null)
+    public virtual void Initialize(Transform target, float speed, Action<Enemy> onReached = null, IMoveBehavior customBehavior = null)
     {
         this.target = target;
         this.moveSpeed = speed;
         this.onReachedTarget = onReached;
-        StopAllCoroutines(); // 防止重复启动协程
-        StartCoroutine(MoveToTarget());
+        this.moveBehavior = customBehavior ?? new DirectMove();
+
+        StopAllCoroutines();
+        moveCoroutine = StartCoroutine(moveBehavior.Move(this, target, speed, onReachedTarget));
     }
 
-    protected IEnumerator MoveToTarget()
-    {
-        while ((transform.position - target.position).sqrMagnitude > 0.01f)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
-            yield return null;
-        }
-
-        transform.position = target.position;
-        onReachedTarget?.Invoke(this);
-    }
+    private void OnEnable() => AutoShoot.RegisterEnemy(this);
+    private void OnDisable() => AutoShoot.UnregisterEnemy(this);
 }
