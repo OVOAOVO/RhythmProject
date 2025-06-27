@@ -405,7 +405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1540835718}
-  moveSpeed: 8
+  moveSpeed: 2
   spawnSteps: 5
   radius: 5
   startAngle: 45

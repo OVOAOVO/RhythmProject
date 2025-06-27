@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2020217496567490395}
   - component: {fileID: 3313793176461492868}
   m_Layer: 0
-  m_Name: EnemyBulletTracer
+  m_Name: AutoAimBulletTracer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
