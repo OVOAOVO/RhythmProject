@@ -59,9 +59,9 @@ public class AutoShoot : Gun
         Transform target = FindClosestEnemy();
         if (target != null)
         {
-            Vector3 targetCenter = target.position;
-            shootDir = (targetCenter - muzzlePos.position).normalized;
-            SetTracer(targetCenter);
+            // Vector3 targetCenter = target.position;
+            // shootDir = (targetCenter - muzzlePos.position).normalized;
+            SetTracer(target);
         }
     }
 
@@ -75,55 +75,65 @@ public class AutoShoot : Gun
     //     tracer.SetPosition(1, endPosition);
     // }
 
-    private void SetTracer(Vector3 endPosition)
+    private void SetTracer(Transform targetTransform)
     {
         GameObject bullet = ObjectPool.Instance.GetGameObject(bulletPrefab);
         LineRenderer tracer = bullet.GetComponent<LineRenderer>();
 
-        int segmentCount = 8; // 越多越平滑
+        int segmentCount = 8;
         tracer.positionCount = segmentCount;
 
         Vector3 start = muzzlePos.position;
-        Vector3 dir = (endPosition - start);
+        Vector3 dir = (targetTransform.position - start); // 初始方向
+
         if (currentTracerRoutine != null)
             StopCoroutine(currentTracerRoutine);
 
-        currentTracerRoutine = StartCoroutine(AnimateTracer(tracer, start, dir, segmentCount));
+        currentTracerRoutine = StartCoroutine(AnimateTracerFollow(tracer, start, dir, segmentCount, targetTransform));
     }
 
-    private IEnumerator AnimateTracer(LineRenderer tracer, Vector3 start, Vector3 dir, int segmentCount)
+
+    private IEnumerator AnimateTracerFollow(LineRenderer tracer, Vector3 start, Vector3 initialDir, int segmentCount, Transform target)
     {
-        float duration = 0.1f; // 抖动到变直的时间
+        float duration = 0.15f;
         float timer = 0f;
 
         for (int i = 0; i < segmentCount; i++)
         {
             float t = i / (segmentCount - 1f);
-            basePositions[i] = start + dir * t;
+            basePositions[i] = start + initialDir * t;
         }
 
-        while (timer < duration)
+        while (timer < duration && target != null)
         {
             timer += Time.deltaTime;
             float progress = timer / duration;
-            float noiseAmount = Mathf.Lerp(0.4f, 0f, progress); // 抖动强度减弱
+            float noiseAmount = Mathf.Lerp(0.4f, 0f, progress);
+
+            Vector3 dynamicDir = (target.position - start); // 实时方向
 
             for (int i = 0; i < segmentCount; i++)
             {
-                Vector3 offset = Vector3.Cross(dir.normalized, Vector3.forward) * Random.Range(-1f, 1f) * noiseAmount;
-                tracer.SetPosition(i, basePositions[i] + offset);
+                float t = i / (segmentCount - 1f);
+                Vector3 basePos = start + dynamicDir * t; // 跟随敌人移动更新位置
+                Vector3 offset = Vector3.Cross(dynamicDir.normalized, Vector3.forward) * UnityEngine.Random.Range(-1f, 1f) * noiseAmount;
+                tracer.SetPosition(i, basePos + offset);
             }
 
             yield return null;
         }
 
-        // 最终设置为直线
-        for (int i = 0; i < segmentCount; i++)
+        // 最终归为敌人当前方向直线
+        if (target != null)
         {
-            tracer.SetPosition(i, basePositions[i]);
+            Vector3 finalDir = (target.position - start);
+            for (int i = 0; i < segmentCount; i++)
+            {
+                float t = i / (segmentCount - 1f);
+                tracer.SetPosition(i, start + finalDir * t);
+            }
         }
     }
-    
     /*
      NOTE: 效果描述
     抖动不再是完全随机，而是基于连续的函数（Perlin/Sin），有流动感 ,跟尿尿一样
