@@ -2455,85 +2455,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1088350360
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1088350362}
-  - component: {fileID: 1088350361}
-  - component: {fileID: 1088350363}
-  m_Layer: 0
-  m_Name: EnemySpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1088350361
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1088350360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6a070ab0d3295c41943807816c1399d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemyPrefab:
-  - {fileID: 5175433164174420965, guid: 8725bfd54db661349a3cc882f5717283, type: 3}
-  - {fileID: 5175433164174420965, guid: 2747cf80a3a01dd4eb97cddd84858f03, type: 3}
-  - {fileID: 5175433164174420965, guid: ae30a91d4468cd74c84e6c6340b2824b, type: 3}
-  - {fileID: 5175433164174420965, guid: 488f888341c823b458d2112de90a626c, type: 3}
-  - {fileID: 5175433164174420965, guid: 3bd5ea8ccce99524489437cfbdb173d0, type: 3}
-  - {fileID: 5175433164174420965, guid: 0c90df1b2e0803d4184f9c414a47eb3d, type: 3}
-  - {fileID: 5175433164174420965, guid: 60b194cc459aabb45956f834defab65e, type: 3}
-  - {fileID: 5175433164174420965, guid: fcc5dc4cdd6ed9d4ea2269ebb7229173, type: 3}
-  jumpingEnemyPrefab:
-  - {fileID: 5175433164174420965, guid: aa93c24ae1bcd9a449ec119b6718a2fa, type: 3}
-  - {fileID: 5175433164174420965, guid: 007960cf890b70f41aa5047f585ca151, type: 3}
-  - {fileID: 5175433164174420965, guid: 28c17c27b0793f9479ade809c38e8627, type: 3}
-  - {fileID: 5175433164174420965, guid: 6a967fad7e6cb034fb7d786e67094b92, type: 3}
-  target: {fileID: 1445694027}
-  radius: 5
-  startAngle: 45
-  endAngle: 135
-  moveSpeed: 6
-  healthBarDecreaseFeedBacks: {fileID: 2083206870}
-  progressBar: {fileID: 339571312}
---- !u!4 &1088350362
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1088350360}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1088350363
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1088350360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99a281e4cd2ad984daea8d176cd4c7e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  beatMapName: 
 --- !u!1 &1098464106
 GameObject:
   m_ObjectHideFlags: 0
@@ -2587,6 +2508,83 @@ MonoBehaviour:
   HitPerfect: {fileID: 4648535905291946968, guid: 7124afcdae628aa4bb0248a2aeb835df, type: 3}
   feedbacks: {fileID: 1997573547}
   healthBarIncreaseFeedBacks: {fileID: 1439568987}
+--- !u!1 &1109195916
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1109195919}
+  - component: {fileID: 1109195918}
+  - component: {fileID: 1109195917}
+  m_Layer: 0
+  m_Name: EnemySpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1109195917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1109195916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99a281e4cd2ad984daea8d176cd4c7e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  beatMapName: 
+--- !u!114 &1109195918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1109195916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee9625415036ef94d982d4873455a4fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1445694027}
+  moveSpeed: 4
+  spawnSteps: 10
+  radius: 5
+  startAngle: 45
+  endAngle: 135
+  healthBarDecreaseFeedBacks: {fileID: 2083206870}
+  progressBar: {fileID: 339571312}
+  EnemyPrefab: []
+  JumpingEnemyPrefab:
+  - {fileID: 5175433164174420965, guid: 8ccd715eff2e97346adb5191cd0d11b7, type: 3}
+  - {fileID: 5175433164174420965, guid: 9bca9bb9627e7ad4c97215fd90963d48, type: 3}
+  - {fileID: 5175433164174420965, guid: 317d859d80852064bab887f854e14d32, type: 3}
+  - {fileID: 5175433164174420965, guid: 83ae0aececb7ceb4a80f461dd7510d99, type: 3}
+  - {fileID: 5175433164174420965, guid: e57f78121838856448e4f0539018dd3d, type: 3}
+  - {fileID: 5175433164174420965, guid: aa93c24ae1bcd9a449ec119b6718a2fa, type: 3}
+  - {fileID: 5175433164174420965, guid: 007960cf890b70f41aa5047f585ca151, type: 3}
+  - {fileID: 5175433164174420965, guid: 28c17c27b0793f9479ade809c38e8627, type: 3}
+  - {fileID: 5175433164174420965, guid: 6a967fad7e6cb034fb7d786e67094b92, type: 3}
+--- !u!4 &1109195919
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1109195916}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.955589, y: 0.87903035, z: -0.08933186}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1200309587
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7369,10 +7367,10 @@ SceneRoots:
   - {fileID: 72973358}
   - {fileID: 2035311408}
   - {fileID: 732449839}
-  - {fileID: 1088350362}
   - {fileID: 1067737069}
   - {fileID: 1200309587}
   - {fileID: 1445694030}
   - {fileID: 267072683}
   - {fileID: 626415417}
   - {fileID: 2117046002}
+  - {fileID: 1109195919}

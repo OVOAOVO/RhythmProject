@@ -413,9 +413,9 @@ MonoBehaviour:
   healthBarDecreaseFeedBacks: {fileID: 2083206870}
   progressBar: {fileID: 339571312}
   EnemyPrefab:
-  - {fileID: 5175433164174420965, guid: acb3e3f1107d79046bd9f130c025ec68, type: 3}
+  - {fileID: 5175433164174420965, guid: 0cddffcc8f88c8c4f8204634ecd3e8de, type: 3}
   JumpingEnemyPrefab:
-  - {fileID: 5175433164174420965, guid: aa93c24ae1bcd9a449ec119b6718a2fa, type: 3}
+  - {fileID: 5175433164174420965, guid: a7ad9d94307cedb4faaa42f0864ce548, type: 3}
 --- !u!4 &271508698
 Transform:
   m_ObjectHideFlags: 0

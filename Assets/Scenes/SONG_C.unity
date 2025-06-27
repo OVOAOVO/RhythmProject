@@ -2813,6 +2813,82 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &744474248
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 744474249}
+  - component: {fileID: 744474251}
+  - component: {fileID: 744474250}
+  m_Layer: 0
+  m_Name: EnemySpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &744474249
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744474248}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.955589, y: 0.87903035, z: -0.08933186}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &744474250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744474248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee9625415036ef94d982d4873455a4fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1460766939}
+  moveSpeed: 6
+  spawnSteps: 10
+  radius: 5
+  startAngle: 45
+  endAngle: 135
+  healthBarDecreaseFeedBacks: {fileID: 2083206870}
+  progressBar: {fileID: 339571312}
+  EnemyPrefab:
+  - {fileID: 5175433164174420965, guid: 6a34eeb48a690204e8e0921f3c4fbbda, type: 3}
+  - {fileID: 5175433164174420965, guid: ff2e87923356c2d4c8073cc8d27ce477, type: 3}
+  - {fileID: 5175433164174420965, guid: b0c52e886d9167c44b8fab0c3d97ac10, type: 3}
+  - {fileID: 5175433164174420965, guid: 2e22db7b82ee3a148bce8a3c0bb974bd, type: 3}
+  JumpingEnemyPrefab:
+  - {fileID: 5175433164174420965, guid: 317d859d80852064bab887f854e14d32, type: 3}
+  - {fileID: 5175433164174420965, guid: 83ae0aececb7ceb4a80f461dd7510d99, type: 3}
+  - {fileID: 5175433164174420965, guid: e57f78121838856448e4f0539018dd3d, type: 3}
+  - {fileID: 5175433164174420965, guid: 007960cf890b70f41aa5047f585ca151, type: 3}
+--- !u!114 &744474251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744474248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99a281e4cd2ad984daea8d176cd4c7e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  beatMapName: 
 --- !u!1 &954741423
 GameObject:
   m_ObjectHideFlags: 0
@@ -2990,85 +3066,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1088350360
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1088350362}
-  - component: {fileID: 1088350361}
-  - component: {fileID: 1088350363}
-  m_Layer: 0
-  m_Name: EnemySpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1088350361
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1088350360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6a070ab0d3295c41943807816c1399d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemyPrefab:
-  - {fileID: 5175433164174420965, guid: 901875f281cec294faa43e8a1be5c4a4, type: 3}
-  - {fileID: 5175433164174420965, guid: 8725bfd54db661349a3cc882f5717283, type: 3}
-  - {fileID: 5175433164174420965, guid: 488f888341c823b458d2112de90a626c, type: 3}
-  - {fileID: 5175433164174420965, guid: acb3e3f1107d79046bd9f130c025ec68, type: 3}
-  - {fileID: 5175433164174420965, guid: ff2e87923356c2d4c8073cc8d27ce477, type: 3}
-  - {fileID: 5175433164174420965, guid: 2e22db7b82ee3a148bce8a3c0bb974bd, type: 3}
-  - {fileID: 5175433164174420965, guid: 3bd5ea8ccce99524489437cfbdb173d0, type: 3}
-  - {fileID: 5175433164174420965, guid: 60b194cc459aabb45956f834defab65e, type: 3}
-  jumpingEnemyPrefab:
-  - {fileID: 5175433164174420965, guid: 9bca9bb9627e7ad4c97215fd90963d48, type: 3}
-  - {fileID: 5175433164174420965, guid: 83ae0aececb7ceb4a80f461dd7510d99, type: 3}
-  - {fileID: 5175433164174420965, guid: e57f78121838856448e4f0539018dd3d, type: 3}
-  - {fileID: 5175433164174420965, guid: 007960cf890b70f41aa5047f585ca151, type: 3}
-  target: {fileID: 1460766939}
-  radius: 5
-  startAngle: 45
-  endAngle: 135
-  moveSpeed: 10
-  healthBarDecreaseFeedBacks: {fileID: 2083206870}
-  progressBar: {fileID: 339571312}
---- !u!4 &1088350362
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1088350360}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1088350363
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1088350360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99a281e4cd2ad984daea8d176cd4c7e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  beatMapName: 
 --- !u!1001 &1110422949
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7369,10 +7366,10 @@ SceneRoots:
   - {fileID: 72973358}
   - {fileID: 2035311408}
   - {fileID: 732449839}
-  - {fileID: 1088350362}
   - {fileID: 1067737069}
   - {fileID: 1817886691}
   - {fileID: 1460766942}
   - {fileID: 35980056}
   - {fileID: 2117969710}
   - {fileID: 284572297}
+  - {fileID: 744474249}

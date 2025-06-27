@@ -8,7 +8,7 @@
 // using System.Linq;
 
 //NOTE: 这个脚本是旧的敌人生成器，已被 EnemySpawn 替代
-// public class EnemySpawner : MonoBehaviour
+// public class OldEnemySpawner : MonoBehaviour
 // {
 //     public List<GameObject> EnemyPrefab;
 //     public List<GameObject> jumpingEnemyPrefab; // 跳跃怪物预制体

@@ -10,13 +10,13 @@ using System.Linq;
 public class EnemySpawner : MonoBehaviour
 {
    public GameObject target;
-    public float moveSpeed = 20f;
+    public float moveSpeed = 6f;
 
     [Header("生成控制")]
     public int spawnSteps = 10;
     public float radius = 5f;
-    public float startAngle = 0f;
-    public float endAngle = 180f;
+    public float startAngle = 45f;
+    public float endAngle = 135f;
 
     [Header("反馈与UI")]
     public MMFeedbacks healthBarDecreaseFeedBacks;
