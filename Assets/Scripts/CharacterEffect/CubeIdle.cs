@@ -8,7 +8,7 @@ public class CubeIdle : MonoBehaviour
     public float scaleDuration = 0.6f;
 
     [Header("上下浮动")]
-    public float floatHeight = 0.05f;
+    public float floatHeight = 0.5f;
     public float floatDuration = 0.4f;
 
     [Header("节拍旋转倾斜")]
@@ -60,28 +60,14 @@ public class CubeIdle : MonoBehaviour
         float angle = swayDirection ? swayAmount : -swayAmount;
         swayDirection = !swayDirection;
 
-        // Kill 本对象上的 "rotate" 动画
-        DOTween.Kill(transform, "rotate");
+        // 倾斜目标角度（基于初始旋转）
+        Quaternion tiltRotation = Quaternion.Euler(baseRotation.eulerAngles + new Vector3(0, 0, angle));
 
-        // 立即重置角度
-        transform.localRotation = baseRotation;
-
-        // 播放左/右倾斜
-        Tweener firstTween = transform.DOLocalRotate(baseRotation.eulerAngles + new Vector3(0, 0, angle), swayDuration)
-            .SetEase(Ease.OutQuad)
-            .SetId("rotate")
-            .SetTarget(transform);
-
-        // 回正
-        firstTween.OnComplete(() =>
-        {
-            if (this == null || transform == null) return;
-
-            transform.DOLocalRotate(baseRotation.eulerAngles, swayDuration)
-                .SetEase(Ease.InQuad)
-                .SetId("rotate")
-                .SetTarget(transform);
-        });
+        // 倾斜过去，再自动回正，无 Kill
+        Sequence seq = DOTween.Sequence();
+        seq.Append(transform.DOLocalRotateQuaternion(tiltRotation, swayDuration).SetEase(Ease.OutQuad));
+        seq.Append(transform.DOLocalRotateQuaternion(baseRotation, swayDuration).SetEase(Ease.InQuad));
+        seq.SetId("rotate").SetTarget(transform);
     }
 
     void OnDestroy()
