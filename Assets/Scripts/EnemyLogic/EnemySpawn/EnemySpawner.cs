@@ -22,6 +22,11 @@ public class EnemySpawner : MonoBehaviour
     public MMFeedbacks healthBarDecreaseFeedBacks;
     public MMProgressBar progressBar;
 
+        [Header("敌人预制体")]
+    public List<GameObject> EnemyPrefab;
+    public List<GameObject> JumpingEnemyPrefab;
+    public List<GameObject> DashEnemyPrefab; // ✅ 新增 dash 敌人列表
+
     private BeatScheduler beatScheduler;
     private EnemySpawnPattern spawnPattern;
 
@@ -34,7 +39,8 @@ public class EnemySpawner : MonoBehaviour
         spawnPattern.RegisterPatterns(new List<IEnemySpawnBehavior>
         {
             new BasicMonsterSpawner(EnemyPrefab, this),
-            new JumpMonsterSpawner(JumpingEnemyPrefab, this)
+            new JumpMonsterSpawner(JumpingEnemyPrefab, this),
+            new DashMonsterSpawner(DashEnemyPrefab, this)
         });
     }
 
@@ -51,7 +57,4 @@ public class EnemySpawner : MonoBehaviour
             SceneManager.LoadScene("ResultMenu");
         }
     }
-
-    public List<GameObject> EnemyPrefab;
-    public List<GameObject> JumpingEnemyPrefab;
 }

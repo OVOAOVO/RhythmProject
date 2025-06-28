@@ -416,6 +416,8 @@ MonoBehaviour:
   - {fileID: 5175433164174420965, guid: 0cddffcc8f88c8c4f8204634ecd3e8de, type: 3}
   JumpingEnemyPrefab:
   - {fileID: 5175433164174420965, guid: a7ad9d94307cedb4faaa42f0864ce548, type: 3}
+  DashEnemyPrefab:
+  - {fileID: 5175433164174420965, guid: faca06cbbf9761548831d203bc6a3342, type: 3}
 --- !u!4 &271508698
 Transform:
   m_ObjectHideFlags: 0
@@ -4867,6 +4869,8 @@ GameObject:
   - component: {fileID: 1540835722}
   - component: {fileID: 1540835721}
   - component: {fileID: 1540835720}
+  - component: {fileID: 1540835723}
+  - component: {fileID: 1540835724}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -4944,6 +4948,39 @@ Transform:
   - {fileID: 1313597635}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1540835723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1540835718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcf4c5a3f07731143a3ec0241bd3236d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleFactor: 0.05
+  scaleDuration: 1.2
+  floatHeight: 0.05
+  floatDuration: 1
+  swayAmount: 10
+  swayDuration: 1.2
+--- !u!114 &1540835724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1540835718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 277e6e298a0425c4db39827c71f20163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleFactor: 0.05
+  duration: 1.2
+  baseScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1710220454
 GameObject:
   m_ObjectHideFlags: 0
