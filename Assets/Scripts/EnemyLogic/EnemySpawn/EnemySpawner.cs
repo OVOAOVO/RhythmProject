@@ -35,14 +35,25 @@ public class EnemySpawner : MonoBehaviour
         beatScheduler = new BeatScheduler();
         beatScheduler.Init(Conductor.Instance);
 
-        spawnPattern = new EnemySpawnPattern(spawnSteps, radius, startAngle, endAngle, target, moveSpeed, progressBar, healthBarDecreaseFeedBacks);
-        spawnPattern.RegisterPatterns(new List<IEnemySpawnBehavior>
+        var activeBehaviors = new List<IEnemySpawnBehavior>();
+
+        if (EnemyPrefab != null && EnemyPrefab.Count > 0)
         {
-            new BasicMonsterSpawner(EnemyPrefab, this),
-            new JumpMonsterSpawner(JumpingEnemyPrefab, this),
-            new DashMonsterSpawner(DashEnemyPrefab, this)
-        });
+            activeBehaviors.Add(new BasicMonsterSpawner(EnemyPrefab, this));
+        }
+        if (JumpingEnemyPrefab != null && JumpingEnemyPrefab.Count > 0)
+        {
+            activeBehaviors.Add(new JumpMonsterSpawner(JumpingEnemyPrefab, this));
+        }
+        if (DashEnemyPrefab != null && DashEnemyPrefab.Count > 0)
+        {
+            activeBehaviors.Add(new DashMonsterSpawner(DashEnemyPrefab, this));
+        }
+
+        spawnPattern = new EnemySpawnPattern(spawnSteps, radius, startAngle, endAngle, target, moveSpeed, progressBar, healthBarDecreaseFeedBacks);
+        spawnPattern.RegisterPatterns(activeBehaviors);
     }
+
 
     void Update()
     {

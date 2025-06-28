@@ -16,12 +16,6 @@ public class BasicMonsterSpawner : IEnemySpawnBehavior
 
     public void Spawn(Vector3 position, GameObject target, float moveSpeed, Action<Enemy> onReached)
     {
-        if (prefabs == null || prefabs.Count == 0)
-        {
-            Debug.LogWarning("[JumpMonsterSpawner] 预制体列表为空，跳过生成！");
-            return;
-        }
-
         GameObject prefab = prefabs[UnityEngine.Random.Range(0, prefabs.Count)];
         GameObject obj = ObjectPool.Instance.GetGameObject(prefab);
         obj.transform.position = position;

@@ -16,12 +16,6 @@ public class DashMonsterSpawner : IEnemySpawnBehavior
 
     public void Spawn(Vector3 position, GameObject target, float moveSpeed, Action<Enemy> onReached)
     {
-        if (prefabs == null || prefabs.Count == 0)
-        {
-            Debug.LogWarning("[DashMonsterSpawner] 预制体列表为空，跳过生成！");
-            return;
-        }
-
         GameObject prefab = prefabs[UnityEngine.Random.Range(0, prefabs.Count)];
         GameObject obj = ObjectPool.Instance.GetGameObject(prefab);
         obj.transform.position = position;
@@ -32,11 +26,6 @@ public class DashMonsterSpawner : IEnemySpawnBehavior
         coroutineHost.StartCoroutine(EnableNextFrame(col));
 
         Enemy enemy = obj.GetComponent<Enemy>();
-        if (enemy == null)
-        {
-            Debug.LogError("[DashMonsterSpawner] 预制体缺少 Enemy 组件！");
-            return;
-        }
 
         // 正确调用 Initialize 方法，传入 DashMove 行为
         enemy.Initialize(target.transform, moveSpeed, onReached, new DashMove());
