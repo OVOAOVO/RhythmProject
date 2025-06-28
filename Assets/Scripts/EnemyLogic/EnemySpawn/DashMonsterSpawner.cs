@@ -19,6 +19,7 @@ public class DashMonsterSpawner : IEnemySpawnBehavior
         GameObject prefab = prefabs[UnityEngine.Random.Range(0, prefabs.Count)];
         GameObject obj = ObjectPool.Instance.GetGameObject(prefab);
         obj.transform.position = position;
+        obj.transform.LookAt(target.transform);
 
         // 延迟开启碰撞体，避免生成瞬间触发
         Collider col = obj.GetComponent<Collider>();

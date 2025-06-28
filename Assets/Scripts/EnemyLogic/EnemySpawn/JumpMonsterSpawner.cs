@@ -19,6 +19,7 @@ public class JumpMonsterSpawner : IEnemySpawnBehavior
         GameObject prefab = prefabs[UnityEngine.Random.Range(0, prefabs.Count)];
         GameObject obj = ObjectPool.Instance.GetGameObject(prefab);
         obj.transform.position = position;
+        obj.transform.LookAt(target.transform);
 
         Collider col = obj.GetComponent<Collider>();
         if (col != null) col.enabled = false;
