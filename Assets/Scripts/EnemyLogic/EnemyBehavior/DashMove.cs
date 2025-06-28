@@ -46,8 +46,8 @@ public class DashMove : IMoveBehavior
             float duration = dashDistance / dashSpeed;
 
             Tween tween = enemy.transform.DOMove(new Vector3(dashEnd.x, dashEnd.y, enemyPos.z), duration)
-                .SetEase(Ease.OutQuad)
-                .SetLink(enemy.gameObject);
+                .SetEase(Ease.OutQuad);
+            enemy.RegisterTween(tween); // 注册 tween             
 
             yield return tween.WaitForCompletion();
             yield return new WaitForSeconds(pauseBetweenDashes);
