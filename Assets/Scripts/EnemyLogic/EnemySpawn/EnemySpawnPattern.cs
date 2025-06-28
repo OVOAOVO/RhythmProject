@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
-
+using UnityEngine.SceneManagement;
 public class EnemySpawnPattern
 {
     private int spawnSteps;
@@ -85,7 +85,7 @@ public class EnemySpawnPattern
 
     public bool CheckShouldEndGame(Conductor conductor)
     {
-        return conductor.aliveEnemies <= 0 &&
-               (conductor.CurrentState == Conductor.MusicState.Finished || progressBar.BarTarget <= 0f);
+        return (progressBar.BarTarget <= 0f || 
+            (Conductor.Instance.aliveEnemies <= 0 && Conductor.Instance.CurrentState == Conductor.MusicState.Finished));
     }
 }
