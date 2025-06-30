@@ -5,15 +5,18 @@ public class EnemyIdle : MonoBehaviour
 {
     [Header("呼吸缩放")]
     public float scaleFactor = 0.1f;       // 缩放幅度（越大呼吸越明显）
-    public float scaleDuration = 0.6f;      // 每次呼吸时长（越小越快）
+    public float scaleDuration = 0.6f;     // 每次呼吸时长（越小越快）
 
     private Vector3 baseScale;
 
-    private void Start()
+    private void Awake()
     {
         baseScale = transform.localScale;
+    }
 
-        // 呼吸缩放动画（无限循环，平滑往复）
+    private void OnEnable()
+    {
+        // 每次激活都重新创建 Tween
         transform.DOScale(baseScale * (1 + scaleFactor), scaleDuration)
             .SetLoops(-1, LoopType.Yoyo)
             .SetEase(Ease.InOutSine)
@@ -23,6 +26,8 @@ public class EnemyIdle : MonoBehaviour
 
     private void OnDisable()
     {
-        DOTween.Kill(transform); // 清除当前物体上的所有 Tween，防止泄露或冲突
+        // Kill 掉以 transform 为 target 的所有 Tween
+        DOTween.Kill(transform);
+        transform.localScale = baseScale; // 防止残留缩放
     }
 }
