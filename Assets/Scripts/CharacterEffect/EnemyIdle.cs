@@ -21,7 +21,7 @@ public class EnemyIdle : MonoBehaviour
             .SetTarget(transform);
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         DOTween.Kill(transform); // 清除当前物体上的所有 Tween，防止泄露或冲突
     }

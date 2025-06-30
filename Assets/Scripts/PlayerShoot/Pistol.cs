@@ -27,6 +27,11 @@ public class Pistol : Gun
         SetTracer(isHit ? hit.point : new Vector3(mousePos.x, mousePos.y, 0.0f));
         if (isHit)
         {
+            Enemy enemy = hit.collider.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                enemy.PlayHitEffect(hit.point);  // 播放击中粒子特效
+            }
             ObjectPool.Instance.PushObject(hit.collider.gameObject);  // 将射中物体放入对象池
 
             Vector3 objectCenter = hit.collider.transform.position;
