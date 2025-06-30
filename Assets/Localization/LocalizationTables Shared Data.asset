@@ -91,6 +91,10 @@ MonoBehaviour:
     m_Key: PSLabel
     m_Metadata:
       m_Items: []
+  - m_Id: 18922744269340672
+    m_Key: GameTest
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

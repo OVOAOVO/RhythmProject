@@ -5,6 +5,7 @@ using System.Collections;
 using MoreMountains.Feedbacks;
 public class MainMenuController : MonoBehaviour
 {
+    public MMF_Player game;
     public MMF_Player songA;
     public MMF_Player songB;
     public MMF_Player songC;
@@ -16,11 +17,14 @@ public class MainMenuController : MonoBehaviour
         isTransitioning = false;
         var root = GetComponent<UIDocument>().rootVisualElement;
 
+        var gameButton = root.Q<Button>("GameTest");
         var songAButton = root.Q<Button>("songA");
         var songBButton = root.Q<Button>("songB");    
         var songCButton = root.Q<Button>("songC");
         var exitButton = root.Q<Button>("quitButton");
         var PSLabel = root.Q<Label>("PSLabel");
+
+        gameButton.clicked += () => OnButtonClicked(game, "Game");
         songAButton.clicked += () => OnButtonClicked(songA, "SONG_A");
         songBButton.clicked += () => OnButtonClicked(songB, "SONG_B");
         songCButton.clicked += () => OnButtonClicked(songC, "SONG_C");
@@ -33,6 +37,7 @@ public class MainMenuController : MonoBehaviour
             }
         };
 
+        UILocalizationHelper.BindLocalizedText(gameButton, "LocalizationTables", "GameTest");
         UILocalizationHelper.BindLocalizedText(songAButton, "LocalizationTables", "songA");
         UILocalizationHelper.BindLocalizedText(songBButton, "LocalizationTables", "songB");
         UILocalizationHelper.BindLocalizedText(songCButton, "LocalizationTables", "songC");
