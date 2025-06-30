@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 941165415132486130}
   - component: {fileID: 291951370367406050}
   - component: {fileID: 4242418709425367854}
-  - component: {fileID: 2475281019426842458}
+  - component: {fileID: -2750583764016247946}
   m_Layer: 0
-  m_Name: EnemyY_7
+  m_Name: EnemyY_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2daccb9943909d84a939cc683650c1f0, type: 2}
+  - {fileID: 2100000, guid: 64c6813ea962f39428be4fdcb9eff3db, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109,7 +109,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2475281019426842458
+--- !u!114 &-2750583764016247946
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,6 +118,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 5175433164174420965}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a82b22dfd2ffcc429fad0a9cff54ca5, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f4552e724e0ddc4da8f80f5170afaa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

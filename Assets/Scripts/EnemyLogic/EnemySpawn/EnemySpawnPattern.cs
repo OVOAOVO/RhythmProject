@@ -1,10 +1,10 @@
-// EnemySpawnPattern.cs
 using UnityEngine;
 using System;
 using System.Collections.Generic;
 using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
 using UnityEngine.SceneManagement;
+
 public class EnemySpawnPattern
 {
     private int spawnSteps;
@@ -37,6 +37,8 @@ public class EnemySpawnPattern
 
     public void SpawnRandom()
     {
+        if (behaviors == null || behaviors.Count == 0) return;
+
         int index = UnityEngine.Random.Range(0, behaviors.Count);
         Vector3 pos = GetNextSpawnPosition();
         behaviors[index].Spawn(pos, target, moveSpeed, OnEnemyReached);
@@ -49,8 +51,11 @@ public class EnemySpawnPattern
         float x = radius * Mathf.Cos(angle);
         float y = radius * Mathf.Sin(angle);
 
+        // z轴深度偏移，防止Z-Fighting
+        float zOffset = currentSpawnIndex * 0.05f;
+
         UpdateSpawnIndex();
-        return new Vector3(y, -x, 0f);
+        return new Vector3(y, -x, zOffset);
     }
 
     private void UpdateSpawnIndex()
@@ -85,7 +90,7 @@ public class EnemySpawnPattern
 
     public bool CheckShouldEndGame(Conductor conductor)
     {
-        return (progressBar.BarTarget <= 0f || 
-            (Conductor.Instance.aliveEnemies <= 0 && Conductor.Instance.CurrentState == Conductor.MusicState.Finished));
+        return (progressBar.BarTarget <= 0f ||
+                (Conductor.Instance.aliveEnemies <= 0 && Conductor.Instance.CurrentState == Conductor.MusicState.Finished));
     }
 }

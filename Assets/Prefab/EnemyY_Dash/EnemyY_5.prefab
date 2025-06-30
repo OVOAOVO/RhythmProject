@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 941165415132486130}
   - component: {fileID: 291951370367406050}
   - component: {fileID: 4242418709425367854}
-  - component: {fileID: 2475281019426842458}
+  - component: {fileID: -3740249702272435650}
   m_Layer: 0
   m_Name: EnemyY_5
   m_TagString: Untagged
@@ -109,7 +109,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2475281019426842458
+--- !u!114 &-3740249702272435650
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,6 +118,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 5175433164174420965}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a82b22dfd2ffcc429fad0a9cff54ca5, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f4552e724e0ddc4da8f80f5170afaa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

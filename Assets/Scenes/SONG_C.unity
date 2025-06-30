@@ -2876,6 +2876,11 @@ MonoBehaviour:
   - {fileID: 5175433164174420965, guid: 83ae0aececb7ceb4a80f461dd7510d99, type: 3}
   - {fileID: 5175433164174420965, guid: e57f78121838856448e4f0539018dd3d, type: 3}
   - {fileID: 5175433164174420965, guid: 007960cf890b70f41aa5047f585ca151, type: 3}
+  DashEnemyPrefab:
+  - {fileID: 5175433164174420965, guid: 6a34eeb48a690204e8e0921f3c4fbbda, type: 3}
+  - {fileID: 5175433164174420965, guid: 2e22db7b82ee3a148bce8a3c0bb974bd, type: 3}
+  - {fileID: 5175433164174420965, guid: ff2e87923356c2d4c8073cc8d27ce477, type: 3}
+  - {fileID: 5175433164174420965, guid: b0c52e886d9167c44b8fab0c3d97ac10, type: 3}
 --- !u!114 &744474251
 MonoBehaviour:
   m_ObjectHideFlags: 0
