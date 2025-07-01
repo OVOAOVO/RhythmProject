@@ -55,12 +55,12 @@ public class Pistol : Gun
         GameObject hitType = null;  // 用于存储击中效果的Prefab
         
         //TODO: 这里最好不要按照固定的数值，需要再改
-        if (distanceToCenterLine > 0.3f)
+        if (distanceToCenterLine > 0.4f)
         {
             hitType = HitBad;
             ResultDataManager.Instance.AddBad();      // 记一次 Bad
         }
-        else if (distanceToCenterLine > 0.1f && distanceToCenterLine <= 0.3f)
+        else if (distanceToCenterLine > 0.2f && distanceToCenterLine <= 0.4f)
         {
             hitType = HitGood;
             ResultDataManager.Instance.AddGood();     // 记一次 Good
