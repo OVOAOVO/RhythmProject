@@ -36,13 +36,37 @@ public class Gun : MonoBehaviour
                 timer = 0;
         }
 
-        if(Input.GetMouseButton(0) && timer == 0)
+        if (IsFireKeyPressed() && timer == 0)
         {
             timer = interval;
             Fire();
         }
     }
 
+    protected virtual bool IsFireKeyPressed()
+    {
+        // 遍历所有 KeyCode，排除不想要的控制键
+        foreach (KeyCode key in System.Enum.GetValues(typeof(KeyCode)))
+        {
+            if (Input.GetKey(key))
+            {
+                // 排除 Escape、控制键、功能键等
+                if (key == KeyCode.Escape ||
+                    key == KeyCode.LeftAlt || key == KeyCode.RightAlt ||
+                    key == KeyCode.LeftControl || key == KeyCode.RightControl ||
+                    key == KeyCode.LeftShift || key == KeyCode.RightShift ||
+                    key == KeyCode.Tab || key == KeyCode.CapsLock)
+                {
+                    continue;
+                }
+
+                return true; // 有按下的有效按键
+            }
+        }
+        return false;
+    }
+
+    
     protected virtual void Fire()
     {
         // GameObject bullet = ObjectPool.Instance.GetGameObject(bulletPrefab);
