@@ -31,6 +31,8 @@ public class DashMonsterSpawner : IEnemySpawnBehavior
         // 正确调用 Initialize 方法，传入 DashMove 行为
         enemy.Initialize(target.transform, moveSpeed, onReached, new DashMove());
 
+        // //播放生成特效
+        // enemy.PlaySpawnEffect(position);
         Conductor.Instance.aliveEnemies++;
     }
 

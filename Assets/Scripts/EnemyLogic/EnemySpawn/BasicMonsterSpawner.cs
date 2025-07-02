@@ -27,6 +27,8 @@ public class BasicMonsterSpawner : IEnemySpawnBehavior
 
         Enemy enemy = obj.GetComponent<Enemy>();
         enemy.Initialize(target.transform, moveSpeed, onReached);
+        // //播放生成特效
+        // enemy.PlaySpawnEffect(position);
         Conductor.Instance.aliveEnemies++;
     }
 

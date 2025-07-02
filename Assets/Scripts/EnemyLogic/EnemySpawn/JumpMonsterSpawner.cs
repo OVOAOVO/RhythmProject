@@ -29,7 +29,8 @@ public class JumpMonsterSpawner : IEnemySpawnBehavior
         Vector3 midPoint = position + new Vector3(-2f, 0f, 0f);
         Vector3 jumpTarget = position + new Vector3(-4f, 0f, 0f);
         enemy.InitializeJump(midPoint, jumpTarget, target.transform, moveSpeed, onReached);
-
+        // //播放生成特效
+        // enemy.PlaySpawnEffect(position);
         Conductor.Instance.aliveEnemies++;
     }
 

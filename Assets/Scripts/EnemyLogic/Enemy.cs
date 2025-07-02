@@ -15,6 +15,8 @@ public class Enemy : MonoBehaviour
     private List<Tween> activeTweens = new List<Tween>();
 
     public GameObject hitEffectPrefab;  // 被击中粒子特效预制体
+
+    public GameObject spawnEffectPrefab;  // 生成粒子特效预制体
     public virtual void Initialize(Transform target, float speed, Action<Enemy> onReached = null, IMoveBehavior customBehavior = null)
     {
         this.target = target;
@@ -49,6 +51,11 @@ public class Enemy : MonoBehaviour
     // 因为使用了对象池维护了敌人对象，所以不能在这边维护粒子的生命周期    
     public void PlayHitEffect(Vector3 position)
     {
-        ParticleEffectManager.Instance.PlayEffect(hitEffectPrefab, position);
+        ParticleEffectManager.Instance.PlayEnemyDieEffect(hitEffectPrefab, position);
+    }
+
+    public void PlaySpawnEffect(Vector3 position)
+    {
+        ParticleEffectManager.Instance.PlayEnemySpawnEffect(spawnEffectPrefab, position);
     }
 }

@@ -16,6 +16,15 @@ public class ParticleEffectManager : MonoBehaviour
         }
         Instance = this;
     }
+    public void PlayEnemySpawnEffect(GameObject effectPrefab, Vector3 position)
+    {
+        PlayEffect(effectPrefab, position);
+    }
+
+    public void PlayEnemyDieEffect(GameObject effectPrefab, Vector3 position)
+    {
+        PlayEffect(effectPrefab, position);
+    }
 
     public void PlayEffect(GameObject effectPrefab, Vector3 position)
     {
