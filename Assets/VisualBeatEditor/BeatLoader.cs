@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
+using UnityEngine.Networking;
+using System.Collections;
 
 public class BeatLoader : MonoBehaviour
 {
@@ -15,31 +17,49 @@ public class BeatLoader : MonoBehaviour
             ? SceneManager.GetActiveScene().name
             : beatMapName;
 
-        LoadFromJson(mapNameToLoad);
+        StartCoroutine(LoadBeatData(mapNameToLoad));
     }
 
-    public void LoadFromJson(string mapName)
+    IEnumerator LoadBeatData(string mapName)
     {
-        string filePath;
-
-    #if UNITY_EDITOR
-        filePath = Path.Combine(Application.dataPath, $"BeatBook/{mapName}.json");
-    #else
-        filePath = Path.Combine(Application.dataPath, $"../BeatBook/{mapName}.json");
-    #endif
-
-        Debug.Log($"🧾 Attempting to load beat data: {filePath}");
-
-        if (File.Exists(filePath))
+        string persistentPath = Path.Combine(Application.persistentDataPath, $"BeatBook/{mapName}.json");
+        if (File.Exists(persistentPath))
         {
-            string json = File.ReadAllText(filePath);
+            string json = File.ReadAllText(persistentPath);
             LoadedData = JsonUtility.FromJson<BeatRecord>(json);
-            Debug.Log($"✅ Loaded {LoadedData.beatHits.Count} beats from '{mapName}'.");
+            Debug.Log($"✅ Loaded {LoadedData.beatHits.Count} beats from persistent storage.");
+            yield break;
+        }
+
+        string streamingPath = Path.Combine(Application.streamingAssetsPath, $"BeatBook/{mapName}.json");
+
+#if UNITY_ANDROID && !UNITY_EDITOR
+        UnityWebRequest request = UnityWebRequest.Get(streamingPath);
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success)
+        {
+            string json = request.downloadHandler.text;
+            LoadedData = JsonUtility.FromJson<BeatRecord>(json);
+            Debug.Log($"✅ Loaded {LoadedData.beatHits.Count} beats from StreamingAssets.");
         }
         else
         {
-            Debug.LogWarning($"⚠️ Beat JSON file for '{mapName}' not found.");
+            Debug.LogWarning($"❌ Failed to load from StreamingAssets: {request.error}");
             LoadedData = new BeatRecord();
         }
+#else
+        if (File.Exists(streamingPath))
+        {
+            string json = File.ReadAllText(streamingPath);
+            LoadedData = JsonUtility.FromJson<BeatRecord>(json);
+            Debug.Log($"✅ Loaded {LoadedData.beatHits.Count} beats from StreamingAssets.");
+        }
+        else
+        {
+            Debug.LogWarning($"⚠️ Beat JSON file for '{mapName}' not found in any location.");
+            LoadedData = new BeatRecord();
+        }
+#endif
     }
 }

@@ -15,24 +15,24 @@ public class BeatRecorder : MonoBehaviour
         {
             int currentBeat = Conductor.Instance.hit;
             beatRecord.beatHits.Add(currentBeat);
-            Debug.Log($"Recorded beat: {currentBeat}");
+            Debug.Log($"🎵 Recorded beat: {currentBeat}");
         }
 
         if (Input.GetKeyDown(saveKey))
         {
-            SaveToJson();
+            SaveToJson("SONG_D");
         }
     }
 
-    void SaveToJson()
+    void SaveToJson(string mapName)
     {
-        string folderPath = Path.Combine(Application.dataPath, "BeatBook");
+        string folderPath = Path.Combine(Application.persistentDataPath, "BeatBook");
         if (!Directory.Exists(folderPath))
         {
             Directory.CreateDirectory(folderPath);
         }
 
-        string filePath = Path.Combine(folderPath, "SONG_D.json");
+        string filePath = Path.Combine(folderPath, $"{mapName}.json");
         string json = JsonUtility.ToJson(beatRecord, true);
         File.WriteAllText(filePath, json);
         Debug.Log($"✅ Saved beat data to: {filePath}");
