@@ -17,6 +17,9 @@ public class Enemy : MonoBehaviour
     public GameObject hitEffectPrefab;  // 被击中粒子特效预制体
 
     public GameObject spawnEffectPrefab;  // 生成粒子特效预制体
+
+    public bool IsBoss = false;
+
     public virtual void Initialize(Transform target, float speed, Action<Enemy> onReached = null, IMoveBehavior customBehavior = null)
     {
         this.target = target;

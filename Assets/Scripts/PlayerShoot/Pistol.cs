@@ -28,19 +28,23 @@ public class Pistol : Gun
         if (isHit)
         {
             Enemy enemy = hit.collider.GetComponent<Enemy>();
-            if (enemy != null)
+            if (enemy.IsBoss)
+            {
+                Debug.Log("Boss =be hit with pistol!");  // Boss不能被手枪击中
+            }
+            else
             {
                 enemy.PlayHitEffect(hit.point);  // 播放击中粒子特效
+                ObjectPool.Instance.PushObject(hit.collider.gameObject);  // 将射中物体放入对象池
+
+                Vector3 objectCenter = hit.collider.transform.position;
+                Vector3 idealDirection = (objectCenter - muzzlePos.position).normalized;
+                float distanceToIdealLine = CalculatePerpendicularDistanceToLine(hit.point, muzzlePos.position, idealDirection);
+
+                // 处理击中效果和连击数
+                HandleHitEffectAndCombo(distanceToIdealLine, hit.point);
+                Conductor.Instance.aliveEnemies--;  // 击中敌人，减少存活敌人数量
             }
-            ObjectPool.Instance.PushObject(hit.collider.gameObject);  // 将射中物体放入对象池
-
-            Vector3 objectCenter = hit.collider.transform.position;
-            Vector3 idealDirection = (objectCenter - muzzlePos.position).normalized;
-            float distanceToIdealLine = CalculatePerpendicularDistanceToLine(hit.point, muzzlePos.position, idealDirection);
-
-            // 处理击中效果和连击数
-            HandleHitEffectAndCombo(distanceToIdealLine, hit.point);
-            Conductor.Instance.aliveEnemies--;  // 击中敌人，减少存活敌人数量
         }
         else
         {

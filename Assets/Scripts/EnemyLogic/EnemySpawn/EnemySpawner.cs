@@ -9,7 +9,7 @@ using System.Linq;
 
 public class EnemySpawner : MonoBehaviour
 {
-   public GameObject target;
+    public GameObject target;
     public float moveSpeed = 6f;
 
     [Header("生成控制")]
@@ -29,7 +29,6 @@ public class EnemySpawner : MonoBehaviour
 
     private BeatScheduler beatScheduler;
     private EnemySpawnPattern spawnPattern;
-
     void Start()
     {
         beatScheduler = new BeatScheduler();
