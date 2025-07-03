@@ -21,16 +21,22 @@ public class BossSpawner : MonoBehaviour
             return;
         }
 
-        // 实例化 Boss（不要手动设置位置，交给 BossEnemy.Initialize 控制）
-        GameObject boss = Instantiate(bossPrefab);
+        // 使用你的对象池系统
+        GameObject boss = ObjectPool.Instance.GetGameObject(bossPrefab);
+        if (boss == null)
+        {
+            Debug.LogError("对象池中获取 Boss 实例失败！");
+            return;
+        }
 
-        boss.transform.LookAt(target); // 可以设置朝向
-
-        // 启用 Boss UI
+        // boss.transform.LookAt(target); // 可以设置朝向
+        boss.SetActive(true);                     // 激活
+        
+        // ✅ Boss 到位后，再调用 UI 显示
         BossUIManager.Instance?.ShowBossUI();
 
         // 获取 Enemy 脚本
-        Enemy enemy = boss.GetComponent<Enemy>();
+        BossEnemy enemy = boss.GetComponent<BossEnemy>();
         if (enemy != null)
         {
             if (!enemy.IsBoss)

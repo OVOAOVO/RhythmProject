@@ -83,7 +83,7 @@ public class EnemySpawnPattern
     private void OnEnemyReached(Enemy enemy)
     {
         ObjectPool.Instance.PushObject(enemy.gameObject);
-        progressBar.Minus10Percent();
+        progressBar.MinusPercent(0.01f);
         feedbacks.PlayFeedbacks();
         Conductor.Instance.aliveEnemies--;
     }

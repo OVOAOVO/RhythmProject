@@ -570,6 +570,19 @@ namespace MoreMountains.Tools
 		}
 
 		/// <summary>
+		/// 减去任意比例的值，percent 范围建议是 0 ~ 1 之间（表示减多少百分比）
+		/// </summary>
+		public virtual void MinusPercent(float percent)
+		{
+			// 强制 Clamp 到 0 ~ 1 范围内，避免传入非法数值
+			percent = Mathf.Clamp01(percent);
+
+			float newProgress = BarTarget - percent;
+			newProgress = Mathf.Clamp01(newProgress); // 确保在合法范围
+			UpdateBar01(newProgress);
+		}
+
+		/// <summary>
 		/// Test method - increases the bar's current value by 20%
 		/// </summary>
 		public virtual void Plus20Percent()
