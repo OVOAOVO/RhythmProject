@@ -40,7 +40,7 @@ public class Enemy : MonoBehaviour
     {
         tweenOwner?.RegisterTween(tween);
     }
-    
+
     public void EnsureTweenOwner()
     {
         if (tweenOwner == null)
@@ -56,7 +56,7 @@ public class Enemy : MonoBehaviour
     // 因为使用了对象池维护了敌人对象，所以不能在这边维护粒子的生命周期    
     public void PlayHitEffect(Vector3 position)
     {
-        ParticleEffectManager.Instance.PlayEnemyDieEffect(hitEffectPrefab, position);
+        ParticleEffectManager.Instance.PlayEnemyHittedEffect(hitEffectPrefab, position);
     }
 
     public void PlaySpawnEffect(Vector3 position)

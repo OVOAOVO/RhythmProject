@@ -30,7 +30,17 @@ public class Pistol : Gun
             Enemy enemy = hit.collider.GetComponent<Enemy>();
             if (enemy.IsBoss)
             {
-                Debug.Log("Boss =be hit with pistol!");  // Boss不能被手枪击中
+                Debug.Log("Boss be hit with pistol!");
+                enemy.PlayHitEffect(hit.point);  // 播放击中粒子特效
+
+                BossUIManager.Instance?.progressBar?.MinusPercent(0.05f);  // UI血条减少
+                                                  
+                Vector3 objectCenter = hit.collider.transform.position;
+                Vector3 idealDirection = (objectCenter - muzzlePos.position).normalized;
+                float distanceToIdealLine = CalculatePerpendicularDistanceToLine(hit.point, muzzlePos.position, idealDirection);
+
+                // 处理击中效果和连击数
+                HandleHitEffectAndCombo(distanceToIdealLine, hit.point);
             }
             else
             {

@@ -21,7 +21,7 @@ public class ParticleEffectManager : MonoBehaviour
         PlayEffect(effectPrefab, position);
     }
 
-    public void PlayEnemyDieEffect(GameObject effectPrefab, Vector3 position)
+    public void PlayEnemyHittedEffect(GameObject effectPrefab, Vector3 position)
     {
         PlayEffect(effectPrefab, position);
     }
