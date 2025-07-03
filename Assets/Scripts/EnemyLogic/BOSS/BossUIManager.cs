@@ -50,8 +50,6 @@ public class BossUIManager : MonoBehaviour
         seq.Play();
     }
 
-
-
     public void HideBossUI()
     {
         if (progressBar == null) return;

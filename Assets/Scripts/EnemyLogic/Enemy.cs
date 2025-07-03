@@ -12,13 +12,13 @@ public class Enemy : MonoBehaviour
     private Coroutine moveCoroutine;
     private IMoveBehavior moveBehavior = new DirectMove(); // 默认行为
 
-    private List<Tween> activeTweens = new List<Tween>();
-
     public GameObject hitEffectPrefab;  // 被击中粒子特效预制体
 
     public GameObject spawnEffectPrefab;  // 生成粒子特效预制体
 
     public bool IsBoss = false;
+
+    private TweenOwner tweenOwner;
 
     public virtual void Initialize(Transform target, float speed, Action<Enemy> onReached = null, IMoveBehavior customBehavior = null)
     {
@@ -26,29 +26,31 @@ public class Enemy : MonoBehaviour
         this.moveSpeed = speed;
         this.onReachedTarget = onReached;
         this.moveBehavior = customBehavior ?? new DirectMove();
+        
+        EnsureTweenOwner(); // 确保有 TweenOwner
 
         StopAllCoroutines();
         moveCoroutine = StartCoroutine(moveBehavior.Move(this, target, speed, onReachedTarget));
     }
 
     private void OnEnable() => AutoShoot.RegisterEnemy(this);
-    private void OnDisable()
-    {
-        AutoShoot.UnregisterEnemy(this);
-        KillAllTweens(); // 保证回收到对象池时清理     
-    }
+    private void OnDisable() => AutoShoot.UnregisterEnemy(this);
+
     public void RegisterTween(Tween tween)
     {
-        activeTweens.Add(tween);
+        tweenOwner?.RegisterTween(tween);
     }
-
-    public void KillAllTweens()
+    
+    public void EnsureTweenOwner()
     {
-        foreach (var t in activeTweens)
+        if (tweenOwner == null)
         {
-            if (t.IsActive()) t.Kill();
+            tweenOwner = GetComponent<TweenOwner>();
+            if (tweenOwner == null)
+            {
+                tweenOwner = gameObject.AddComponent<TweenOwner>();
+            }
         }
-        activeTweens.Clear();
     }
 
     // 因为使用了对象池维护了敌人对象，所以不能在这边维护粒子的生命周期    

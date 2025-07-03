@@ -21,12 +21,17 @@ public class BossEnemy : Enemy
 
         // 入场动画：移动到目标附近的入场点，比如 target.x + 5
         Vector3 enterPos = new Vector3(target.position.x + 8f, target.position.y, target.position.z);
-        // ✅ 注册 tween，确保能被 KillAllTweens 清除
-        Tween tween = transform.DOMove(enterPos, 1.5f).SetEase(Ease.OutBack).OnComplete(() =>
+        // ✅ 使用 TweenOwner 来注册 tween
+        var tween = transform.DOMove(enterPos, 1.5f).SetEase(Ease.OutBack).OnComplete(() =>
         {
             if (col != null) col.enabled = true;
             onReached?.Invoke(this);
         });
-        RegisterTween(tween);
+
+        // ✅ 确保 TweenOwner 存在
+        var owner = GetComponent<TweenOwner>();
+        if (owner == null) owner = gameObject.AddComponent<TweenOwner>();
+
+        owner.RegisterTween(tween);
     }
 }
