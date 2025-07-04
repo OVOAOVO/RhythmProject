@@ -1,5 +1,7 @@
-using System;
 using UnityEngine;
+using DG.Tweening;
+using MoreMountains.Feedbacks;
+using MoreMountains.Tools;
 
 public class BossSpawner : MonoBehaviour
 {
@@ -7,6 +9,15 @@ public class BossSpawner : MonoBehaviour
     public GameObject bossPrefab;
     public Transform target;
     public float moveSpeed = 6f;
+
+    [Header("Boss 位置偏移（相对于目标）")]
+    [Tooltip("Boss 初始生成偏移量")] public Vector3 bossStartOffset = new Vector3(30f, 0f, 0f);
+    [Tooltip("Boss 入场点偏移量")] public Vector3 bossEnterOffset = new Vector3(8f, 0f, 0f);
+
+    [Header("攻击设置")]
+    public GameObject circleEffectPrefab;
+    public float beatDuration = 0.5f;
+    public MMProgressBar Cube_NotEnemy_progressBar;
 
     private void Start()
     {
@@ -21,7 +32,6 @@ public class BossSpawner : MonoBehaviour
             return;
         }
 
-        // 使用你的对象池系统
         GameObject boss = ObjectPool.Instance.GetGameObject(bossPrefab);
         if (boss == null)
         {
@@ -29,24 +39,20 @@ public class BossSpawner : MonoBehaviour
             return;
         }
 
-        // boss.transform.LookAt(target); // 可以设置朝向
-        boss.SetActive(true);                     // 激活
-        
-        // ✅ Boss 到位后，再调用 UI 显示
+        boss.SetActive(true);
+
         BossUIManager.Instance?.ShowBossUI();
 
-        // 获取 Enemy 脚本
-        BossEnemy enemy = boss.GetComponent<BossEnemy>();
-        if (enemy != null)
+        BossEnemy bossEnemy = boss.GetComponent<BossEnemy>();
+        if (bossEnemy != null)
         {
-            if (!enemy.IsBoss)
-            {
-                enemy.IsBoss = true;
-                Debug.Log("标记 Boss 为 Boss 类型");
-            }
+            bossEnemy.IsBoss = true;
+            bossEnemy.startOffset = bossStartOffset;
+            bossEnemy.enterOffset = bossEnterOffset;
 
-            // 直接调用 Initialize，让 BossEnemy 自己控制入场动画和位置
-            enemy.Initialize(target, moveSpeed, e =>
+            bossEnemy.attackBehavior = new TargetedCircleAttack(circleEffectPrefab, beatDuration, Cube_NotEnemy_progressBar);
+
+            bossEnemy.Initialize(target, moveSpeed, e =>
             {
                 Debug.Log("Boss 入场完成: " + e.name);
                 if (Conductor.Instance != null)
@@ -57,7 +63,26 @@ public class BossSpawner : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Boss GameObject 上没有 Enemy 组件！");
+            Debug.LogWarning("Boss GameObject 上没有 BossEnemy 组件！");
         }
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmosSelected()
+    {
+        if (target == null) return;
+
+        Vector3 startPos = target.position + bossStartOffset;
+        Vector3 enterPos = target.position + bossEnterOffset;
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(startPos, 0.3f);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(enterPos, 0.3f);
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawLine(startPos, enterPos);
+    }
+#endif
 }

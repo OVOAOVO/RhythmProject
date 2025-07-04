@@ -6519,6 +6519,11 @@ MonoBehaviour:
   bossPrefab: {fileID: 5175433164174420965, guid: 9a4df8e23f481e54da6df041edb74fd5, type: 3}
   target: {fileID: 1540835722}
   moveSpeed: 6
+  bossStartOffset: {x: 30, y: 0, z: 0}
+  bossEnterOffset: {x: 8, y: 0, z: 0}
+  circleEffectPrefab: {fileID: 0}
+  beatDuration: 0.5
+  Cube_NotEnemy_progressBar: {fileID: 0}
 --- !u!4 &1652372457
 Transform:
   m_ObjectHideFlags: 0
