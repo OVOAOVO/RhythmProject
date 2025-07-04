@@ -3570,6 +3570,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 954741423}
   m_CullTransparentMesh: 0
+--- !u!4 &975456681 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2836147644820559240, guid: 44373e0a55095f548895ecf6a620affa, type: 3}
+  m_PrefabInstance: {fileID: 4164701972910255358}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1067737067
 GameObject:
   m_ObjectHideFlags: 0
@@ -6429,6 +6434,7 @@ Transform:
   m_Children:
   - {fileID: 55849158}
   - {fileID: 1313597635}
+  - {fileID: 975456681}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1540835723
@@ -6481,11 +6487,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossPrefab: {fileID: 5175433164174420965, guid: 9a4df8e23f481e54da6df041edb74fd5, type: 3}
   target: {fileID: 1540835722}
-  moveSpeed: 6
   bossStartOffset: {x: 30, y: 0, z: 0}
   bossEnterOffset: {x: 12, y: 0, z: 0}
-  circleEffectPrefab: {fileID: 0}
-  beatDuration: 0.5
+  circleEffectPrefab: {fileID: 518344507844845590, guid: 67fe658f9ed29bd40bf482c56c5b5a96, type: 3}
   Cube_NotEnemy_progressBar: {fileID: 0}
 --- !u!4 &1652372457
 Transform:
@@ -9711,15 +9715,15 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1540835722}
     m_Modifications:
     - target: {fileID: 2836147644820559240, guid: 44373e0a55095f548895ecf6a620affa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.2755218
+      value: 0.649
       objectReference: {fileID: 0}
     - target: {fileID: 2836147644820559240, guid: 44373e0a55095f548895ecf6a620affa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.034895837
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 2836147644820559240, guid: 44373e0a55095f548895ecf6a620affa, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9731,15 +9735,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2836147644820559240, guid: 44373e0a55095f548895ecf6a620affa, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2836147644820559240, guid: 44373e0a55095f548895ecf6a620affa, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2836147644820559240, guid: 44373e0a55095f548895ecf6a620affa, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2836147644820559240, guid: 44373e0a55095f548895ecf6a620affa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -9775,7 +9779,6 @@ SceneRoots:
   - {fileID: 1067737069}
   - {fileID: 856280585}
   - {fileID: 2074203982}
-  - {fileID: 4164701972910255358}
   - {fileID: 367205645}
   - {fileID: 271508698}
   - {fileID: 1691659320}
