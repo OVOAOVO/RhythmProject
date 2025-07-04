@@ -35,4 +35,27 @@ public class BossEnemy : Enemy
         var owner = GetComponent<TweenOwner>() ?? gameObject.AddComponent<TweenOwner>();
         owner.RegisterTween(tween);
     }
+
+    public void Exit()
+    {
+        StopAllCoroutines(); // 停止攻击行为
+
+        var col = GetComponent<Collider>();
+        if (col != null) col.enabled = false;
+
+        Vector3 exitPos = target.position + startOffset; // 原路径反向退出
+        Sequence seq = DOTween.Sequence();
+        seq.Append(transform.DOMove(exitPos, 1.2f).SetEase(Ease.InBack));
+        seq.Join(transform.DOScale(Vector3.zero, 1.2f).SetEase(Ease.InBack));
+        seq.OnComplete(() =>
+        {
+            // 回收对象（你用的是对象池）
+            gameObject.SetActive(false);
+            transform.localScale = Vector3.one; // 恢复缩放
+        });
+
+        var owner = GetComponent<TweenOwner>() ?? gameObject.AddComponent<TweenOwner>();
+        owner.RegisterTween(seq);
+    }
+
 }

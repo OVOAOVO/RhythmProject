@@ -20,8 +20,10 @@ public class BossSpawner : MonoBehaviour
     public GameObject circleEffectPrefab;
     public MMProgressBar Cube_NotEnemy_progressBar;
 
+    private BossEnemy bossEnemy;
     private void Start()
     {
+        BossUIManager.Instance.OnUIHiddenDueToZero += OnBossShouldRetreat;
         SpawnBoss();
     }
 
@@ -44,7 +46,7 @@ public class BossSpawner : MonoBehaviour
 
         BossUIManager.Instance?.ShowBossUI();
 
-        BossEnemy bossEnemy = boss.GetComponent<BossEnemy>();
+        bossEnemy = boss.GetComponent<BossEnemy>();
         if (bossEnemy != null)
         {
             bossEnemy.IsBoss = true;
@@ -65,6 +67,15 @@ public class BossSpawner : MonoBehaviour
         else
         {
             Debug.LogWarning("Boss GameObject 上没有 BossEnemy 组件！");
+        }
+    }
+
+    private void OnBossShouldRetreat()
+    {
+        if (bossEnemy != null)
+        {
+            bossEnemy.Exit();
+            bossEnemy = null;
         }
     }
 
