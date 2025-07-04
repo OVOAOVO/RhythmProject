@@ -42,7 +42,7 @@ public class BossUIManager : MonoBehaviour
         Sequence seq = DOTween.Sequence();
 
         // 1.5秒飞入，Ease.OutBack
-        seq.Append(progressRect.DOAnchorPos(new Vector2(125f, -150f), 1.5f).SetEase(Ease.OutBack));
+        seq.Append(progressRect.DOAnchorPos(new Vector2(0, -240f), 1.5f).SetEase(Ease.OutBack));
 
         // 淡入动画和位置动画同时进行，持续1.5秒
         seq.Join(canvasGroup.DOFade(1f, 1.5f));

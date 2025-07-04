@@ -8,7 +8,9 @@ public class BossSpawner : MonoBehaviour
     [Header("Boss 设置")]
     public GameObject bossPrefab;
     public Transform target;
-    public float moveSpeed = 6f;
+
+    //目前其实并没有使用
+    private float moveSpeed = 6f;
 
     [Header("Boss 位置偏移（相对于目标）")]
     [Tooltip("Boss 初始生成偏移量")] public Vector3 bossStartOffset = new Vector3(30f, 0f, 0f);
@@ -16,7 +18,6 @@ public class BossSpawner : MonoBehaviour
 
     [Header("攻击设置")]
     public GameObject circleEffectPrefab;
-    public float beatDuration = 0.5f;
     public MMProgressBar Cube_NotEnemy_progressBar;
 
     private void Start()
@@ -50,7 +51,7 @@ public class BossSpawner : MonoBehaviour
             bossEnemy.startOffset = bossStartOffset;
             bossEnemy.enterOffset = bossEnterOffset;
 
-            bossEnemy.attackBehavior = new TargetedCircleAttack(circleEffectPrefab, beatDuration, Cube_NotEnemy_progressBar);
+            bossEnemy.attackBehavior = new TargetedCircleAttack(circleEffectPrefab, Cube_NotEnemy_progressBar);
 
             bossEnemy.Initialize(target, moveSpeed, e =>
             {
