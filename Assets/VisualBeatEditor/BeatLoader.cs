@@ -27,7 +27,7 @@ public class BeatLoader : MonoBehaviour
         {
             string json = File.ReadAllText(persistentPath);
             LoadedData = JsonUtility.FromJson<BeatRecord>(json);
-            Debug.Log($"✅ Loaded {LoadedData.beatHits.Count} beats from persistent storage.");
+            Debug.Log($"✅ Loaded {LoadedData.attackBeats.Count} attack beats and {LoadedData.spawnBeats.Count} spawn beats from persistent storage.");
             yield break;
         }
 
@@ -41,7 +41,7 @@ public class BeatLoader : MonoBehaviour
         {
             string json = request.downloadHandler.text;
             LoadedData = JsonUtility.FromJson<BeatRecord>(json);
-            Debug.Log($"✅ Loaded {LoadedData.beatHits.Count} beats from StreamingAssets.");
+            Debug.Log($"✅ Loaded {LoadedData.attackBeats.Count} attack beats and {LoadedData.spawnBeats.Count} spawn beats from StreamingAssets.");
         }
         else
         {
@@ -53,7 +53,7 @@ public class BeatLoader : MonoBehaviour
         {
             string json = File.ReadAllText(streamingPath);
             LoadedData = JsonUtility.FromJson<BeatRecord>(json);
-            Debug.Log($"✅ Loaded {LoadedData.beatHits.Count} beats from StreamingAssets.");
+            Debug.Log($"✅ Loaded {LoadedData.attackBeats.Count} attack beats and {LoadedData.spawnBeats.Count} spawn beats from StreamingAssets.");
         }
         else
         {

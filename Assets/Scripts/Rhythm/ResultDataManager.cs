@@ -20,10 +20,6 @@ public class ResultDataManager : MonoBehaviour
     public static ResultDataManager Instance { get; private set; }
     public static string LastPlayedSceneName;
 
-    private static readonly HashSet<string> GameSceneNames = new HashSet<string>
-    {
-        "Game","SONG_A", "SONG_B", "SONG_C"
-    };
     private void Awake()
     {
         // 单例初始化
@@ -55,10 +51,18 @@ public class ResultDataManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (GameSceneNames.Contains(scene.name))
+        // 遍历新场景的所有根节点，检查是否挂有 Conductor
+        foreach (var rootGO in scene.GetRootGameObjects())
         {
-            ResetAll();
+            if (rootGO.GetComponentInChildren<Conductor>() != null)
+            {
+                ResetAll();
+                Debug.Log($"[ResultDataManager] 在场景 '{scene.name}' 中检测到 Conductor，已执行 ResetAll()");
+                return;
+            }
         }
+
+        Debug.Log($"[ResultDataManager] 场景 '{scene.name}' 无 Conductor，跳过 ResetAll()");
     }
 
     // —— 对外接口 —— //

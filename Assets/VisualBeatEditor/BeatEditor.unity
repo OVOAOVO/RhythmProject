@@ -239,8 +239,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 81a93abd5cd7d9b498ebb5e4ca5c1211, type: 3}
-  m_Resource: {fileID: 8300000, guid: 81a93abd5cd7d9b498ebb5e4ca5c1211, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 88458e627c51d4d42bd7c4e3380972c9, type: 3}
+  m_Resource: {fileID: 8300000, guid: 88458e627c51d4d42bd7c4e3380972c9, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -338,7 +338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51a01ee73247abc47b67e27f95277fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  songBPM: 87
+  songBPM: 150
   secPerBeat: 0
   songPosition: 0
   hit: 0
@@ -528,8 +528,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2222d14e7a1d04f44aa20912fcc16c9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recordKey: 32
+  attackKey: 32
+  spawnKey: 107
   saveKey: 115
+  beatMapName: Game
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

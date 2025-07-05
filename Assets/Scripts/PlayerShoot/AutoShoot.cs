@@ -27,7 +27,7 @@ public class AutoShoot : Gun
 
         if (BeatLoader.LoadedData != null)
         {
-            scheduledBeats = new List<int>(BeatLoader.LoadedData.beatHits);
+            scheduledBeats = new List<int>(BeatLoader.LoadedData.spawnBeats);
         }
         else
         {

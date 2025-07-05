@@ -12,7 +12,7 @@ public class BeatScheduler
     public void Init(Conductor conductor)
     {
         if (BeatLoader.LoadedData != null)
-            scheduledBeats = new List<int>(BeatLoader.LoadedData.beatHits);
+            scheduledBeats = new List<int>(BeatLoader.LoadedData.spawnBeats);
         else
             scheduledBeats = new List<int>();
 
