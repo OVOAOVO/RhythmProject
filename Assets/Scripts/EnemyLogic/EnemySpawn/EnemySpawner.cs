@@ -73,7 +73,7 @@ private void OnDrawGizmosSelected()
     if (spawnSteps <= 1) return;
 
     // 场景中的中心点（对应 SpawnPattern 里生成位置的原点）
-    Vector3 center = transform.position;
+    Vector3 center = target.transform.position;
 
     // 每一步的角度增量
     float step = (endAngle - startAngle) / (spawnSteps - 1);
