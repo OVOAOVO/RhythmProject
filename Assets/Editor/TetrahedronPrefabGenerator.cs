@@ -8,7 +8,7 @@ using System.IO;
 // 注意：这个脚本目前没有用，因为3棱锥显示很差的原因
 public class TetrahedronPrefabGenerator
 {
-    [MenuItem("Tools/Create Enemy Tetrahedron Prefab")]
+    [MenuItem("Tools/Create Enemy Tetrahedron Prefab (Not Used)")]
     public static void CreateTetrahedron()
     {
         // 创建 GameObject
