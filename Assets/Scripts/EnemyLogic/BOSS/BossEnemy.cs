@@ -57,5 +57,4 @@ public class BossEnemy : Enemy
         var owner = GetComponent<TweenOwner>() ?? gameObject.AddComponent<TweenOwner>();
         owner.RegisterTween(seq);
     }
-
 }

@@ -668,7 +668,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a281e4cd2ad984daea8d176cd4c7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beatMapName: 
+  beatMapName: TestOSUBeat
 --- !u!1 &320590445
 GameObject:
   m_ObjectHideFlags: 0

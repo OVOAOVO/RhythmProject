@@ -23,15 +23,34 @@ public class BeatLoader : MonoBehaviour
     IEnumerator LoadBeatData(string mapName)
     {
         string persistentPath = Path.Combine(Application.persistentDataPath, $"BeatBook/{mapName}.json");
+        string streamingPath = Path.Combine(Application.streamingAssetsPath, $"BeatBook/{mapName}.json");
+        bool usePersistent = false;
+
         if (File.Exists(persistentPath))
+        {
+            // 这里可以比较两个文件的修改时间或版本号，决定是否用persistent
+            // 简单示例：假设StreamingAssets文件比persistent新，就更新
+            if (File.Exists(streamingPath))
+            {
+                var persistentTime = File.GetLastWriteTimeUtc(persistentPath);
+                var streamingTime = File.GetLastWriteTimeUtc(streamingPath);
+                if (streamingTime > persistentTime)
+                {
+                    // StreamingAssets文件较新，覆盖persistent
+                    File.Copy(streamingPath, persistentPath, true);
+                    Debug.Log("覆盖更新 persistentDataPath 中的谱面文件");
+                }
+            }
+            usePersistent = true;
+        }
+
+        if (usePersistent && File.Exists(persistentPath))
         {
             string json = File.ReadAllText(persistentPath);
             LoadedData = JsonUtility.FromJson<BeatRecord>(json);
             Debug.Log($"✅ Loaded {LoadedData.attackBeats.Count} attack beats and {LoadedData.spawnBeats.Count} spawn beats from persistent storage.");
             yield break;
         }
-
-        string streamingPath = Path.Combine(Application.streamingAssetsPath, $"BeatBook/{mapName}.json");
 
 #if UNITY_ANDROID && !UNITY_EDITOR
         UnityWebRequest request = UnityWebRequest.Get(streamingPath);

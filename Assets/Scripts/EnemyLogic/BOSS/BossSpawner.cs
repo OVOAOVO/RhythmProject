@@ -53,7 +53,8 @@ public class BossSpawner : MonoBehaviour
             bossEnemy.startOffset = bossStartOffset;
             bossEnemy.enterOffset = bossEnterOffset;
 
-            bossEnemy.attackBehavior = new TargetedCircleAttack(circleEffectPrefab, Cube_NotEnemy_progressBar);
+            // Beat 跟 Attack
+            bossEnemy.attackBehavior = new TargetedCircleAttack(circleEffectPrefab, Cube_NotEnemy_progressBar, BeatLoader.LoadedData);
 
             bossEnemy.Initialize(target, moveSpeed, e =>
             {
