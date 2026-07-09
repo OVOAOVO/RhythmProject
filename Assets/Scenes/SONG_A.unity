@@ -1489,6 +1489,7 @@ MonoBehaviour:
   - {fileID: 5175433164174420965, guid: ae30a91d4468cd74c84e6c6340b2824b, type: 3}
   - {fileID: 5175433164174420965, guid: 488f888341c823b458d2112de90a626c, type: 3}
   JumpingEnemyPrefab: []
+  DashEnemyPrefab: []
 --- !u!114 &903378428
 MonoBehaviour:
   m_ObjectHideFlags: 0
