@@ -6,7 +6,7 @@
 ![rhythmshoot](ReadMeAssets/startMenu.png)
 
 ## GameView  
-![rhythmshoot](ReadMeAssets/rhythmShoot2.gif)
+![rhythmshoot](ReadMeAssets/333.gif)
 
 
 # 🎶 Want to use your own music?
